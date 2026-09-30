@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,277 +7,334 @@
   <meta name="description" content="Island Breeze Seniors Day Program is a non-profit in Markham, Ontario offering social, recreational and wellness programs for adults 55+ and their caregivers. Where Every Senior Matters.">
   <meta name="theme-color" content="#0b4f7c">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <meta property="og:title" content="Island Breeze Seniors Day Program">
-  <meta property="og:description" content="Where Every Senior Matters. Social, recreational and wellness programs for adults 55+ in Markham, Ontario.">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/atkinson-hyperlegible-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/fraunces-800.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NGO",
-    "name": "Island Breeze Seniors Day Program",
-    "legalName": "Island Breeze Seniors Day Program Ltd.",
-    "slogan": "Where Every Senior Matters",
-    "foundingDate": "2018-10-29",
-    "telephone": "+1-416-319-7763",
-    "email": "islandbreezeseniors@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "4460 14th Avenue, Unit 314",
-      "addressLocality": "Markham",
-      "addressRegion": "ON",
-      "postalCode": "L3R 1H1",
-      "addressCountry": "CA"
-    },
-    "sameAs": [
-      "https://www.facebook.com/Islandbreezeseniors/",
-      "https://www.instagram.com/islandbreezeseniors55/"
-    ]
-  }
-  </script>
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="main.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
 
+  <!-- Icon sprite: one set of line icons in the brand colours, used with <use href="#i-…"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-yarn" viewBox="0 0 48 48"><circle cx="21" cy="27" r="14"/><path d="M9 22c7-1 16 3 22 12M12 34c5-6 14-9 22-7M16 15c6 4 10 12 10 25M30 16c-4 4-6 10-6 16"/><path d="M33 17 44 6"/><path d="M42 5.5a2 2 0 0 1 2.5 2.5"/></symbol>
+      <symbol id="i-dominoes" viewBox="0 0 48 48"><rect x="6" y="10" width="16" height="30" rx="3" transform="rotate(-12 14 25)"/><rect x="26" y="8" width="16" height="30" rx="3" transform="rotate(10 34 23)"/><path d="M8.8 25.6 22.6 22.7M27.5 21.6l13.8 2.4"/><circle cx="14" cy="18" r="1.4" fill="currentColor"/><circle cx="16.3" cy="32" r="1.4" fill="currentColor"/><circle cx="12.5" cy="33" r="1.4" fill="currentColor"/><circle cx="33.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="36.5" cy="11.8" r="1.4" fill="currentColor"/><circle cx="31.5" cy="30" r="1.4" fill="currentColor"/><circle cx="35.5" cy="30.8" r="1.4" fill="currentColor"/></symbol>
+      <symbol id="i-palette" viewBox="0 0 48 48"><path d="M24 6C13 6 5 14 5 24s8 18 18 18c3 0 4-2 4-4 0-3-3-4-1-7 1.5-2 5-1 8-1 6 0 9-4 9-9C43 12 34 6 24 6Z"/><circle cx="15" cy="20" r="2.6"/><circle cx="23" cy="14" r="2.6"/><circle cx="32" cy="16" r="2.6"/><circle cx="14" cy="30" r="2.6"/></symbol>
+      <symbol id="i-laugh" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M15 20q3-4 6 0M27 20q3-4 6 0"/><path d="M14 27h20c-1 6-5 9-10 9s-9-3-10-9Z"/></symbol>
+      <symbol id="i-lotus" viewBox="0 0 48 48"><path d="M24 12c5 5 6 13 0 22-6-9-5-17 0-22Z"/><path d="M24 34c-7 0-14-4-16-12 7 0 13 4 16 12ZM24 34c7 0 14-4 16-12-7 0-13 4-16 12Z"/><path d="M8 40h32"/></symbol>
+      <symbol id="i-quill" viewBox="0 0 48 48"><path d="M40 6C24 8 14 18 11 34l3 3C30 34 40 22 40 6Z"/><path d="M8 42 26 22"/><path d="M18 26h9M22 20h9"/></symbol>
+      <symbol id="i-bus" viewBox="0 0 48 48"><rect x="8" y="7" width="32" height="30" rx="5"/><path d="M8 24h32M8 16h32"/><circle cx="15" cy="30.5" r="2"/><circle cx="33" cy="30.5" r="2"/><path d="M13 37v4M35 37v4"/></symbol>
+      <symbol id="i-teapot" viewBox="0 0 48 48"><path d="M10 20h26v8c0 7-5 12-13 12s-13-5-13-12Z"/><path d="M36 23c5-1 7 2 7 5s-3 6-8 6"/><path d="M10 25 5 19"/><path d="M16 20c0-4 3-7 7-7s7 3 7 7"/><path d="M23 13v-3"/></symbol>
+      <symbol id="i-people" viewBox="0 0 48 48"><circle cx="17" cy="16" r="6"/><circle cx="33" cy="18" r="5"/><path d="M6 38c0-7 5-12 11-12s11 5 11 12M28 38c0-6 2-10 7-11 5 0 8 4 8 11"/></symbol>
+      <symbol id="i-puzzle" viewBox="0 0 48 48"><path d="M8 16h9a4 4 0 1 1 8 0h9v9a4 4 0 1 1 0 8v9H25a4 4 0 1 0-8 0H8Z"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 48 48"><path d="M24 40S7 30 7 18a9 9 0 0 1 17-4 9 9 0 0 1 17 4c0 12-17 22-17 22Z"/><path d="M11 24h8l3-5 4 10 3-5h8"/></symbol>
+      <symbol id="i-palm" viewBox="0 0 48 48"><path d="M27 44c0-9-1-18-4-26"/><path d="M23 18c-5-5-12-5-16-1 5-1 11 0 16 1ZM23 18c2-6 8-9 14-7-5 1-10 3-14 7ZM23 18c6-2 12 1 15 6-5-3-10-5-15-6ZM23 18c-5 1-10 5-11 11 3-5 7-8 11-11Z"/><path d="M12 44h26"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 48 48"><path d="M14 6h-4a4 4 0 0 0-4 4c0 18 14 32 32 32a4 4 0 0 0 4-4v-4a2 2 0 0 0-2-2l-8-2-4 4c-6-3-11-8-14-14l4-4-2-8a2 2 0 0 0-2-2Z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 48 48"><rect x="5" y="10" width="38" height="28" rx="4"/><path d="m6 12 18 14 18-14"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 48 48"><path d="M24 43s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24Z"/><circle cx="24" cy="19" r="5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 13v11l7 5"/></symbol>
+      <symbol id="i-hands" viewBox="0 0 48 48"><path d="M24 20s-8-5-8-10a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 5-8 10-8 10Z"/><path d="M4 30l8-4c3-1 5 0 7 1l5 3h7a3 3 0 0 1 0 6h-9"/><path d="M4 40l7-3 13 4 18-9a3 3 0 0 0-3-5l-9 4"/></symbol>
+      <symbol id="i-hand" viewBox="0 0 48 48"><path d="M16 26V11a3 3 0 0 1 6 0v12M22 22V8a3 3 0 0 1 6 0v14M28 22V11a3 3 0 0 1 6 0v14M34 25v-8a3 3 0 0 1 6 0v12c0 9-6 15-14 15-6 0-9-3-12-7l-6-8a3 3 0 0 1 5-4l3 3"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1Z"/></symbol>
+      <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="Island Breeze Seniors Day Program, home">
+      <a class="brand" href="#top" aria-label="Island Breeze Seniors Day Program, back to top">
         <img src="logo.svg" alt="" width="56" height="56">
         <span class="brand-text">
           <span class="brand-name">Island Breeze</span>
           <span class="brand-sub">Seniors Day Program</span>
         </span>
       </a>
-      <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">
+        <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="menu-label">Menu</span>
+      </button>
       <nav id="nav" class="nav" aria-label="Main">
         <a href="#about">About</a>
         <a href="#programs">Programs</a>
         <a href="#community">Community</a>
         <a href="#visit">Visit</a>
-        <a class="btn btn-small" href="tel:+14163197763">Call 416-319-7763</a>
+        <a class="btn btn-small" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>416-319-7763</a>
       </nav>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <!-- HERO -->
-    <section class="hero" id="top">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <!-- PHOTO SLOT: when real photos arrive, replace this <img> with a <picture> (AVIF/WebP, 800/1280/1920w), keep fetchpriority="high". -->
+      <img class="hero-bg" src="img/hero-scene.svg" alt="" width="1600" height="900" fetchpriority="high">
+      <div class="hero-scrim" aria-hidden="true"></div>
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Non-profit &middot; Adults 55+ &middot; Markham, Ontario</p>
-          <h1>Where Every Senior Matters</h1>
-          <p class="lead">Stay Active. Stay Connected. Live Better.</p>
-          <p>Island Breeze is a community day program for older adults and their caregivers &mdash; crochet circles, domino game nights, arts and crafts, wellness workshops and outings, all with a warm Caribbean welcome.</p>
-          <div class="hero-cta">
-            <a class="btn" href="tel:+14163197763">Call us: 416-319-7763</a>
-            <a class="btn btn-ghost" href="#programs">See our programs</a>
+          <p class="badge hero-anim">Non-profit <span aria-hidden="true">&middot;</span> Adults 55+ <span aria-hidden="true">&middot;</span> Markham, Ontario</p>
+          <h1 id="hero-title" class="hero-anim">Where Every Senior Matters</h1>
+          <p class="lead hero-anim">Stay Active. Stay Connected. Live Better.</p>
+          <p class="hero-text hero-anim">A seniors day program in Markham for older adults and their caregivers &mdash; crochet circles, domino game nights, arts and crafts, wellness workshops and outings, all with a warm Caribbean welcome.</p>
+          <div class="hero-cta hero-anim">
+            <a class="btn btn-lg" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call us: 416-319-7763</a>
+            <a class="btn btn-lg btn-ghost" href="#programs">See our programs <svg class="ico arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
+          <p class="trust hero-anim"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg>A registered not-for-profit serving Markham since 2018.</p>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <img src="logo.svg" alt="" width="360" height="360">
+        <div class="hero-mark" aria-hidden="true">
+          <svg class="float" viewBox="0 0 120 120" width="300" height="300">
+            <defs>
+              <linearGradient id="hm-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d6246e"/><stop offset=".45" stop-color="#f26a2e"/><stop offset="1" stop-color="#ffb347"/></linearGradient>
+              <linearGradient id="hm-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b8fc4"/><stop offset="1" stop-color="#0b4f7c"/></linearGradient>
+              <clipPath id="hm-c"><circle cx="60" cy="60" r="54"/></clipPath>
+            </defs>
+            <g clip-path="url(#hm-c)">
+              <rect width="120" height="68" fill="url(#hm-sky)"/>
+              <circle class="sun" cx="60" cy="68" r="22" fill="#ffd166"/>
+              <rect y="66" width="120" height="60" fill="url(#hm-sea)"/>
+              <path d="M20 78q8-4 16 0t16 0M58 88q8-4 16 0t16 0M28 98q8-4 16 0t16 0" stroke="#fff" stroke-opacity=".55" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M88 104C90 88 92 70 90 50" stroke="#6b4423" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+              <g fill="#2e9e4f"><path d="M90 50C80 40 66 42 60 50c10-5 20-4 30 0Z"/><path d="M90 50c-6-14 0-24 10-26-6 8-8 16-10 26Z"/><path d="M90 50c10-10 22-8 28 0-10-4-20-4-28 0Z"/><path d="M90 50c-10 0-20 8-22 18 8-10 14-14 22-18Z"/><path d="M90 50c10 2 18 10 18 20-6-10-12-15-18-20Z"/></g>
+            </g>
+            <circle cx="60" cy="60" r="54" fill="none" stroke="#fff" stroke-width="4"/>
+          </svg>
         </div>
       </div>
-      <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C240 90 480 0 720 40 S1200 90 1440 40 V90 H0Z"/></svg>
+      <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C240 90 480 0 720 40s480 50 720 0v50H0Z"/></svg>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="wrap two-col">
-        <div>
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head reveal">
           <p class="eyebrow">About us</p>
-          <h2>More than just activities&hellip; it&rsquo;s a healthier, happier you!</h2>
-          <p>Island Breeze Seniors Day Program Ltd. is a federally incorporated not-for-profit organization, founded in October 2018 and based at Hagerman Corners Community Homes in Markham. We serve adults aged 55 and older &mdash; and the caregivers who love them &mdash; with programs that help people connect, engage and socialize.</p>
-          <p>We are governed by a volunteer board of directors and run with the help of dedicated volunteers and community facilitators.</p>
+          <h2 id="about-title">A seniors day program in Markham built on friendship</h2>
+          <p class="intro">More than just activities&hellip; it&rsquo;s a healthier, happier you!</p>
         </div>
-        <div class="card mission">
-          <h3>Our mission</h3>
-          <p class="quote">&ldquo;To be the premier day center for older adults and their caregivers, where our clients can connect and engage.&rdquo;</p>
-          <p>We provide a stimulating cultural environment that helps maintain social, cognitive and physical well-being, while supporting equal access to community resources.</p>
+        <div class="about-grid">
+          <div class="prose reveal">
+            <p>Island Breeze Seniors Day Program Ltd. is a federally incorporated not-for-profit organization, founded in October 2018 and based at Hagerman Corners Community Homes in Markham. We serve adults aged 55 and older &mdash; and the caregivers who love them &mdash; with senior activities in Markham that help people connect, engage and socialize.</p>
+            <p>We are governed by a volunteer board of directors and run with the help of dedicated volunteers and community facilitators.</p>
+          </div>
+          <figure class="feature-quote reveal">
+            <blockquote>
+              <p>To be the premier day center for older adults and their caregivers, where our clients can connect and engage.</p>
+            </blockquote>
+            <figcaption>Our mission &mdash; providing a stimulating cultural environment that helps maintain social, cognitive and physical well-being, while supporting equal access to community resources.</figcaption>
+          </figure>
         </div>
-      </div>
-      <div class="wrap pillars">
-        <div class="pillar"><span class="dot dot-blue" aria-hidden="true"></span><h3>Social</h3><p>Friendship, conversation and a place where everyone knows your name.</p></div>
-        <div class="pillar"><span class="dot dot-orange" aria-hidden="true"></span><h3>Cognitive</h3><p>Games, crafts and learning that keep the mind sharp.</p></div>
-        <div class="pillar"><span class="dot dot-green" aria-hidden="true"></span><h3>Physical</h3><p>Wellness workshops and gentle activity for a healthier body.</p></div>
-        <div class="pillar"><span class="dot dot-pink" aria-hidden="true"></span><h3>Cultural</h3><p>A warm, Caribbean-inspired space that celebrates who you are.</p></div>
+        <ul class="pillars" role="list">
+          <li class="pillar reveal" style="--accent:var(--ocean-500);--accent-ink:var(--ocean)"><span class="pillar-icon"><svg aria-hidden="true"><use href="#i-people"/></svg></span><h3>Social</h3><p>Friendship, conversation and a place where everyone knows your name.</p></li>
+          <li class="pillar reveal" style="--accent:var(--sunset);--accent-ink:var(--sunset-700)"><span class="pillar-icon"><svg aria-hidden="true"><use href="#i-puzzle"/></svg></span><h3>Cognitive</h3><p>Games, crafts and learning that keep the mind sharp.</p></li>
+          <li class="pillar reveal" style="--accent:var(--palm);--accent-ink:var(--palm-700)"><span class="pillar-icon"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><h3>Physical</h3><p>Wellness workshops and gentle activity for a healthier body.</p></li>
+          <li class="pillar reveal" style="--accent:var(--pink);--accent-ink:var(--pink-700)"><span class="pillar-icon"><svg aria-hidden="true"><use href="#i-palm"/></svg></span><h3>Cultural</h3><p>A warm, Caribbean-inspired space that celebrates who you are.</p></li>
+        </ul>
       </div>
     </section>
 
     <!-- PROGRAMS -->
-    <section id="programs" class="section section-tint">
+    <section id="programs" class="section section-tint" aria-labelledby="programs-title">
       <div class="wrap">
-        <p class="eyebrow">What we do</p>
-        <h2>Programs &amp; activities</h2>
-        <p class="section-intro">Our calendar changes week to week with new workshops and events. Please call ahead to check what&rsquo;s on.</p>
-        <div class="grid">
-          <article class="program">
-            <div class="icon" aria-hidden="true">🧶</div>
+        <div class="section-head reveal">
+          <p class="eyebrow">What we do</p>
+          <h2 id="programs-title">Senior activities &amp; social programs in Markham</h2>
+          <p class="intro">Our calendar changes week to week with new workshops and events. Please call 416-319-7763 to check what&rsquo;s on this week.</p>
+        </div>
+        <ul class="program-grid" role="list">
+          <li class="program reveal" style="--accent:var(--sunset);--tint:#fff1e8">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-yarn"/></svg></span>
             <h3>Weekly crochet class</h3>
-            <p>Every Monday at Hagerman Corners Community Homes, facilitated by one of our volunteers. Beginners welcome.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">🎲</div>
-            <h3>Game nights</h3>
+            <p>At Hagerman Corners Community Homes, facilitated by one of our volunteers. Beginners welcome.</p>
+            <p class="chip"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Every Monday</p>
+          </li>
+          <li class="program reveal" style="--accent:var(--palm);--tint:#eaf6ee">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-dominoes"/></svg></span>
+            <h3>Domino game nights</h3>
             <p>Dominoes and friendly competition &mdash; the group always looks forward to the interaction and socializing.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">🎨</div>
+          </li>
+          <li class="program reveal" style="--accent:var(--pink);--tint:#fdebf2">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-palette"/></svg></span>
             <h3>Arts &amp; crafts</h3>
             <p>Creative, hands-on sessions to make something beautiful together.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">😄</div>
+          </li>
+          <li class="program reveal" style="--accent:var(--ocean-500);--tint:#e6f2fa">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-laugh"/></svg></span>
             <h3>Laughter Yoga</h3>
             <p>A joyful wellness workshop for seniors that combines laughter, breathing and gentle movement.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">🧘</div>
-            <h3>Meditation &amp; holistic wellness</h3>
+          </li>
+          <li class="program reveal" style="--accent:var(--palm);--tint:#eaf6ee">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-lotus"/></svg></span>
+            <h3>Meditation &amp; wellness</h3>
             <p>Calming sessions focused on stress relief, balance and whole-person wellness.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">✍️</div>
+          </li>
+          <li class="program reveal" style="--accent:var(--pink);--tint:#fdebf2">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-quill"/></svg></span>
             <h3>Healing Through Poetry</h3>
             <p>A supportive workshop for seniors in South Markham exploring grief and healing through the written word.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">🚌</div>
+          </li>
+          <li class="program reveal" style="--accent:var(--ocean-500);--tint:#e6f2fa">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-bus"/></svg></span>
             <h3>Community outings</h3>
-            <p>Group trips and excursions to local spots &mdash; like our visit to the Markham Museum&rsquo;s older adults program.</p>
-          </article>
-          <article class="program">
-            <div class="icon" aria-hidden="true">🫖</div>
+            <p>Group trips to local spots &mdash; like our visit to the Markham Museum&rsquo;s older adults program.</p>
+          </li>
+          <li class="program reveal" style="--accent:var(--sunset);--tint:#fff1e8">
+            <span class="program-icon"><svg aria-hidden="true"><use href="#i-teapot"/></svg></span>
             <h3>Special events</h3>
             <p>Tea parties, health fairs and seasonal celebrations with our community partners.</p>
-          </article>
-        </div>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- COMMUNITY -->
-    <section id="community" class="section">
+    <section id="community" class="section" aria-labelledby="community-title">
       <div class="wrap">
-        <p class="eyebrow">Stronger together</p>
-        <h2>In the community</h2>
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Carefirst</h3>
-            <p>Carefirst has hosted a tea party for our seniors, and our members joined the Carefirst Health Fair at the YMCA in Markham.</p>
-          </div>
-          <div class="card">
-            <h3>Black Health Initiative</h3>
-            <p>During Black History Month 2025 we launched a Black Health initiative to support the health and well-being of Black older adults in our community.</p>
-          </div>
-          <div class="card">
-            <h3>Eastern York Region North Durham OHT</h3>
-            <p>Island Breeze is listed among the community partners of the Eastern York Region North Durham Ontario Health Team.</p>
-          </div>
-          <div class="card">
-            <h3>Government of Canada</h3>
-            <p>Our programs have been supported by federal community grants, including funding through the Supporting Black Communities stream of Employment and Social Development Canada.</p>
-          </div>
-          <div class="card">
-            <h3>Markham Museum</h3>
-            <p>Our seniors have visited the Markham Museum&rsquo;s older adults program.</p>
-          </div>
-          <div class="card card-accent">
-            <h3>Partner with us</h3>
-            <p>Are you an organization serving older adults in York Region? We&rsquo;d love to collaborate.</p>
-            <a class="link" href="mailto:islandbreezeseniors@gmail.com?subject=Partnership%20inquiry">Email us &rarr;</a>
-          </div>
+        <div class="section-head reveal">
+          <p class="eyebrow">Stronger together</p>
+          <h2 id="community-title">Our community partners in York Region</h2>
+          <p class="intro">We work alongside local health, cultural and government organizations so our members can reach the resources they need.</p>
         </div>
+        <ul class="partner-grid" role="list">
+          <!-- LOGO SLOTS: replace each .partner-logo monogram with <img src="img/partners/NAME.svg" alt="NAME logo"> once permission to use the logo is confirmed. -->
+          <li class="partner reveal">
+            <span class="partner-logo" aria-hidden="true">Cf</span>
+            <div><h3>Carefirst</h3><p>Hosted a tea party for our seniors; our members joined the Carefirst Health Fair at the YMCA in Markham.</p></div>
+          </li>
+          <li class="partner reveal">
+            <span class="partner-logo" aria-hidden="true">BH</span>
+            <div><h3>Black Health Initiative</h3><p>Launched during Black History Month 2025 to support the health and well-being of Black older adults in our community.</p></div>
+          </li>
+          <li class="partner reveal">
+            <span class="partner-logo" aria-hidden="true">OHT</span>
+            <div><h3>Eastern York Region North Durham OHT</h3><p>Island Breeze is listed among the community partners of this Ontario Health Team.</p></div>
+          </li>
+          <li class="partner reveal">
+            <span class="partner-logo" aria-hidden="true">GC</span>
+            <div><h3>Government of Canada</h3><p>Our programs have been supported by federal community grants, including Employment and Social Development Canada&rsquo;s Supporting Black Communities stream.</p></div>
+          </li>
+          <li class="partner reveal">
+            <span class="partner-logo" aria-hidden="true">MM</span>
+            <div><h3>Markham Museum</h3><p>Our seniors have visited the Markham Museum&rsquo;s older adults program.</p></div>
+          </li>
+          <li class="partner partner-cta reveal">
+            <span class="partner-logo" aria-hidden="true">+</span>
+            <div><h3>Partner with us</h3><p>Serving older adults in York Region? We&rsquo;d love to collaborate.</p>
+            <a class="text-link" href="mailto:islandbreezeseniors@gmail.com?subject=Partnership%20inquiry">Email us <svg class="ico arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- GET INVOLVED -->
-    <section class="section section-sunset">
+    <section id="get-involved" class="section section-sunset" aria-labelledby="involved-title">
       <div class="wrap">
-        <h2>Because You Matter!</h2>
-        <div class="grid grid-3">
-          <div class="card card-glass">
-            <h3>Join the program</h3>
-            <p>Open to adults 55+. Give us a call to learn how to register and what&rsquo;s coming up this week.</p>
-            <p class="small">Call 416-319-7763 and we&rsquo;ll walk you through how to join.</p>
-          </div>
-          <div class="card card-glass">
-            <h3>For caregivers</h3>
-            <p>We welcome caregivers too. Reach out to talk about how Island Breeze can support you and your loved one.</p>
-          </div>
-          <div class="card card-glass">
-            <h3>Volunteer</h3>
-            <p>Share a skill &mdash; crochet, crafts, music, wellness &mdash; or simply your time. Our volunteers make every program possible.</p>
-          </div>
+        <div class="section-head center reveal">
+          <p class="eyebrow">Get involved</p>
+          <h2 id="involved-title">Because You Matter!</h2>
+          <p class="intro">Whether you&rsquo;re joining for yourself, supporting someone you love, or giving your time &mdash; there&rsquo;s a place for you here.</p>
         </div>
+        <ul class="cta-grid" role="list">
+          <li class="cta-card reveal">
+            <span class="cta-icon"><svg aria-hidden="true"><use href="#i-people"/></svg></span>
+            <h3>Join the program</h3>
+            <p>Open to adults 55+. Call us and we&rsquo;ll walk you through how to join and what&rsquo;s coming up this week.</p>
+            <a class="btn btn-light" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call to register</a>
+          </li>
+          <li class="cta-card reveal">
+            <span class="cta-icon"><svg aria-hidden="true"><use href="#i-hands"/></svg></span>
+            <h3>For caregivers</h3>
+            <p>Caregiver support in Markham starts with a conversation. Tell us about your loved one and how we can help.</p>
+            <a class="btn btn-light" href="#contact" data-topic="I'm a caregiver and would like to talk about the program.">Talk to us <svg class="ico arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </li>
+          <li class="cta-card reveal">
+            <span class="cta-icon"><svg aria-hidden="true"><use href="#i-hand"/></svg></span>
+            <h3>Volunteer</h3>
+            <p>Share a skill &mdash; crochet, crafts, music, wellness &mdash; or simply your time. Volunteers make every program possible.</p>
+            <a class="btn btn-light" href="#contact" data-topic="I'd like to volunteer with Island Breeze.">Volunteer with us <svg class="ico arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- VISIT -->
-    <section id="visit" class="section">
-      <div class="wrap two-col">
-        <div>
+    <section id="visit" class="section" aria-labelledby="visit-title">
+      <div class="wrap">
+        <div class="section-head reveal">
           <p class="eyebrow">Visit &amp; contact</p>
-          <h2>Come say hello</h2>
-          <dl class="contact">
-            <div>
-              <dt>Address</dt>
-              <dd>Hagerman Corners Community Homes<br>4460 14th Avenue, Unit 314<br>Markham, ON L3R 1H1</dd>
-            </div>
-            <div>
-              <dt>Phone</dt>
-              <dd><a href="tel:+14163197763">416-319-7763</a></dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd><a href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@gmail.com</a></dd>
-            </div>
-            <div>
-              <dt>Hours</dt>
-              <dd>Programs run on a weekly schedule. Please call 416-319-7763 to confirm this week&rsquo;s times.</dd>
-            </div>
-            <div>
-              <dt>Follow us</dt>
-              <dd class="social">
-                <a href="https://www.facebook.com/Islandbreezeseniors/" rel="noopener" target="_blank">Facebook</a>
-                <a href="https://www.instagram.com/islandbreezeseniors55/" rel="noopener" target="_blank">Instagram</a>
-              </dd>
-            </div>
-          </dl>
+          <h2 id="visit-title">Come say hello</h2>
+          <p class="intro">We&rsquo;re at Hagerman Corners Community Homes on 14th Avenue in Markham. The easiest way to reach us is by phone.</p>
         </div>
-        <div class="map">
-          <iframe title="Map to 4460 14th Avenue, Markham" src="https://www.google.com/maps?q=4460+14th+Avenue,+Markham,+ON+L3R+1H1&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="visit-grid">
+          <div class="contact-list reveal">
+            <a class="contact-tile" href="tel:+14163197763">
+              <span class="contact-icon"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+              <span><span class="contact-label">Call us</span><span class="contact-value">416-319-7763</span></span>
+            </a>
+            <a class="contact-tile" href="mailto:islandbreezeseniors@gmail.com">
+              <span class="contact-icon"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
+              <span><span class="contact-label">Email us</span><span class="contact-value contact-email">islandbreezeseniors@gmail.com</span></span>
+            </a>
+            <div class="contact-tile static">
+              <span class="contact-icon"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <span><span class="contact-label">Address</span>
+                <address class="contact-value">Hagerman Corners Community Homes<br>4460 14th Avenue, Unit 314<br>Markham, ON L3R 1H1</address></span>
+            </div>
+            <div class="contact-tile static">
+              <span class="contact-icon"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>
+              <span><span class="contact-label">Program times</span>
+                <span class="contact-value small-value">Programs run on a weekly schedule. Please call 416-319-7763 to confirm this week&rsquo;s times.</span></span>
+            </div>
+            <a class="btn btn-lg btn-block" href="https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue+Unit+314+Markham+ON+L3R+1H1" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Get directions<span class="visually-hidden"> (opens Google Maps in a new tab)</span></a>
+            <p class="social-row">
+              <a class="social-link" href="https://www.facebook.com/Islandbreezeseniors/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-fb"/></svg>Facebook<span class="visually-hidden"> (opens in a new tab)</span></a>
+              <a class="social-link" href="https://www.instagram.com/islandbreezeseniors55/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Instagram<span class="visually-hidden"> (opens in a new tab)</span></a>
+            </p>
+          </div>
+          <div class="map reveal" data-map-src="https://www.google.com/maps?q=4460+14th+Avenue,+Markham,+ON+L3R+1H1&amp;output=embed">
+            <div class="map-placeholder">
+              <svg aria-hidden="true"><use href="#i-pin"/></svg>
+              <p>4460 14th Avenue, Unit 314<br>Markham, ON</p>
+            </div>
+            <noscript><iframe title="Map showing 4460 14th Avenue, Markham" src="https://www.google.com/maps?q=4460+14th+Avenue,+Markham,+ON+L3R+1H1&amp;output=embed" loading="lazy"></iframe></noscript>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <div class="brand">
-        <img src="logo.svg" alt="" width="48" height="48">
-        <span class="brand-text">
-          <span class="brand-name">Island Breeze</span>
-          <span class="brand-sub">Where Every Senior Matters</span>
-        </span>
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <img src="logo.svg" alt="" width="52" height="52" loading="lazy">
+          <span class="brand-text">
+            <span class="brand-name">Island Breeze</span>
+            <span class="brand-sub">Where Every Senior Matters</span>
+          </span>
+        </div>
+        <p>A seniors day program for adults 55+ and their caregivers in Markham, York Region.</p>
       </div>
-      <p class="small">&copy; <span id="yr">2026</span> Island Breeze Seniors Day Program Ltd. &middot; Federal not-for-profit corporation, Markham, Ontario.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <h2 class="footer-title">Explore</h2>
+        <a href="#about">About us</a>
+        <a href="#programs">Programs</a>
+        <a href="#community">Community partners</a>
+        <a href="#visit">Visit &amp; contact</a>
+      </nav>
+      <div class="footer-contact">
+        <h2 class="footer-title">Reach us</h2>
+        <a href="tel:+14163197763">416-319-7763</a>
+        <a href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@gmail.com</a>
+        <a href="https://www.facebook.com/Islandbreezeseniors/" target="_blank" rel="noopener">Facebook<span class="visually-hidden"> (opens in a new tab)</span></a>
+        <a href="https://www.instagram.com/islandbreezeseniors55/" target="_blank" rel="noopener">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+    <div class="wrap footer-base">
+      <p>&copy; <span id="yr">2026</span> Island Breeze Seniors Day Program Ltd. &middot; Federal not-for-profit corporation, Markham, Ontario.</p>
     </div>
   </footer>
-
-  <script>
-    const btn = document.querySelector('.menu-btn');
-    const nav = document.getElementById('nav');
-    btn.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open);
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    }));
-    document.getElementById('yr').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
