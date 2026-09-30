@@ -112,6 +112,77 @@
     sections.forEach(function (sec) { spyIO.observe(sec); });
   }
 
+
+  /* ---------- "Talk to us" / "Volunteer" buttons pre-fill the message ---------- */
+  var msg = document.getElementById('f-message');
+  Array.prototype.forEach.call(document.querySelectorAll('a[data-topic]'), function (a) {
+    a.addEventListener('click', function () {
+      if (msg && !msg.value.trim()) msg.value = a.getAttribute('data-topic') + ' ';
+    });
+  });
+
+  /* ---------- Contact form: friendly validation + background send via FormSubmit ---------- */
+  var form = document.getElementById('contact-form');
+  if (form && window.fetch && window.FormData) {
+    var status = form.querySelector('.form-status');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var btnText = submitBtn.querySelector('.btn-text');
+    var checks = [
+      { el: form.querySelector('#f-name'), ok: function (v) { return v.trim().length > 0; } },
+      { el: form.querySelector('#f-email'), ok: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
+      { el: form.querySelector('#f-message'), ok: function (v) { return v.trim().length > 0; } }
+    ];
+    function showStatus(kind, html) {
+      status.className = 'form-status ' + kind;
+      status.innerHTML = html;
+      status.focus();
+    }
+    function validate() {
+      var firstBad = null;
+      checks.forEach(function (c) {
+        var bad = !c.ok(c.el.value);
+        c.el.setAttribute('aria-invalid', String(bad));
+        document.getElementById(c.el.id + '-err').hidden = !bad;
+        if (bad && !firstBad) firstBad = c.el;
+      });
+      return firstBad;
+    }
+    checks.forEach(function (c) {
+      c.el.addEventListener('blur', function () {
+        if (c.el.getAttribute('aria-invalid') === 'true') validate();
+      });
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = validate();
+      if (bad) { bad.focus(); return; }
+      if (form.querySelector('#f-honey').value) return; // bot
+      submitBtn.disabled = true;
+      btnText.textContent = 'Sending\u2026';
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = v; });
+      if (!data.email_list) data.email_list = 'No';
+      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+        .then(function (res) {
+          if (!res.ok || String(res.body.success) !== 'true') throw new Error(res.body.message || 'Send failed');
+          form.reset();
+          checks.forEach(function (c) { c.el.removeAttribute('aria-invalid'); });
+          showStatus('ok', 'Thank you! Your message has been sent. We\u2019ll get back to you soon. If it\u2019s urgent, please call <a href="tel:+14163197763">416-319-7763</a>.');
+        })
+        .catch(function () {
+          showStatus('err', 'Sorry, your message didn\u2019t go through. Please try again in a moment, or call us at <a href="tel:+14163197763">416-319-7763</a>.');
+        })
+        .then(function () {
+          submitBtn.disabled = false;
+          btnText.textContent = 'Send message';
+        });
+    });
+  }
+
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 })();

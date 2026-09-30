@@ -134,6 +134,7 @@
         <a href="#programs">Programs</a>
         <a href="#community">Community</a>
         <a href="#visit">Visit</a>
+        <a href="#contact">Contact</a>
         <a class="btn btn-small" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>416-319-7763</a>
       </nav>
     </div>
@@ -376,6 +377,66 @@
         </div>
       </div>
     </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contact" class="section section-warm" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Send us a message</p>
+          <h2 id="contact-title">We&rsquo;d love to hear from you</h2>
+          <p class="intro">Ask a question, tell us about a loved one, or sign up for updates. We&rsquo;ll get back to you as soon as we can.</p>
+        </div>
+        <div class="contact-grid">
+          <!-- Form delivery: FormSubmit (formsubmit.co). TEMPORARY recipient — switch to the organization's address before launch. -->
+          <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/aran.luxman@gmail.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New message from the Island Breeze website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://island-breeze-seniors.pages.dev/thanks.html">
+            <!-- Honeypot: hidden from people, bots fill it in and get discarded -->
+            <div class="hp" aria-hidden="true">
+              <label for="f-honey">Leave this field empty</label>
+              <input type="text" id="f-honey" name="_honey" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+              <p class="field-error" id="f-name-err" hidden>Please tell us your name.</p>
+            </div>
+            <div class="field">
+              <label for="f-email">Email address</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+              <p class="field-error" id="f-email-err" hidden>Please enter an email address like name@example.com.</p>
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone number <span class="optional">(optional)</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-hint">
+              <p class="field-hint" id="f-phone-hint">If you&rsquo;d rather we call you back.</p>
+            </div>
+            <div class="field">
+              <label for="f-message">Your message</label>
+              <textarea id="f-message" name="message" rows="5" required aria-describedby="f-message-err"></textarea>
+              <p class="field-error" id="f-message-err" hidden>Please write a short message.</p>
+            </div>
+            <div class="field check">
+              <input id="f-list" name="email_list" type="checkbox" value="Yes, add me to the email list">
+              <label for="f-list">Add me to the email list for news and upcoming programs</label>
+            </div>
+            <button class="btn btn-lg btn-block" type="submit"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span class="btn-text">Send message</span></button>
+            <div class="form-status" role="status" aria-live="polite" tabindex="-1"></div>
+          </form>
+
+          <aside class="call-card reveal" aria-labelledby="call-title">
+            <span class="cta-icon"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+            <h3 id="call-title">Prefer to talk?</h3>
+            <p>Many of our members would rather pick up the phone &mdash; and so would we. Give us a call.</p>
+            <a class="call-number" href="tel:+14163197763">416-319-7763</a>
+            <p class="small-note">Or email <a href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@gmail.com</a></p>
+          </aside>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -395,7 +456,8 @@
         <a href="#about">About us</a>
         <a href="#programs">Programs</a>
         <a href="#community">Community partners</a>
-        <a href="#visit">Visit &amp; contact</a>
+        <a href="#visit">Visit us</a>
+        <a href="#contact">Send a message</a>
       </nav>
       <div class="footer-contact">
         <h2 class="footer-title">Reach us</h2>
