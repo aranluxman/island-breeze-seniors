@@ -76,6 +76,42 @@
     }
   }
 
+
+  /* ---------- Scroll reveal: once, at 12% visible, grid items staggered 0.07s ---------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if (!reduce && 'IntersectionObserver' in window && reveals.length) {
+    Array.prototype.forEach.call(document.querySelectorAll('ul[role="list"]'), function (list) {
+      Array.prototype.forEach.call(list.children, function (item, i) {
+        if (item.classList.contains('reveal')) item.style.setProperty('--delay', (i * 0.07).toFixed(2) + 's');
+      });
+    });
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-in'); revealIO.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    Array.prototype.forEach.call(reveals, function (el) { revealIO.observe(el); });
+    document.documentElement.classList.add('reveal-ready');
+  }
+
+  /* ---------- Scroll-spy: aria-current on the nav link for the section in view ---------- */
+  var links = nav ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]')) : [];
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if (sections.length && 'IntersectionObserver' in window) {
+    var visible = {};
+    var spyIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+      var current = null;
+      sections.forEach(function (sec) { if (visible[sec.id] && !current) current = sec.id; });
+      links.forEach(function (a) {
+        if (current && a.getAttribute('href') === '#' + current) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (sec) { spyIO.observe(sec); });
+  }
+
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 })();

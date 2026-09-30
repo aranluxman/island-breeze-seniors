@@ -299,3 +299,78 @@ a.contact-tile:hover { border-color: var(--sunset); color: var(--ink); }
 .simple-page { min-height: 100vh; display: grid; place-content: center; justify-items: center; text-align: center; padding: var(--s-6) var(--s-4); max-width: 44rem; margin: 0 auto; }
 .simple-page img { width: 120px; margin-bottom: var(--s-5); }
 .simple-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; }
+
+/* ==========================================================================
+   Motion — all gated behind prefers-reduced-motion: no-preference.
+   With reduced motion (or no JS) everything is static and fully visible.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Interactions: 150–300ms, calm easing */
+  .btn, .text-link, .social-link, .contact-tile, .program, .partner, .pillar, .cta-card,
+  .site-header, .nav a::after, .burger span, .program-icon, .footer-nav a, .footer-contact a {
+    transition-timing-function: var(--ease);
+    transition-duration: .25s;
+  }
+  .btn { transition-property: transform, box-shadow, background-color, color, border-color; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(184, 65, 15, .55), 0 0 0 6px rgba(255, 179, 71, .22); }
+  .btn-ghost:hover, .btn-light:hover { box-shadow: 0 10px 24px -8px rgba(10, 61, 97, .45), 0 0 0 6px rgba(255, 209, 102, .3); }
+  .btn:active { transform: scale(.98); transition-duration: .1s; }
+  .arrow { transition: transform .25s var(--ease); }
+  a:hover > .arrow, .btn:hover .arrow { transform: translateX(4px); }
+  .social-link, .contact-tile { transition-property: transform, background-color, color, border-color, box-shadow; }
+  .social-link:hover, a.contact-tile:hover { transform: translateY(-2px); }
+
+  /* Nav underline slides in from the left */
+  .nav a:not(.btn)::after { transition-property: transform; }
+
+  /* Header */
+  .site-header { transition-property: background-color, box-shadow, border-color; }
+  .burger span { transition-property: transform, opacity, top, bottom; }
+  .js .nav { transition: opacity .25s var(--ease), transform .3s var(--ease), visibility 0s linear .3s; }
+  .js .nav.open { transition: opacity .25s var(--ease), transform .3s var(--ease), visibility 0s; }
+
+  /* Cards: warm lift; icon does a small wiggle */
+  .program, .partner, .pillar { transition-property: transform, box-shadow; }
+  .program:hover, .partner:hover, .pillar:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+  .program:hover .program-icon { animation: wiggle .6s var(--ease); }
+  /* PHOTO SLOT behaviour: an <img> inside .program-media zooms gently on hover */
+  .program-media { overflow: hidden; }
+  .program-media img { transition: transform .6s var(--ease); }
+  .program:hover .program-media img { transform: scale(1.05); }
+
+  /* Scroll reveal (class added by main.js only once the observer is running) */
+  .reveal-ready .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--delay, 0s); }
+  .reveal-ready .reveal.is-in { opacity: 1; transform: none; }
+
+  /* Hero: fade up in sequence on load */
+  .hero-anim { animation: fadeUp .8s var(--ease) both; }
+  .hero-anim:nth-child(1) { animation-delay: .05s; }
+  .hero-anim:nth-child(2) { animation-delay: .15s; }
+  .hero-anim:nth-child(3) { animation-delay: .25s; }
+  .hero-anim:nth-child(4) { animation-delay: .35s; }
+  .hero-anim:nth-child(5) { animation-delay: .45s; }
+  .hero-anim:nth-child(6) { animation-delay: .55s; }
+  .hero-mark .float { animation: float 7s ease-in-out infinite alternate; }
+  .hero-mark .sun { animation: glow 9s ease-in-out infinite alternate; }
+
+  /* Signature: slow sunset shimmer across "Because You Matter!" */
+  .section-sunset::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(100deg, transparent 20%, rgba(255, 179, 71, .16) 40%, rgba(214, 36, 110, .18) 55%, transparent 75%);
+    background-size: 250% 100%;
+    animation: shimmer 12s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes float { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+@keyframes glow { from { fill: #ffd166; } to { fill: #ffe7a3; } }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-8deg); } 60% { transform: rotate(6deg); } }
+
+/* Header state once scrolled (works with or without motion) */
+.site-header.scrolled { background: rgba(255, 248, 239, .98); border-bottom-color: var(--sand-2); box-shadow: 0 8px 24px -14px rgba(122, 59, 20, .35); }
