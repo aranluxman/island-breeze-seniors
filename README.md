@@ -3,6 +3,9 @@
 Hand-written static site for Island Breeze Seniors Day Program (Markham, ON). Plain HTML/CSS/JS, no framework, no build step.
 
 ```
+content/site-content.json   editable content (activities, milestones, FAQ, partners)
+scripts/                    render-content.mjs, optimize-images.mjs (dev tools, no deps)
+docs/content-checklist.md   sources + open questions (not published)
 public/
   index.html        the whole site (single page)
   styles.css        design tokens, layout, components, motion (reduced-motion safe)
@@ -11,7 +14,7 @@ public/
   404.html          real 404 (stops Pages serving the home page for missing URLs)
   robots.txt, sitemap.xml, _headers
   fonts/            self-hosted Atkinson Hyperlegible + Fraunces (SIL OFL)
-  img/              hero-scene.svg, og-image.jpg (1200x630 share image)
+  img/              og-image.jpg (1200x630 share image) + optimized illustrations
   logo.svg, favicon.svg
 wrangler.toml       pages_build_output_dir = ./public
 ```
@@ -28,36 +31,43 @@ wrangler.toml       pages_build_output_dir = ./public
 
 CLI alternative: `npx wrangler pages deploy public --project-name island-breeze-seniors`
 
+## Updating content (activities, milestones, FAQ, partners)
+
+All of it lives in **`content/site-content.json`**. After editing:
+
+```bash
+node scripts/render-content.mjs
+```
+
+This rewrites the marked blocks (`<!-- @content:NAME -->`) in `public/index.html`. It has no dependencies and the output is committed, so Cloudflare Pages still needs no build step. Only add facts that have a source or come from the owner. `docs/content-checklist.md` tracks what's verified and what's still open.
+
 ## Contact form (FormSubmit)
 
-The form posts to `https://formsubmit.co/aran.luxman@gmail.com` (temporary recipient).
+The form posts to `https://formsubmit.co/aran.luxman@gmail.com` (**temporary** recipient).
 
-1. **Activate it once:** the first real submission from the live site triggers a FormSubmit email to that address. Click the confirm link, or no messages will arrive.
-2. After activating, FormSubmit gives you a random alias. Replace the email in the form `action` in `index.html` with that alias so the address isn't visible in the page source.
-3. Before handing over, change the recipient to the organization's address (it needs its own one-time activation).
+- Visitors choose **"Call me back"** (phone required, email optional) or **"Email me"** (email required).
+- There's no newsletter checkbox, because no mailing-list workflow exists.
+- A success message appears only when FormSubmit replies `success: "true"`. An unactivated form, a network failure or any other reply shows an error with the phone number.
+- **Activation:** the first real submission sends a confirmation email to the recipient, and nothing is delivered until it's clicked. Test once from the live site after publishing.
+- After activating, replace the email in the form `action` with the random alias FormSubmit provides, so the address isn't visible in the page source.
+- Before handover, switch to the organization's inbox (it needs its own activation) and keep the privacy note accurate.
 
-The email-list checkbox only adds a "Yes, add me to the email list" line to the message. A real mailing list (e.g. Buttondown or Mailchimp) is a later step.
+## Images
 
-## Photos
+`scripts/optimize-images.mjs` turns a source image into `public/img/<name>-{800,1280}.{webp,jpg}` using Playwright's Chromium:
 
-There are no photos yet: the build environment can't reach stock photo sites, and real program photos haven't been supplied. The design uses an illustrated sunset scene and SVG icons instead.
+```bash
+node scripts/optimize-images.mjs incoming/dominoes.png illus-dominoes
+node scripts/render-content.mjs
+```
 
-- Hero: replace `img/hero-scene.svg` in the `<img class="hero-bg">` with a `<picture>` (AVIF + WebP at 800/1280/1920w). Keep `fetchpriority="high"`.
-- Program cards: add `<div class="program-media"><img …></div>` at the top of a card; the hover zoom is already styled.
-- **Consent:** only use photos where everyone identifiable has agreed to appear on the website.
+Slots are defined under `illustrations` in the content file (`illus-crochet` → Creative activities, `illus-dominoes` → Social games, `illus-tea` → About). A slot appears only once its files exist, so there are never empty placeholders.
 
-## Before launch — questions for the owner
+The three supplied images are **painted illustrations, not photos of Island Breeze members**. They're captioned "Illustration". Replace them with consented community photos when available.
 
-1. **Hours:** which days and times does the program run? (Then add `openingHours` to the JSON-LD.)
-2. **Registration and fees:** how does someone join? Is there a fee, a waitlist, or an intake form?
-3. **Black Health Initiative:** who is the partner or funder, what does it offer, and what name should appear?
-4. **Program schedule:** days and times for game nights, arts & crafts, Laughter Yoga, meditation and poetry. Only crochet (Mondays) is confirmed. What time is crochet?
-5. **Partner logos:** permission to use the Carefirst, EYRND OHT, Government of Canada and Markham Museum logos?
-6. **Photos:** real photos of the program, with consent from everyone shown.
-7. **Accessibility and parking** at 4460 14th Ave: elevator, accessible entrance, parking, transit?
-8. **Social media:** are facebook.com/Islandbreezeseniors and instagram.com/islandbreezeseniors55 the right accounts? Any others?
-9. **Form email:** which address should website messages go to?
-10. **Domain:** who has the GoDaddy login for islandbreezeseniors.ca, and is any email set up on that domain?
+## Before launch — owner questions
+
+See `docs/content-checklist.md` (section "Unresolved").
 
 ## Moving islandbreezeseniors.ca to this site
 
