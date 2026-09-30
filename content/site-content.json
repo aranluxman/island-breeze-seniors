@@ -1,0 +1,285 @@
+{
+  "_readme": "Edit this file to update activities, milestones, collaborators, funding and FAQ, then run: node scripts/render-content.mjs. Text fields may contain simple HTML (<a>, <strong>, <em>). Only add facts with a source or confirmed by the owner. 'status' for activities: 'regular' (shared as recurring), 'project' (time-limited workshop series), 'event' (one-off or annual).",
+  "latest": {
+    "text": "Most recently, members joined the Carefirst Health Fair at the YMCA in Markham (September 2026).",
+    "source": {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/p/DdRtvXkET1U/"
+    }
+  },
+  "activityGroups": [
+    {
+      "id": "creative",
+      "title": "Creative activities",
+      "icon": "i-palette",
+      "accent": "pink",
+      "items": [
+        {
+          "name": "Crochet circle",
+          "desc": "A relaxed crochet class led by a volunteer instructor, held at Hagerman Corners Community Homes.",
+          "status": "regular",
+          "note": "Shared as a weekly class in 2024 and 2025"
+        },
+        {
+          "name": "Arts and crafts",
+          "desc": "Hands-on creative sessions, including a colour therapy workshop.",
+          "status": "event",
+          "note": "Colour therapy workshop, October 2025"
+        },
+        {
+          "name": "Pottery with Markham Museum",
+          "desc": "A seniors pottery workshop led by Markham Museum.",
+          "status": "event",
+          "note": "October 2025"
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Social games & gatherings",
+      "icon": "i-dominoes",
+      "accent": "palm",
+      "items": [
+        {
+          "name": "Game night",
+          "desc": "Dominoes, friendly competition and plenty of conversation.",
+          "status": "regular",
+          "note": "Shared in 2025"
+        },
+        {
+          "name": "Black History Month luncheon",
+          "desc": "An annual celebration lunch each February.",
+          "status": "event",
+          "note": "Held in 2025 (third annual) and 2026"
+        },
+        {
+          "name": "Christmas dinner",
+          "desc": "A holiday dinner to close out the year together.",
+          "status": "event",
+          "note": "Described as annual in 2022"
+        }
+      ]
+    },
+    {
+      "id": "wellness",
+      "title": "Wellness workshops",
+      "icon": "i-lotus",
+      "accent": "ocean",
+      "items": [
+        {
+          "name": "Drumming for Wellness",
+          "desc": "Rhythm and movement for mind and body.",
+          "status": "project",
+          "note": "January 2026 workshop"
+        },
+        {
+          "name": "Healing Grief Through Poetry",
+          "desc": "A gentle workshop on grief and healing through the written word.",
+          "status": "project",
+          "note": "February 2026 workshop"
+        },
+        {
+          "name": "Laughter Yoga",
+          "desc": "Laughter, breathing and gentle movement.",
+          "status": "project",
+          "note": "Part of the 2026 workshop series"
+        }
+      ]
+    },
+    {
+      "id": "outings",
+      "title": "Outings & community events",
+      "icon": "i-bus",
+      "accent": "sunset",
+      "items": [
+        {
+          "name": "Markham Museum",
+          "desc": "A visit to the museum's older adults program.",
+          "status": "event",
+          "note": "February 2024"
+        },
+        {
+          "name": "Carefirst tea party",
+          "desc": "A tea party hosted by the Carefirst team for Island Breeze members.",
+          "status": "event",
+          "note": "July 2026"
+        },
+        {
+          "name": "Carefirst Health Fair",
+          "desc": "Members attended the Carefirst Health Fair at the YMCA in Markham.",
+          "status": "event",
+          "note": "September 2026"
+        }
+      ]
+    }
+  ],
+  "featuredProject": {
+    "title": "Cultural Arts for Holistic Healing of Mind, Body and Spirit",
+    "when": "2026",
+    "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze and funded by United Way Greater Toronto through the South Markham Community Action Grants. Workshops included Drumming for Wellness and Healing Grief Through Poetry, and the project closed with a celebration luncheon and fashion show.",
+    "source": {
+      "label": "Island Breeze on Facebook and Instagram, 2026",
+      "url": "https://www.facebook.com/Islandbreezeseniors/"
+    }
+  },
+  "joinSteps": [
+    {
+      "title": "Give us a call",
+      "text": "Call <a href=\"tel:+14163197763\">416-319-7763</a>, or send a message below and ask us to call you back."
+    },
+    {
+      "title": "Ask your questions",
+      "text": "Ask what's on this month, where to meet, and anything else you'd like to know before you come."
+    },
+    {
+      "title": "Plan your first visit",
+      "text": "Pick an activity to try first. If anything would make your visit easier, just let us know when you call."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Who can join?",
+      "a": "Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, please give us a call."
+    },
+    {
+      "q": "How do I register?",
+      "a": "Call <a href=\"tel:+14163197763\">416-319-7763</a> and we'll talk you through it. You can also send us a message and ask for a call back."
+    },
+    {
+      "q": "What does it cost?",
+      "a": "Costs can vary by activity. Please call us to ask about the activity you're interested in."
+    },
+    {
+      "q": "Can a caregiver attend?",
+      "a": "Our mission includes older adults and their caregivers. Please call to talk about coming together, so we can plan the visit with you."
+    },
+    {
+      "q": "What are the current program times?",
+      "a": "Our schedule changes through the year. Please call <a href=\"tel:+14163197763\">416-319-7763</a> for this month's activities and times."
+    },
+    {
+      "q": "What accessibility or transportation arrangements are available?",
+      "a": "Please call before your visit so we can talk through access, mobility needs and how you'll get there."
+    }
+  ],
+  "milestones": [
+    {
+      "date": "October 2018",
+      "title": "Incorporated as a not-for-profit",
+      "text": "Island Breeze Seniors Day Program Ltd. was incorporated under the Canada Not-for-profit Corporations Act.",
+      "source": {
+        "label": "Corporations Canada record",
+        "url": "https://www.canadacompanyregistry.com/companies/island-breeze-seniors-day-program-ltd/"
+      }
+    },
+    {
+      "date": "2021–2022",
+      "title": "Guiding Light",
+      "text": "Received a $4,000 federal grant for the Guiding Light project through the Supporting Black Communities stream (September 2021 to September 2022).",
+      "source": {
+        "label": "Government of Canada grants record",
+        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q2-00250%2Ccurrent"
+      }
+    },
+    {
+      "date": "2022–2023",
+      "title": "Moment In Time",
+      "text": "Received an $18,750 New Horizons for Seniors Program grant for the Moment In Time project (March 2022 to March 2023).",
+      "source": {
+        "label": "Government of Canada grants record",
+        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q4-03583%2Ccurrent"
+      }
+    },
+    {
+      "date": "February 2024",
+      "title": "Markham Museum visit",
+      "text": "Members visited the Markham Museum's older adults program.",
+      "source": {
+        "label": "Island Breeze on Instagram",
+        "url": "https://www.instagram.com/p/C3N3If2JFYM/"
+      }
+    },
+    {
+      "date": "2025",
+      "title": "Part of Carefirst's partner network",
+      "text": "Carefirst Seniors and Community Services Association listed Island Breeze among its social care and community support partners in presentations in January and July 2025.",
+      "source": {
+        "label": "HSPN webinar slides, July 22, 2025",
+        "url": "https://hspn.ca/wp-content/uploads/2025/07/HSPN_LDPHM_July-22_2025.pdf"
+      }
+    },
+    {
+      "date": "2026",
+      "title": "Cultural Arts for Holistic Healing",
+      "text": "A United Way–funded workshop series for seniors in South Markham, closing with a celebration luncheon in July.",
+      "source": {
+        "label": "Island Breeze on Facebook",
+        "url": "https://www.facebook.com/Islandbreezeseniors/"
+      }
+    }
+  ],
+  "collaborators": [
+    {
+      "name": "Carefirst Seniors and Community Services Association",
+      "text": "Lists Island Breeze in its partner network (since 2022). Hosted a tea party for our members in 2026.",
+      "source": {
+        "label": "HSPN slides, 2025",
+        "url": "https://hspn.ca/wp-content/uploads/2025/07/HSPN_LDPHM_July-22_2025.pdf"
+      }
+    }
+  ],
+  "funding": [
+    {
+      "name": "Government of Canada — New Horizons for Seniors Program",
+      "text": "Moment In Time, $18,750, 2022–2023",
+      "source": {
+        "label": "Grant record",
+        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q4-03583%2Ccurrent"
+      }
+    },
+    {
+      "name": "Government of Canada — Supporting Black Communities",
+      "text": "Guiding Light, $4,000, 2021–2022",
+      "source": {
+        "label": "Grant record",
+        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q2-00250%2Ccurrent"
+      }
+    },
+    {
+      "name": "United Way Greater Toronto — South Markham Community Action Grants",
+      "text": "Cultural Arts for Holistic Healing workshop series, 2026",
+      "source": {
+        "label": "Island Breeze on Facebook",
+        "url": "https://www.facebook.com/Islandbreezeseniors/"
+      }
+    }
+  ],
+  "outings": [
+    {
+      "name": "Markham Museum",
+      "text": "Older adults program visit (2024) and a seniors pottery workshop (2025)."
+    },
+    {
+      "name": "YMCA in Markham",
+      "text": "Carefirst Health Fair (2026)."
+    }
+  ],
+  "illustrations": {
+    "_note": "Painted illustrations supplied by the site builder — not photos of Island Breeze members. Each is shown only when public/img/<base>-800.webp exists (run scripts/optimize-images.mjs). Replace with consented community photos when available.",
+    "creative": {
+      "base": "illus-crochet",
+      "alt": "Painted illustration of three older adults crocheting colourful squares at a table covered in balls of yarn.",
+      "caption": "Illustration"
+    },
+    "social": {
+      "base": "illus-dominoes",
+      "alt": "Painted illustration of four older friends laughing over a game of dominoes at a wooden table.",
+      "caption": "Illustration"
+    },
+    "about": {
+      "base": "illus-tea",
+      "alt": "Painted illustration of older adults and a younger woman chatting and laughing over tea and cookies around a sunny table.",
+      "caption": "Illustration"
+    }
+  }
+}
