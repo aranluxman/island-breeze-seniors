@@ -5,6 +5,7 @@
  *   node scripts/optimize-images.mjs <source-image> <output-base>
  *   e.g. node scripts/optimize-images.mjs incoming/dominoes.png illus-dominoes
  * Writes public/img/<output-base>-{800,1280}.{webp,jpg} at quality ~80.
+ * The 1280 size is skipped when the source is narrower (no upscaling).
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, extname } from 'node:path';
@@ -22,7 +23,7 @@ const page = await browser.newPage();
 const out = await page.evaluate(async ({ dataUrl, widths }) => {
   const img = new Image(); img.src = dataUrl; await img.decode();
   const res = {};
-  for (const w of widths) {
+  for (const w of widths.filter((w, i) => i === 0 || w <= img.naturalWidth)) {
     const h = Math.round(img.naturalHeight * w / img.naturalWidth);
     const c = document.createElement('canvas'); c.width = w; c.height = h;
     const ctx = c.getContext('2d'); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(img, 0, 0, w, h);

@@ -17,24 +17,30 @@ let html = readFileSync(htmlPath, 'utf8');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // Rich fields are author-controlled and may hold simple inline HTML.
 const rich = (s) => String(s);
-const src = (s) => s ? `<a class="source" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a>` : '';
+const src = (s) => !s ? '' : !s.url ? esc(s.label) : `<a class="source" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a>`;
 const statusLabel = { regular: 'Regular activity', project: 'Past workshop', event: 'Event' };
 const icon = (id, cls = '') => `<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
 
 
-// Responsive illustration, rendered only when its optimized files exist (no empty placeholders).
-const art = (key, cls, sizes) => {
-  const a = (content.illustrations || {})[key];
+// Responsive photo, rendered only when its optimized files exist (no empty placeholders).
+const photoKey = (slot) => (content.photoSlots || {})[slot];
+const pic = (key, sizes, lazy = true) => {
+  const a = (content.photos || {})[key];
   if (!a || !existsSync(join(root, 'public/img', `${a.base}-800.webp`))) return '';
   const set = (ext) => [800, 1280].filter((w) => existsSync(join(root, 'public/img', `${a.base}-${w}.${ext}`))).map((w) => `img/${a.base}-${w}.${ext} ${w}w`).join(', ');
-  return `
-            <figure class="${cls}">
-              <picture>
+  const pos = a.pos ? ` style="object-position: ${esc(a.pos)}"` : '';
+  return `<picture>
                 <source type="image/webp" srcset="${set('webp')}" sizes="${sizes}">
-                <img src="img/${a.base}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(a.alt)}" width="1536" height="1024" loading="lazy" decoding="async">
-              </picture>
-              <figcaption>${esc(a.caption)}</figcaption>
-            </figure>`;
+                <img src="img/${a.base}-800.jpg" srcset="${set('jpg')}" sizes="${sizes}" alt="${esc(a.alt)}" width="${a.w}" height="${a.h}"${lazy ? ' loading="lazy"' : ' fetchpriority="high"'} decoding="async"${pos}>
+              </picture>`;
+};
+const photo = (key, cls, sizes) => {
+  const p = pic(key, sizes);
+  return p ? `
+            <figure class="${cls}">
+              ${p}
+              <figcaption>${esc(content.photos[key].caption)}</figcaption>
+            </figure>` : '';
 };
 
 const blocks = {
@@ -42,7 +48,7 @@ const blocks = {
 
   activities: () => content.activityGroups.map((g) => `
           <section class="activity-group reveal" aria-labelledby="ag-${g.id}" data-accent="${g.accent}">
-            <h3 id="ag-${g.id}"><span class="ag-icon">${icon(g.icon, 'draw')}</span>${esc(g.title)}</h3>${art(g.id, 'illus illus-group', '(max-width: 860px) 92vw, 540px')}
+            <h3 id="ag-${g.id}"><span class="ag-icon">${icon(g.icon, 'draw')}</span>${esc(g.title)}</h3>${photo(photoKey(g.id), 'photo photo-group', '(max-width: 860px) 92vw, 540px')}
             <ul class="activity-list" role="list">${g.items.map((it) => `
               <li>
                 <p class="activity-name">${esc(it.name)} <span class="tag tag-${it.status}">${statusLabel[it.status] || ''}</span></p>
@@ -58,11 +64,34 @@ const blocks = {
           <p class="eyebrow">Recent project &middot; ${esc(p.when)}</p>
           <h3>${esc(p.title)}</h3>
           <p>${rich(p.text)}</p>
+          <ol class="project-timeline" role="list">${(p.timeline || []).map((t) => `
+            <li><span class="pt-month">${esc(t.month)}</span><span><strong>${esc(t.title)}</strong> ${rich(t.text)}</span></li>`).join('')}
+          </ol>
           <p class="source-line">Source: ${src(p.source)}</p>
         `;
   },
 
-  'about-art': () => art('about', 'illus illus-wide', '(max-width: 1200px) 92vw, 1160px') + '\n      ',
+  'about-art': () => photo(photoKey('about'), 'photo photo-wide', '(max-width: 1200px) 92vw, 1160px') + '\n      ',
+
+  'hero-photo': () => `
+          ${pic(photoKey('hero'), '(max-width: 900px) 62vw, 300px', false)}
+          `,
+
+  gallery: () => content.gallery.filter((k) => pic(k, '')).map((k, i, all) => `
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${all.length}">
+            <figure>
+              ${pic(k, '(max-width: 700px) 86vw, 640px', i > 1)}
+              <figcaption>${esc(content.photos[k].caption)}</figcaption>
+            </figure>
+          </li>`).join('') + '\n        ',
+
+  'join-photo': () => photo(photoKey('join'), 'photo photo-join reveal', '(max-width: 900px) 92vw, 480px') + '\n          ',
+
+  'story-photo': () => photo(photoKey('story'), 'photo photo-story', '(max-width: 1000px) 92vw, 380px') + '\n          ',
+
+  'callband-photo': () => `
+        ${pic(photoKey('callband'), '180px')}
+        `,
 
   steps: () => content.joinSteps.map((s, i) => `
             <li class="step reveal"><span class="step-num" aria-hidden="true">${i + 1}</span><div><h3>${esc(s.title)}</h3><p>${rich(s.text)}</p></div></li>`).join('') + '\n          ',

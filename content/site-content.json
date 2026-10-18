@@ -116,11 +116,48 @@
   "featuredProject": {
     "title": "Cultural Arts for Holistic Healing of Mind, Body and Spirit",
     "when": "2026",
-    "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze and funded by United Way Greater Toronto through the South Markham Community Action Grants. Workshops included Drumming for Wellness and Healing Grief Through Poetry, and the project closed with a celebration luncheon and fashion show.",
+    "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze and funded by United Way Greater Toronto through the South Markham Community Action Grants. From January to July, members drummed, wrote, danced, sculpted and celebrated together.",
     "source": {
-      "label": "Island Breeze on Facebook and Instagram, 2026",
+      "label": "Island Breeze 2026 program highlights, Facebook and Instagram",
       "url": "https://www.facebook.com/Islandbreezeseniors/"
-    }
+    },
+    "timeline": [
+      {
+        "month": "Jan",
+        "title": "Drumming for Wellness",
+        "text": "Rhythm and connection to start the year."
+      },
+      {
+        "month": "Feb",
+        "title": "Healing Grief Through Poetry",
+        "text": "A four-week series for reflection, healing and self-expression."
+      },
+      {
+        "month": "Mar",
+        "title": "Afro-Peruvian dance workshop",
+        "text": "Culture celebrated through dance, colour and joy."
+      },
+      {
+        "month": "Apr",
+        "title": "Art clay workshop",
+        "text": "Hands-on creativity with clay."
+      },
+      {
+        "month": "May",
+        "title": "Health & wellness workshop",
+        "text": "Healthy-living information, activities and blood pressure checks."
+      },
+      {
+        "month": "Jun",
+        "title": "Zumba, merengue & bingo",
+        "text": "A day of movement, music, laughter and games."
+      },
+      {
+        "month": "Jul",
+        "title": "Fashion show & celebration lunch",
+        "text": "Closing the series with style, pride and culture."
+      }
+    ]
   },
   "joinSteps": [
     {
@@ -226,6 +263,13 @@
         "label": "HSPN slides, 2025",
         "url": "https://hspn.ca/wp-content/uploads/2025/07/HSPN_LDPHM_July-22_2025.pdf"
       }
+    },
+    {
+      "name": "ACSA Community Services",
+      "text": "Partner on the 2026 Cultural Arts for Holistic Healing program.",
+      "source": {
+        "label": "2026 program highlights (supplied by Island Breeze)"
+      }
     }
   ],
   "funding": [
@@ -264,22 +308,96 @@
       "text": "Carefirst Health Fair (2026)."
     }
   ],
-  "illustrations": {
-    "_note": "Painted illustrations supplied by the site builder — not photos of Island Breeze members. Each is shown only when public/img/<base>-800.webp exists (run scripts/optimize-images.mjs). Replace with consented community photos when available.",
-    "creative": {
-      "base": "illus-crochet",
-      "alt": "Painted illustration of three older adults crocheting colourful squares at a table covered in balls of yarn.",
-      "caption": "Illustration"
+  "photos": {
+    "_note": "Consented photos of Island Breeze members, supplied by the owner (October 2026). Files: public/img/<base>-{800,1280}.{webp,jpg}, made with scripts/optimize-images.mjs. A photo appears only once its files exist. 'w'/'h' are the image's proportions; 'pos' is an optional CSS object-position for cropped slots.",
+    "group": {
+      "base": "photo-group",
+      "w": 800,
+      "h": 1066,
+      "pos": "50% 60%",
+      "alt": "About thirty Island Breeze members and volunteers, many in matching white T-shirts, posing together for a group photo in a bright community room.",
+      "caption": "Our Island Breeze family"
     },
-    "social": {
-      "base": "illus-dominoes",
-      "alt": "Painted illustration of four older friends laughing over a game of dominoes at a wooden table.",
-      "caption": "Illustration"
+    "celebration": {
+      "base": "photo-celebration",
+      "w": 800,
+      "h": 800,
+      "alt": "A large group of members in colourful clothing standing together in front of a decorated wall with an “Honoring” banner.",
+      "caption": "Celebrating culture together"
     },
-    "about": {
-      "base": "illus-tea",
-      "alt": "Painted illustration of older adults and a younger woman chatting and laughing over tea and cookies around a sunny table.",
-      "caption": "Illustration"
+    "friends": {
+      "base": "photo-friends",
+      "w": 800,
+      "h": 500,
+      "alt": "Two smiling friends with their arms around each other at a community lunch.",
+      "caption": "Friends at lunch"
+    },
+    "friends-three": {
+      "base": "photo-friends-three",
+      "w": 1280,
+      "h": 557,
+      "alt": "Three smiling women sitting side by side at a table.",
+      "caption": "Good company"
+    },
+    "wave": {
+      "base": "photo-wave",
+      "w": 800,
+      "h": 591,
+      "pos": "62% 40%",
+      "alt": "A smiling gentleman in a plaid shirt and black cap waving at the camera.",
+      "caption": "A friendly wave"
+    },
+    "tea-party": {
+      "base": "photo-tea-party",
+      "w": 800,
+      "h": 1067,
+      "pos": "50% 40%",
+      "alt": "Members in elegant hats seated along a long table set with teacups, tiered stands of treats and pink runners at a tea party.",
+      "caption": "Tea party"
+    },
+    "bingo": {
+      "base": "photo-bingo",
+      "w": 800,
+      "h": 1066,
+      "pos": "50% 35%",
+      "alt": "Members playing bingo with bright green cards at a long table.",
+      "caption": "Bingo"
+    },
+    "lunch": {
+      "base": "photo-lunch",
+      "w": 800,
+      "h": 800,
+      "pos": "50% 45%",
+      "alt": "Members chatting around tables with sunflower tablecloths at a community lunch.",
+      "caption": "Community lunch"
+    },
+    "buffet": {
+      "base": "photo-buffet",
+      "w": 800,
+      "h": 800,
+      "alt": "Members serving themselves from a buffet of homemade dishes.",
+      "caption": "Lunch is served"
     }
+  },
+  "gallery": [
+    "group",
+    "celebration",
+    "friends",
+    "wave",
+    "tea-party",
+    "bingo",
+    "friends-three",
+    "lunch",
+    "buffet"
+  ],
+  "photoSlots": {
+    "_note": "Where photos appear outside the carousel. Activity keys match activityGroups ids.",
+    "hero": "group",
+    "social": "bingo",
+    "outings": "tea-party",
+    "join": "friends",
+    "about": "lunch",
+    "story": "celebration",
+    "callband": "wave"
   }
 }

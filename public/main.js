@@ -91,6 +91,44 @@
     sections.forEach(function (sec) { spyIO.observe(sec); });
   }
 
+  /* ---------- Photo carousel: swipe or scroll natively; buttons step one photo at a time ---------- */
+  var track = document.querySelector('.gallery-track');
+  var controls = document.querySelector('.gallery-controls');
+  if (track && controls) {
+    var slides = track.querySelectorAll('.slide');
+    var prev = controls.querySelector('[data-dir="-1"]');
+    var next = controls.querySelector('[data-dir="1"]');
+    var count = controls.querySelector('.g-count');
+    var edge = function () { return parseFloat(getComputedStyle(track).paddingLeft) || 0; };
+    var current = function () {
+      var x = track.scrollLeft, best = 0;
+      each(slides, function (s, i) { if (Math.abs(s.offsetLeft - edge() - x) < Math.abs(slides[best].offsetLeft - edge() - x)) best = i; });
+      return best;
+    };
+    var sync = function () {
+      var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      var i = atEnd ? slides.length - 1 : current();
+      count.textContent = (i + 1) + ' of ' + slides.length;
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = atEnd;
+    };
+    var go = function (dir) {
+      var i = Math.max(0, Math.min(slides.length - 1, current() + dir));
+      track.scrollTo({ left: slides[i].offsetLeft - edge(), behavior: reduce ? 'auto' : 'smooth' });
+    };
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
+    var pending = false;
+    track.addEventListener('scroll', function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () { sync(); pending = false; });
+    }, { passive: true });
+    window.addEventListener('resize', sync);
+    controls.hidden = false;
+    sync();
+  }
+
   /* ---------- Map loads only when it's about to scroll into view ---------- */
   var map = document.querySelector('.map[data-map-src]');
   function loadMap() {

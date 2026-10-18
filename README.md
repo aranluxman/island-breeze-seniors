@@ -14,8 +14,8 @@ public/
   404.html          real 404 (stops Pages serving the home page for missing URLs)
   robots.txt, sitemap.xml, _headers
   fonts/            self-hosted Atkinson Hyperlegible + Fraunces (SIL OFL)
-  img/              og-image.jpg (1200x630 share image) + optimized illustrations
-  logo.svg, favicon.svg
+  img/              og-image.jpg (1200x630 share image) + optimized photos
+  logo.svg, logo-full.svg, favicon.svg
 wrangler.toml       pages_build_output_dir = ./public
 ```
 
@@ -54,16 +54,26 @@ The form posts to `https://formsubmit.co/aran.luxman@gmail.com` (**temporary** r
 
 ## Images
 
-`scripts/optimize-images.mjs` turns a source image into `public/img/<name>-{800,1280}.{webp,jpg}` using Playwright's Chromium:
+`scripts/optimize-images.mjs` turns a source image into `public/img/<name>-{800,1280}.{webp,jpg}` using Playwright's Chromium (the 1280 size is skipped for small sources, so nothing is upscaled):
 
 ```bash
-node scripts/optimize-images.mjs incoming/dominoes.png illus-dominoes
+node scripts/optimize-images.mjs incoming/bingo.jpg photo-bingo
 node scripts/render-content.mjs
 ```
 
-Slots are defined under `illustrations` in the content file (`illus-crochet` → Creative activities, `illus-dominoes` → Social games, `illus-tea` → About). A slot appears only once its files exist, so there are never empty placeholders.
+Photos are listed under `photos` in the content file (file base, alt text, caption, proportions, optional crop position). Then:
+- `gallery` sets the order of the home-page carousel.
+- `photoSlots` sets where photos appear elsewhere: hero arch, activity groups (by group id), joining, about, story and the call band.
 
-The three supplied images are **painted illustrations, not photos of Island Breeze members**. They're captioned "Illustration". Replace them with consented community photos when available.
+A photo appears only once its files exist, so there are never empty placeholders. The current photos were supplied by the owner in October 2026, with consent confirmed, and lightly colour-corrected and sharpened before optimizing.
+
+The carousel is a native scroll-snap strip: it swipes on touch, scrolls with the keyboard, and works without JavaScript. `main.js` adds previous/next buttons and the "3 of 9" counter. It never auto-advances.
+
+## Logo
+
+- `public/logo.svg`: the sun-and-sea mark (header, footer, simple pages).
+- `public/favicon.svg`: the same mark with an opaque sea, so it reads at tab size.
+- `public/logo-full.svg`: the full lockup (mark, palm-tree "I", wordmark), with the lettering outlined as paths from TeX Gyre Chorus (GUST Font License), a close match to the original logo's calligraphic lettering. Use it for print or partner materials.
 
 ## Before launch — owner questions
 

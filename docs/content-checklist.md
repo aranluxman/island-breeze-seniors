@@ -21,6 +21,8 @@ Last reviewed: 30 September 2026. Everything on the site should trace to a sourc
 | Markham Museum visit (Feb 2024); Markham Museum seniors pottery workshop (Oct 2025) | Instagram; Facebook video |
 | Colour therapy workshop (Oct 2025) | Facebook |
 | Carefirst tea party (Jul 2026); Carefirst Health Fair at the YMCA in Markham (Sep 2026) | Instagram |
+| 2026 program month by month (Afro-Peruvian dance Mar, art clay Apr, health & wellness with blood pressure checks May, Zumba/merengue/bingo Jun, fashion show & celebration lunch Jul); ACSA Community Services as a program partner | "2026 Program Highlights" poster supplied by the owner (Oct 2026) |
+| Member photos (9) and consent to publish | Supplied by the owner, consent confirmed (Oct 2026) |
 | Map point for 4460 14th Avenue (43.8431, −79.3071) | OpenStreetMap Nominatim |
 
 ## Corrected from the previous site
@@ -41,7 +43,10 @@ Last reviewed: 30 September 2026. Everything on the site should trace to a sourc
 - [ ] **Charity status:** not claimed. The BN suffix RC0001 is a corporate tax account, not a charity (RR) number. Don't offer tax receipts.
 - [ ] **A $3,000 federal grant (29 Mar 2021)** appears in open.canada.ca search results with no program shown. Not used.
 - [ ] **Logos:** permission from Carefirst, United Way and others before showing any logo.
-- [ ] **Photos:** consented photos of real members and events (see README).
+- [ ] **Third 2026 sponsor:** the poster footer shows a logo starting "SOUTH…" (cut off). Get the full name before listing it.
+- [ ] **ACSA's role:** partner, funder or host? The site says "partner" only.
+- [ ] **Photo details:** event and date for the group photo (white T-shirts), the "Honoring" celebration, the tea party (is it the Carefirst tea party, July 2026?) and the community lunch. Captions stay general until confirmed.
+- [ ] **Poster thumbnails:** the small photos on the 2026 poster look AI-generated, so they're not used as member photos.
 - [ ] **Form recipient:** currently a temporary address; switch to the organization's inbox.
 
 ## Do not confuse with
