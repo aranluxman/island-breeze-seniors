@@ -125,6 +125,44 @@
       requestAnimationFrame(function () { sync(); pending = false; });
     }, { passive: true });
     window.addEventListener('resize', sync);
+
+    // Mouse drag (touch and trackpads already scroll natively): 1:1 tracking from the grab
+    // point, then a momentum projection picks the photo the throw is heading for.
+    var drag = null, moved = false;
+    var project = function (v) { return (v / 1000) * 0.998 / (1 - 0.998); }; // px/s -> px
+    track.classList.add('can-drag');
+    track.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: track.scrollLeft, hist: [{ x: e.clientX, t: e.timeStamp }] };
+      moved = false;
+    });
+    track.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (!moved && Math.abs(dx) < 10) return; // small threshold before committing to a drag
+      if (!moved) { moved = true; track.setPointerCapture(e.pointerId); track.classList.add('dragging'); }
+      track.scrollLeft = drag.left - dx;
+      drag.hist.push({ x: e.clientX, t: e.timeStamp });
+      if (drag.hist.length > 5) drag.hist.shift();
+    });
+    var release = function () {
+      if (!drag) return;
+      var h = drag.hist, a = h[0], b = h[h.length - 1];
+      var v = b.t > a.t ? -(b.x - a.x) / (b.t - a.t) * 1000 : 0; // scroll velocity, px/s
+      drag = null;
+      if (!moved) return;
+      var aim = track.scrollLeft + project(v), best = 0;
+      each(slides, function (sl, i) { if (Math.abs(sl.offsetLeft - edge() - aim) < Math.abs(slides[best].offsetLeft - edge() - aim)) best = i; });
+      var from = track.scrollLeft;
+      track.classList.remove('dragging');
+      track.scrollLeft = from; // re-enabling snap must not jump; start the glide from where it is
+      track.scrollTo({ left: slides[best].offsetLeft - edge(), behavior: reduce ? 'auto' : 'smooth' });
+    };
+    track.addEventListener('pointerup', release);
+    track.addEventListener('pointercancel', release);
+    // A drag shouldn't count as a click on anything inside the track.
+    track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+
     controls.hidden = false;
     sync();
   }

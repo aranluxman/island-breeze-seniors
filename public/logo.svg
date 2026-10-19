@@ -1,15 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-labelledby="t">
   <title id="t">Island Breeze Seniors Day Program logo</title>
   <defs>
-    <linearGradient id="ib-sun" x1="0" x2="1"><stop offset="0" stop-color="#f06a1f"/><stop offset="1" stop-color="#ef9d2a"/></linearGradient>
-    <linearGradient id="ib-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#039ba3"/><stop offset=".3" stop-color="#0aa1a8"/><stop offset="1" stop-color="#0aa1a8" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ib-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fd3b02"/><stop offset=".55" stop-color="#ff6a01"/><stop offset="1" stop-color="#ff9200"/></linearGradient>
+    <radialGradient id="ib-glow" cx="150" cy="156" r="120" gradientTransform="matrix(1 0 0 .55 0 70.2)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffc400"/><stop offset=".6" stop-color="#ffb000" stop-opacity=".55"/><stop offset="1" stop-color="#ff9200" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ib-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#02408f"/><stop offset=".4" stop-color="#007bca"/><stop offset="1" stop-color="#1ad7fe"/></linearGradient>
     <clipPath id="ib-c"><circle cx="150" cy="150" r="140"/></clipPath>
   </defs>
   <g clip-path="url(#ib-c)">
-    <rect x="10" y="10" width="280" height="141" fill="url(#ib-sun)"/>
-    <rect x="10" y="150" width="280" height="140" fill="url(#ib-sea)"/>
+    <rect x="10" y="10" width="280" height="147" fill="url(#ib-sun)"/>
+    <rect x="10" y="10" width="280" height="147" fill="url(#ib-glow)"/>
+    <rect x="10" y="156" width="280" height="134" fill="url(#ib-sea)"/>
   </g>
-  <g fill="none" stroke="#2a1a10" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#3a1606" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M80 72q5-5 8 4q4-10 11-8"/><path d="M98 86q6-6 10-1q5-4 10 0"/>
   </g>
 </svg>

@@ -7,7 +7,7 @@ Last reviewed: 30 September 2026. Everything on the site should trace to a sourc
 |---|---|
 | Legal name, federal not-for-profit, incorporated 29 Oct 2018, non-soliciting, 6 directors | Corporations Canada data via canadacompanyregistry.com (corp. no. 11069667) |
 | Adults 55+ | Island Breeze Instagram bio ("serving seniors 55 and older in Markham") |
-| Mission quote | Island Breeze Facebook "About" |
+| Mission statement ("Supporting seniors' well-being through advocacy and resources.") and tagline | Owner, Oct 2026 (replaces the earlier Facebook "About" mission) |
 | Phone 416-319-7763, email islandbreezeseniors@gmail.com | Island Breeze Facebook contact info |
 | Guiding Light, $4,000, SDPP-CF Supporting Black Communities, 20 Sep 2021 – 16 Sep 2022 | open.canada.ca grant 141-2021-2022-Q2-00250 |
 | Moment In Time, $18,750, New Horizons for Seniors, 28 Mar 2022 – 27 Mar 2023 | open.canada.ca grant 141-2021-2022-Q4-03583 |

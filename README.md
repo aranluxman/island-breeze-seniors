@@ -15,7 +15,7 @@ public/
   robots.txt, sitemap.xml, _headers
   fonts/            self-hosted Atkinson Hyperlegible + Fraunces (SIL OFL)
   img/              og-image.jpg (1200x630 share image) + optimized photos
-  logo.svg, logo-full.svg, favicon.svg
+  logo.svg, logo-full.svg, logo-full-light.svg, favicon.svg
 wrangler.toml       pages_build_output_dir = ./public
 ```
 
@@ -73,7 +73,7 @@ The carousel is a native scroll-snap strip: it swipes on touch, scrolls with the
 
 - `public/logo.svg`: the sun-and-sea mark (header, footer, simple pages).
 - `public/favicon.svg`: the same mark with an opaque sea, so it reads at tab size.
-- `public/logo-full.svg`: the full lockup (mark, palm-tree "I", wordmark), with the lettering outlined as paths from TeX Gyre Chorus (GUST Font License), a close match to the original logo's calligraphic lettering. Use it for print or partner materials.
+- `public/logo-full.svg` / `logo-full-light.svg` (footer, on dark): the full lockup (mark, palm-tree "I", wordmark, "Where Every Senior Matters"), with the lettering outlined as paths from TeX Gyre Chorus (GUST Font License), a close match to the original logo's calligraphic lettering. Use it for print or partner materials.
 
 ## Before launch — owner questions
 
