@@ -1,0 +1,85 @@
+{
+  "_readme": "Knowledge for the Help assistant (main.js). Written ONLY from what the home page says. The assistant matches a visitor's words against 'keywords' (whole words or phrases) and shows 'answer'; if nothing matches well it says so and offers phone, email or a message. Never add a fact here that isn't on the site. 'answer' may hold simple HTML links. 'suggest' entries become the tap-to-ask chips (4-6).",
+  "suggest": ["join", "register", "cost", "times", "location", "caregivers"],
+  "aliases": {
+    "regester": "register", "registar": "register", "registeration": "register", "signup": "sign up", "enrol": "enroll", "enrolment": "enroll",
+    "carer": "caregiver", "caretaker": "caregiver", "care giver": "caregiver", "care-giver": "caregiver",
+    "adress": "address", "addres": "address", "derections": "directions", "direcions": "directions", "locaton": "location",
+    "schedual": "schedule", "shedule": "schedule", "skedule": "schedule", "scedule": "schedule",
+    "wheel chair": "wheelchair", "walkers": "walker", "transportaion": "transportation", "transport": "transportation",
+    "crotchet": "crochet", "crochetting": "crochet", "knitting": "crochet", "dominos": "dominoes", "domino": "dominoes",
+    "excercise": "exercise", "exersize": "exercise", "pryce": "price", "prices": "price", "fees": "fee", "costs": "cost",
+    "phone number": "phone", "telephone": "phone", "e-mail": "email", "mail": "email",
+    "non profit": "nonprofit", "non-profit": "nonprofit", "not for profit": "nonprofit", "not-for-profit": "nonprofit",
+    "work shop": "workshop", "workshops": "workshop", "activites": "activities", "activitys": "activities", "activity": "activities",
+    "yrs": "years", "yr": "year", "senior": "seniors"
+  },
+  "entries": [
+    {
+      "id": "join",
+      "q": "Who can join?",
+      "keywords": ["who can join", "join", "joining", "eligible", "eligibility", "qualify", "age", "55", "old enough", "how old", "seniors", "member", "membership", "for me"],
+      "answer": "Island Breeze serves adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, just call or email and we'll talk it through."
+    },
+    {
+      "id": "register",
+      "q": "How do I sign up?",
+      "keywords": ["register", "registration", "sign up", "enroll", "apply", "application", "get started", "start", "first visit", "how do i join", "how to join", "form"],
+      "answer": "Joining starts with a friendly conversation. Call 416-319-7763 or email islandbreezeseniors@<wbr>gmail.com and we'll talk you through it. You can also send us a message and ask for a call back."
+    },
+    {
+      "id": "cost",
+      "q": "What does it cost?",
+      "keywords": ["cost", "price", "fee", "pay", "paying", "money", "free", "charge", "expensive", "afford", "how much", "dollars"],
+      "answer": "Costs can vary by activity. Please call or email us to ask about the activity you're interested in."
+    },
+    {
+      "id": "caregivers",
+      "q": "Can my caregiver come with me?",
+      "keywords": ["caregiver", "caregivers", "family", "daughter", "son", "husband", "wife", "spouse", "partner", "friend", "come with", "bring", "accompany", "attend with", "support worker", "psw"],
+      "answer": "Our mission includes older adults and their caregivers. Please call or email to talk about coming together, so we can plan the visit with you."
+    },
+    {
+      "id": "times",
+      "q": "When are the programs?",
+      "keywords": ["time", "times", "schedule", "when", "hours", "open", "day", "days", "week", "weekly", "today", "tomorrow", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "morning", "afternoon", "this month", "calendar"],
+      "answer": "Our schedule changes through the year, so we don't list times here. Please call or email for this month's activities and times."
+    },
+    {
+      "id": "access",
+      "q": "Is it accessible? Is there transportation?",
+      "keywords": ["accessible", "accessibility", "wheelchair", "walker", "cane", "mobility", "elevator", "stairs", "transportation", "ride", "rides", "drive", "driving", "pick up", "pickup", "bus", "transit", "parking", "park", "disability", "hearing", "vision"],
+      "answer": "Please call or email before your visit so we can talk through access, mobility needs and how you'll get there."
+    },
+    {
+      "id": "location",
+      "q": "Where are you?",
+      "keywords": ["where", "location", "located", "address", "directions", "find you", "map", "hagerman", "14th avenue", "markham", "place", "venue", "building", "room", "meet"],
+      "answer": "We're at Hagerman Corners Community Homes, 4460 14th Avenue, Markham, Ontario. Please call or email before your first visit so we can tell you where to meet. <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions on Google Maps<span class=\"visually-hidden\"> (opens in a new tab)</span></a>."
+    },
+    {
+      "id": "activities",
+      "q": "What activities do you offer?",
+      "keywords": ["activities", "programs", "program", "what do you do", "offer", "things to do", "crochet", "crafts", "arts", "art", "pottery", "games", "game night", "dominoes", "bingo", "christmas", "dinner", "lunch", "outings", "trips", "museum", "tea party", "health fair", "social"],
+      "answer": "Recent activities include a crochet circle, arts and crafts, pottery with Markham Museum, game night with dominoes, a Christmas dinner, and outings like the Markham Museum, a Carefirst tea party and the Carefirst Health Fair. Some run regularly and some are one-time events, so please call or email to hear what's on this month. <a href=\"#activities\">See all activities</a>."
+    },
+    {
+      "id": "workshops",
+      "q": "What was the 2026 workshop series?",
+      "keywords": ["workshop", "series", "2026", "drumming", "drum", "poetry", "grief", "dance", "dancing", "zumba", "merengue", "clay", "yoga", "laughter yoga", "fashion show", "wellness", "exercise", "united way", "cultural arts", "healing"],
+      "answer": "In 2026, Island Breeze ran Cultural Arts for Holistic Healing, a workshop series for seniors in South Markham funded by United Way Greater Toronto. From January to July, members tried drumming, poetry for healing grief, Afro-Peruvian dance, art clay, a health and wellness day with blood pressure checks, Zumba and merengue, and a closing fashion show and lunch. Laughter Yoga was part of the series too. Please call or email to ask what's coming up next."
+    },
+    {
+      "id": "contact",
+      "q": "How do I contact you?",
+      "keywords": ["contact", "phone", "call", "number", "email", "reach", "talk to", "speak", "person", "someone", "facebook", "instagram", "social media", "message"],
+      "answer": "Call 416-319-7763 or email islandbreezeseniors@<wbr>gmail.com. You can also find us on <a href=\"https://www.facebook.com/Islandbreezeseniors/\" target=\"_blank\" rel=\"noopener\">Facebook<span class=\"visually-hidden\"> (opens in a new tab)</span></a> and <a href=\"https://www.instagram.com/islandbreezeseniors55/\" target=\"_blank\" rel=\"noopener\">Instagram<span class=\"visually-hidden\"> (opens in a new tab)</span></a>."
+    },
+    {
+      "id": "about",
+      "q": "Who runs Island Breeze?",
+      "keywords": ["who runs", "about", "nonprofit", "organization", "organisation", "volunteer board", "board", "since", "history", "founded", "started", "caribbean", "mission"],
+      "answer": "Island Breeze Seniors Day Program is a federal not-for-profit, incorporated in 2018 and run by a volunteer board with help from volunteers and community facilitators. Our roots are Caribbean, and so is our welcome. Our mission: supporting seniors' well-being through advocacy and resources."
+    }
+  ]
+}
