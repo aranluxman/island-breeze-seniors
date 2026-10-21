@@ -47,13 +47,75 @@
       "postalCode": "L3R 1H1",
       "addressCountry": "CA"
     },
-    "areaServed": { "@type": "City", "name": "Markham" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 43.8431, "longitude": -79.3071 },
+    "areaServed": [
+      { "@type": "City", "name": "Markham", "containedInPlace": { "@type": "AdministrativeArea", "name": "York Region" } },
+      { "@type": "AdministrativeArea", "name": "York Region" }
+    ],
     "sameAs": [
       "https://www.facebook.com/Islandbreezeseniors/",
       "https://www.instagram.com/islandbreezeseniors55/"
     ]
   }
   </script>
+  <!-- @content:faq-schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who can join?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, call 416-319-7763 or email islandbreezeseniors@gmail.com."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call 416-319-7763 or email islandbreezeseniors@gmail.com and we'll talk you through it. You can also send us a message below and ask for a call back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does it cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Costs can vary by activity. Call 416-319-7763 or email islandbreezeseniors@gmail.com to ask about the activity you're interested in."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a caregiver attend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our mission includes older adults and their caregivers in Markham. Call 416-319-7763 or email islandbreezeseniors@gmail.com to talk about coming together, so we can plan the visit with you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the current program times?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our schedule changes through the year. Call 416-319-7763 or email islandbreezeseniors@gmail.com for this month's activities and times."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What accessibility or transportation arrangements are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Please call 416-319-7763 or email islandbreezeseniors@gmail.com before your visit so we can talk through access, mobility needs and how you'll get there."
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- /@content:faq-schema -->
   <link rel="preload" href="fonts/atkinson-hyperlegible-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/fraunces-800.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -81,30 +143,48 @@
       <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
       <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1Z"/></symbol>
       <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+      <!-- 24px line icons for individual activities, timeline months and the help/join panels (stroke set in CSS) -->
+      <symbol id="a-yarn" viewBox="0 0 24 24"><circle cx="11" cy="12" r="7.5"/><path d="M4.2 9.6c4 0 8 2.6 10 7.8M3.8 13.8c3-1.8 7.2-2.2 11.2-.9M8.6 5c2.3 2.6 3.5 6.9 2.8 14.4M14.6 5.4c-2 1.6-3.3 4.2-3.8 7"/><path d="M16.6 17c1.6 1.8 3.4 2.5 5 1.6"/></symbol>
+      <symbol id="a-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.2 0 1.9-.8 1.9-1.8 0-1.4-1.4-1.9-.7-3.1.6-1 2.2-.7 3.6-.7 2.6 0 4.2-1.8 4.2-4.3C21 6.6 17 3 12 3Z"/><circle cx="7.6" cy="10.6" r="1.3"/><circle cx="11.2" cy="7.1" r="1.3"/><circle cx="15.8" cy="8.1" r="1.3"/><circle cx="7.8" cy="15" r="1.3"/></symbol>
+      <symbol id="a-pottery" viewBox="0 0 24 24"><path d="M3 9.5h18"/><path d="M4.4 9.5c.6 5.2 3.6 8.8 7.6 8.8s7-3.6 7.6-8.8"/><path d="M7.6 13.2c1.5.9 2.9.9 4.4 0s2.9-.9 4.4 0"/><path d="M8.5 21h7M10.2 18.2 9.8 21M13.8 18.2l.4 2.8"/><path d="M9 6.5c1.9-.9 4.1-.9 6 0"/></symbol>
+      <symbol id="a-domino" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M6.5 12h11"/><circle cx="9.5" cy="5.6" r="1" fill="currentColor"/><circle cx="12" cy="7.3" r="1" fill="currentColor"/><circle cx="14.5" cy="9" r="1" fill="currentColor"/><circle cx="9.5" cy="15" r="1" fill="currentColor"/><circle cx="14.5" cy="18.5" r="1" fill="currentColor"/></symbol>
+      <symbol id="a-dinner" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5.6"/><circle cx="12" cy="12" r="2.8"/><path d="M2.8 3.5V8a1.6 1.6 0 0 0 3.2 0V3.5M4.4 3.5v17"/><path d="M21.2 20.5v-17c-1.8 1-2.6 3.4-2.6 6.2v3.3h2.6"/></symbol>
+      <symbol id="a-drum" viewBox="0 0 24 24"><ellipse cx="12" cy="11" rx="8" ry="3"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="M4.4 13.4 8 19.4l4-5.4 4 5.4 3.6-6"/><path d="M8.5 2.8 12 8M17.5 3.2 13.6 8"/></symbol>
+      <symbol id="a-quill" viewBox="0 0 24 24"><path d="M20.5 3.5C13 3.8 7.6 9 6.2 16.5L5 21"/><path d="M20.5 3.5c-.4 7.4-5.8 12.4-13.8 13.3"/><path d="M11.5 12.4l3.6-.6M14.2 8.9l3.4-.5"/><path d="M3 21h7"/></symbol>
+      <symbol id="a-yoga" viewBox="0 0 24 24"><circle cx="12" cy="4.6" r="2.1"/><path d="M12 7.6v6.4"/><path d="M12 9.2 7.6 12.4 6.2 16M12 9.2l4.4 3.2 1.4 3.6"/><path d="M4.5 17.2c2.2 2 4.8 2.4 7.5 1.4 2.7 1 5.3.6 7.5-1.4"/><path d="M8 21h8"/></symbol>
+      <symbol id="a-museum" viewBox="0 0 24 24"><path d="M2.5 9 12 3.8 21.5 9Z"/><path d="M5.5 11.5v6.5M9.8 11.5v6.5M14.2 11.5v6.5M18.5 11.5v6.5"/><path d="M3.5 18.5h17M2.5 21h19"/></symbol>
+      <symbol id="a-teacup" viewBox="0 0 24 24"><path d="M4.5 10h11v3.8a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5Z"/><path d="M15.5 11.5h1.6a2.5 2.5 0 0 1 0 5h-2"/><path d="M3 21h15"/><path d="M8.4 3.4c-.9 1 .9 2.1 0 3.4M12 3.4c-.9 1 .9 2.1 0 3.4"/></symbol>
+      <symbol id="a-health" viewBox="0 0 24 24"><path d="M12 20.5s-8-4.9-8-10.8A4.5 4.5 0 0 1 12 6.8a4.5 4.5 0 0 1 8 2.9c0 5.9-8 10.8-8 10.8Z"/><path d="M12 10.4v5.2M9.4 13h5.2"/></symbol>
+      <symbol id="a-dance" viewBox="0 0 24 24"><circle cx="13" cy="3.9" r="1.9"/><path d="M12.6 6.6 11.5 12.5"/><path d="M7.5 10.2 12.4 8l5.2-2.6"/><path d="M11.5 12.5c-3 1-4.5 3-5 5 3 .7 6.5.3 9.5-1.5-1.8-1-3.2-2.2-4.5-3.5Z"/><path d="M10 17.9 9 21.5M13.2 17.4l1.8 3.6"/></symbol>
+      <symbol id="a-music" viewBox="0 0 24 24"><path d="M9 18V6.2l11-2.4v12"/><path d="M9 9.8l11-2.4"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="15.8" r="2.5"/></symbol>
+      <symbol id="a-celebrate" viewBox="0 0 24 24"><path d="M3.5 20.5 8.2 8.4l7.4 7.4Z"/><path d="M6.2 13.6l4.2 4.2"/><path d="M13 3.5c.8 1.5.8 3 0 4.5M16.5 11c1.5-.8 3-.8 4.5 0"/><path d="M15.5 4.5v1.8M19.5 6.5l-1.3 1.3M19.5 14.5h1.8"/><circle cx="17" cy="9" r=".8" fill="currentColor"/></symbol>
+      <symbol id="a-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.4a2.9 2.9 0 0 1 5.7.6c0 2-2.9 2.4-2.9 4.3"/><circle cx="12" cy="17.4" r=".9" fill="currentColor"/></symbol>
+      <symbol id="a-chat" viewBox="0 0 24 24"><path d="M4 4.5h16a1.5 1.5 0 0 1 1.5 1.5v10a1.5 1.5 0 0 1-1.5 1.5H10l-5.5 4v-4H4A1.5 1.5 0 0 1 2.5 16V6A1.5 1.5 0 0 1 4 4.5Z"/><path d="M7 9.5h10M7 13h6"/></symbol>
+      <symbol id="a-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     </defs>
   </svg>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="#top" aria-label="Island Breeze Seniors Day Program, back to top">
-        <img src="logo.svg" alt="" width="52" height="52">
+        <img src="logo.svg" alt="Island Breeze logo: a setting sun over the sea" width="52" height="52">
         <span class="brand-text">
           <span class="brand-name">Island <span class="brand-breeze">Breeze</span></span>
           <span class="brand-sub">Seniors Day Program</span>
         </span>
       </a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">
-        <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span class="menu-label">Menu</span>
-      </button>
       <nav id="nav" class="nav" aria-label="Main">
         <a href="#activities">Activities</a>
         <a href="#join">Joining</a>
         <a href="#about">About</a>
         <a href="#story">Our story</a>
         <a href="#visit">Visit &amp; contact</a>
-        <a class="btn btn-small" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>416-319-7763</a>
       </nav>
+      <a class="btn btn-primary join-btn" href="#contact" data-opens="join-panel">Join Now</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">
+        <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="menu-label">Menu</span>
+      </button>
     </div>
   </header>
 
@@ -115,7 +195,7 @@
       <div class="wrap hero-inner">
         <div class="hero-copy">
           <p class="brand-line hero-anim"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg>Where Every Senior Matters</p>
-          <h1 id="hero-title" class="hero-anim"><span class="h1-line">Good company.</span> <span class="h1-line">Meaningful activities.</span> <span class="h1-line accent-line">A <span class="scribble-word">warm<svg class="scribble" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14c40-9 92-12 194-6"/></svg></span> welcome.</span></h1>
+          <h1 id="hero-title"><span class="h1-line hero-anim">Good company.</span> <span class="h1-line hero-anim">Meaningful activities.</span> <span class="h1-line accent-line hero-anim">A <span class="scribble-word">warm<svg class="scribble" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14c40-9 92-12 194-6"/></svg></span> welcome.</span></h1>
           <p class="hero-text hero-anim">Island Breeze is a not-for-profit seniors day program in Markham, Ontario, for adults 55 and older and the people who care for them &mdash; with a warm Caribbean spirit.</p>
           <div class="hero-cta hero-anim">
             <a class="btn btn-lg btn-primary" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call about joining</a>
@@ -158,10 +238,9 @@
           <div><dt><svg class="ico" aria-hidden="true"><use href="#i-people"/></svg>For</dt><dd>Adults 55+ and their caregivers</dd></div>
           <div><dt><svg class="ico" aria-hidden="true"><use href="#i-sparkle"/></svg>What</dt><dd>Creative, social and wellness activities, plus outings</dd></div>
           <div><dt><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Where</dt><dd>Hagerman Corners Community Homes, 4460 14th Avenue</dd></div>
-          <div><dt><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Times</dt><dd>Call <a href="tel:+14163197763">416-319-7763</a> for this month&rsquo;s schedule</dd></div>
+          <div><dt><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Times</dt><dd>Call <a href="tel:+14163197763">416-319-7763</a> or <a href="mailto:islandbreezeseniors@gmail.com">email us</a> for this month&rsquo;s schedule</dd></div>
         </dl>
       </div>
-      <p class="wrap latest hero-anim"><span class="latest-dot" aria-hidden="true"></span><!-- @content:latest -->Most recently, members joined the Carefirst Health Fair at the YMCA in Markham (September 2026). <a class="source" href="https://www.instagram.com/p/DdRtvXkET1U/" target="_blank" rel="noopener">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a><!-- /@content:latest --></p>
       <div class="horizon" aria-hidden="true">
         <svg class="waves waves-back" viewBox="0 0 2880 80" preserveAspectRatio="none"><path d="M0 40c240 30 480 30 720 0s480-30 720 0 480 30 720 0 480-30 720 0v40H0Z"/></svg>
         <svg class="waves waves-front" viewBox="0 0 2880 80" preserveAspectRatio="none"><path d="M0 50c180-24 360-24 540 0s360 24 540 0 360-24 540 0 360 24 540 0 360-24 540 0 360 24 540 0v30H0Z"/></svg>
@@ -182,9 +261,9 @@
         </div>
       </div>
       <div class="gallery" role="region" aria-roledescription="carousel" aria-label="Community photos">
-        <ul class="gallery-track" role="list" tabindex="0" aria-label="Photos, scroll sideways for more">
+        <div class="gallery-track" role="group" tabindex="0" aria-label="Photos, scroll sideways for more">
 <!-- @content:gallery -->
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="1 of 9">
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-group-800.webp 800w, img/photo-group-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -192,8 +271,8 @@
               </picture>
               <figcaption>Our Island Breeze family</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="2 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-celebration-800.webp 800w, img/photo-celebration-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -201,8 +280,8 @@
               </picture>
               <figcaption>Celebrating culture together</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="3 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-friends-800.webp 800w" sizes="(max-width: 700px) 86vw, 640px">
@@ -210,8 +289,8 @@
               </picture>
               <figcaption>Friends at lunch</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="4 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-wave-800.webp 800w" sizes="(max-width: 700px) 86vw, 640px">
@@ -219,8 +298,8 @@
               </picture>
               <figcaption>A friendly wave</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="5 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="5 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-tea-party-800.webp 800w, img/photo-tea-party-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -228,8 +307,8 @@
               </picture>
               <figcaption>Tea party</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="6 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="6 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-bingo-800.webp 800w, img/photo-bingo-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -237,8 +316,8 @@
               </picture>
               <figcaption>Bingo</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="7 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="7 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-friends-three-800.webp 800w, img/photo-friends-three-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -246,8 +325,8 @@
               </picture>
               <figcaption>Good company</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="8 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="8 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-lunch-800.webp 800w, img/photo-lunch-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -255,8 +334,8 @@
               </picture>
               <figcaption>Community lunch</figcaption>
             </figure>
-          </li>
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="9 of 9">
+          </div>
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="9 of 9">
             <figure>
               <picture>
                 <source type="image/webp" srcset="img/photo-buffet-800.webp 800w, img/photo-buffet-1280.webp 1280w" sizes="(max-width: 700px) 86vw, 640px">
@@ -264,133 +343,185 @@
               </picture>
               <figcaption>Lunch is served</figcaption>
             </figure>
-          </li>
+          </div>
         <!-- /@content:gallery -->
-        </ul>
+        </div>
       </div>
+      <div class="wrap g-dots" hidden></div>
     </section>
 
     <!-- ACTIVITIES -->
     <section id="activities" class="section" aria-labelledby="activities-title">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Activities &amp; programs</p>
+          <p class="eyebrow has-ico"><svg class="eyebrow-ico draw" aria-hidden="true"><use href="#i-sparkle"/></svg>Activities &amp; programs</p>
           <h2 id="activities-title">Something for every <span class="mark">interest</span></h2>
-          <p class="intro">Here&rsquo;s what Island Breeze has offered recently. Some activities run regularly and others are one-time workshops or events, so please call to hear what&rsquo;s on this month.</p>
+          <p class="intro">Here are the senior activities Island Breeze has offered recently in Markham, Ontario. Some run regularly and others are one-time workshops or events, so please call or email to hear what&rsquo;s on this month.</p>
         </div>
         <div class="activity-grid">
 <!-- @content:activities -->
-          <section class="activity-group reveal" aria-labelledby="ag-creative" data-accent="pink">
-            <h3 id="ag-creative"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-palette"/></svg></span>Creative activities</h3>
-            <ul class="activity-list" role="list">
-              <li>
-                <p class="activity-name">Crochet circle <span class="tag tag-regular">Regular activity</span></p>
-                <p class="activity-desc">A relaxed crochet class led by a volunteer instructor, held at Hagerman Corners Community Homes.</p>
-                <p class="activity-note">Shared as a weekly class in 2024 and 2025</p>
-              </li>
-              <li>
-                <p class="activity-name">Arts and crafts <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">Hands-on creative sessions, including a colour therapy workshop.</p>
-                <p class="activity-note">Colour therapy workshop, October 2025</p>
-              </li>
-              <li>
-                <p class="activity-name">Pottery with Markham Museum <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">A seniors pottery workshop led by Markham Museum.</p>
-                <p class="activity-note">October 2025</p>
-              </li>
-            </ul>
+          <section class="activity-group glow reveal" aria-labelledby="ag-creative" data-accent="pink">
+            <div class="ag-body">
+              <h3 id="ag-creative"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-palette"/></svg></span>Creative activities</h3>
+              <ul class="activity-list" role="list">
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-yarn"/></svg></span>
+                  <div>
+                    <p class="activity-name">Crochet circle <span class="tag tag-regular">Regular activity</span></p>
+                    <p class="activity-desc">A relaxed crochet class led by a volunteer instructor, held at Hagerman Corners Community Homes.</p>
+                    <p class="activity-note">Shared as a weekly class in 2024 and 2025</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-palette"/></svg></span>
+                  <div>
+                    <p class="activity-name">Arts and crafts <span class="tag tag-event">Event</span></p>
+                    <p class="activity-desc">Hands-on creative sessions, including a colour therapy workshop.</p>
+                    <p class="activity-note">Colour therapy workshop, October 2025</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-pottery"/></svg></span>
+                  <div>
+                    <p class="activity-name">Pottery with Markham Museum <span class="tag tag-event">Event</span></p>
+                    <p class="activity-desc">A seniors pottery workshop led by Markham Museum.</p>
+                    <p class="activity-note">October 2025</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="ag-visual">
+            <div class="ag-art" aria-hidden="true"><span><svg aria-hidden="true"><use href="#a-yarn"/></svg></span><span><svg aria-hidden="true"><use href="#a-palette"/></svg></span><span><svg aria-hidden="true"><use href="#a-pottery"/></svg></span></div>
+            </div>
           </section>
-          <section class="activity-group reveal" aria-labelledby="ag-social" data-accent="palm">
-            <h3 id="ag-social"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-dominoes"/></svg></span>Social games &amp; gatherings</h3>
-            <figure class="photo photo-group">
+          <section class="activity-group glow reveal" aria-labelledby="ag-social" data-accent="palm">
+            <div class="ag-body">
+              <h3 id="ag-social"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-dominoes"/></svg></span>Social games &amp; gatherings</h3>
+              <ul class="activity-list" role="list">
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-domino"/></svg></span>
+                  <div>
+                    <p class="activity-name">Game night <span class="tag tag-regular">Regular activity</span></p>
+                    <p class="activity-desc">Dominoes, friendly competition and plenty of conversation.</p>
+                    <p class="activity-note">Shared in 2025</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-dinner"/></svg></span>
+                  <div>
+                    <p class="activity-name">Christmas dinner <span class="tag tag-event">Event</span></p>
+                    <p class="activity-desc">A holiday dinner to close out the year together.</p>
+                    <p class="activity-note">Described as annual in 2022</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="ag-visual">
+            <figure class="photo ag-photo">
               <picture>
-                <source type="image/webp" srcset="img/photo-bingo-800.webp 800w, img/photo-bingo-1280.webp 1280w" sizes="(max-width: 860px) 92vw, 540px">
-                <img src="img/photo-bingo-800.jpg" srcset="img/photo-bingo-800.jpg 800w, img/photo-bingo-1280.jpg 1280w" sizes="(max-width: 860px) 92vw, 540px" alt="Members playing bingo with bright green cards at a long table." width="800" height="1066" loading="lazy" decoding="async" style="object-position: 50% 35%">
+                <source type="image/webp" srcset="img/photo-bingo-800.webp 800w, img/photo-bingo-1280.webp 1280w" sizes="(max-width: 860px) 92vw, 520px">
+                <img src="img/photo-bingo-800.jpg" srcset="img/photo-bingo-800.jpg 800w, img/photo-bingo-1280.jpg 1280w" sizes="(max-width: 860px) 92vw, 520px" alt="Members playing bingo with bright green cards at a long table." width="800" height="1066" loading="lazy" decoding="async" style="object-position: 50% 35%">
               </picture>
               <figcaption>Bingo</figcaption>
             </figure>
-            <ul class="activity-list" role="list">
-              <li>
-                <p class="activity-name">Game night <span class="tag tag-regular">Regular activity</span></p>
-                <p class="activity-desc">Dominoes, friendly competition and plenty of conversation.</p>
-                <p class="activity-note">Shared in 2025</p>
-              </li>
-              <li>
-                <p class="activity-name">Black History Month luncheon <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">An annual celebration lunch each February.</p>
-                <p class="activity-note">Held in 2025 (third annual) and 2026</p>
-              </li>
-              <li>
-                <p class="activity-name">Christmas dinner <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">A holiday dinner to close out the year together.</p>
-                <p class="activity-note">Described as annual in 2022</p>
-              </li>
-            </ul>
+            </div>
           </section>
-          <section class="activity-group reveal" aria-labelledby="ag-wellness" data-accent="ocean">
-            <h3 id="ag-wellness"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-lotus"/></svg></span>Wellness workshops</h3>
-            <ul class="activity-list" role="list">
-              <li>
-                <p class="activity-name">Drumming for Wellness <span class="tag tag-project">Past workshop</span></p>
-                <p class="activity-desc">Rhythm and movement for mind and body.</p>
-                <p class="activity-note">January 2026 workshop</p>
-              </li>
-              <li>
-                <p class="activity-name">Healing Grief Through Poetry <span class="tag tag-project">Past workshop</span></p>
-                <p class="activity-desc">A gentle workshop on grief and healing through the written word.</p>
-                <p class="activity-note">February 2026 workshop</p>
-              </li>
-              <li>
-                <p class="activity-name">Laughter Yoga <span class="tag tag-project">Past workshop</span></p>
-                <p class="activity-desc">Laughter, breathing and gentle movement.</p>
-                <p class="activity-note">Part of the 2026 workshop series</p>
-              </li>
-            </ul>
-          </section>
-          <section class="activity-group reveal" aria-labelledby="ag-outings" data-accent="sunset">
-            <h3 id="ag-outings"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-bus"/></svg></span>Outings &amp; community events</h3>
-            <figure class="photo photo-group">
+          <section class="activity-group glow reveal" aria-labelledby="ag-wellness" data-accent="ocean">
+            <div class="ag-body">
+              <h3 id="ag-wellness"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-lotus"/></svg></span>Wellness workshops</h3>
+              <ul class="activity-list" role="list">
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-drum"/></svg></span>
+                  <div>
+                    <p class="activity-name">Drumming for Wellness <span class="tag tag-project">Past workshop</span></p>
+                    <p class="activity-desc">Rhythm and movement for mind and body.</p>
+                    <p class="activity-note">January 2026 workshop</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-quill"/></svg></span>
+                  <div>
+                    <p class="activity-name">Healing Grief Through Poetry <span class="tag tag-project">Past workshop</span></p>
+                    <p class="activity-desc">A gentle workshop on grief and healing through the written word.</p>
+                    <p class="activity-note">February 2026 workshop</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-yoga"/></svg></span>
+                  <div>
+                    <p class="activity-name">Laughter Yoga <span class="tag tag-project">Past workshop</span></p>
+                    <p class="activity-desc">Laughter, breathing and gentle movement.</p>
+                    <p class="activity-note">Part of the 2026 workshop series</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="ag-visual">
+            <figure class="photo ag-photo">
               <picture>
-                <source type="image/webp" srcset="img/photo-tea-party-800.webp 800w, img/photo-tea-party-1280.webp 1280w" sizes="(max-width: 860px) 92vw, 540px">
-                <img src="img/photo-tea-party-800.jpg" srcset="img/photo-tea-party-800.jpg 800w, img/photo-tea-party-1280.jpg 1280w" sizes="(max-width: 860px) 92vw, 540px" alt="Members in elegant hats seated along a long table set with teacups, tiered stands of treats and pink runners at a tea party." width="800" height="1067" loading="lazy" decoding="async" style="object-position: 50% 40%">
+                <source type="image/webp" srcset="img/photo-celebration-800.webp 800w, img/photo-celebration-1280.webp 1280w" sizes="(max-width: 860px) 92vw, 520px">
+                <img src="img/photo-celebration-800.jpg" srcset="img/photo-celebration-800.jpg 800w, img/photo-celebration-1280.jpg 1280w" sizes="(max-width: 860px) 92vw, 520px" alt="A large group of members in colourful clothing standing together in front of a decorated wall with an “Honoring” banner." width="800" height="800" loading="lazy" decoding="async">
+              </picture>
+              <figcaption>Celebrating culture together</figcaption>
+            </figure>
+            </div>
+          </section>
+          <section class="activity-group glow reveal" aria-labelledby="ag-outings" data-accent="sunset">
+            <div class="ag-body">
+              <h3 id="ag-outings"><span class="ag-icon"><svg class="draw" aria-hidden="true"><use href="#i-bus"/></svg></span>Outings &amp; community events</h3>
+              <ul class="activity-list" role="list">
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-museum"/></svg></span>
+                  <div>
+                    <p class="activity-name">Markham Museum <span class="tag tag-event">Event</span></p>
+                    <p class="activity-desc">A visit to the museum's older adults program.</p>
+                    <p class="activity-note">February 2024</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-teacup"/></svg></span>
+                  <div>
+                    <p class="activity-name">Carefirst tea party <span class="tag tag-event">Event</span></p>
+                    <p class="activity-desc">A tea party hosted by the Carefirst team for Island Breeze members.</p>
+                    <p class="activity-note">July 2026</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-icon"><svg aria-hidden="true"><use href="#a-health"/></svg></span>
+                  <div>
+                    <p class="activity-name">Carefirst Health Fair <span class="tag tag-event">Event</span></p>
+                    <p class="activity-desc">Members attended the Carefirst Health Fair at the YMCA in Markham.</p>
+                    <p class="activity-note">September 2026</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="ag-visual">
+            <figure class="photo ag-photo">
+              <picture>
+                <source type="image/webp" srcset="img/photo-tea-party-800.webp 800w, img/photo-tea-party-1280.webp 1280w" sizes="(max-width: 860px) 92vw, 520px">
+                <img src="img/photo-tea-party-800.jpg" srcset="img/photo-tea-party-800.jpg 800w, img/photo-tea-party-1280.jpg 1280w" sizes="(max-width: 860px) 92vw, 520px" alt="Members in elegant hats seated along a long table set with teacups, tiered stands of treats and pink runners at a tea party." width="800" height="1067" loading="lazy" decoding="async" style="object-position: 50% 40%">
               </picture>
               <figcaption>Tea party</figcaption>
             </figure>
-            <ul class="activity-list" role="list">
-              <li>
-                <p class="activity-name">Markham Museum <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">A visit to the museum's older adults program.</p>
-                <p class="activity-note">February 2024</p>
-              </li>
-              <li>
-                <p class="activity-name">Carefirst tea party <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">A tea party hosted by the Carefirst team for Island Breeze members.</p>
-                <p class="activity-note">July 2026</p>
-              </li>
-              <li>
-                <p class="activity-name">Carefirst Health Fair <span class="tag tag-event">Event</span></p>
-                <p class="activity-desc">Members attended the Carefirst Health Fair at the YMCA in Markham.</p>
-                <p class="activity-note">September 2026</p>
-              </li>
-            </ul>
+            </div>
           </section>
         <!-- /@content:activities -->
         </div>
-        <div class="project reveal">
+        <div class="project glow reveal">
 <!-- @content:project -->
           <p class="eyebrow">Recent project &middot; 2026</p>
           <h3>Cultural Arts for Holistic Healing of Mind, Body and Spirit</h3>
           <p>A workshop series for seniors in South Markham, facilitated by Island Breeze and funded by United Way Greater Toronto through the South Markham Community Action Grants. From January to July, members drummed, wrote, danced, sculpted and celebrated together.</p>
           <ol class="project-timeline" role="list">
-            <li><span class="pt-month">Jan</span><span><strong>Drumming for Wellness</strong> Rhythm and connection to start the year.</span></li>
-            <li><span class="pt-month">Feb</span><span><strong>Healing Grief Through Poetry</strong> A four-week series for reflection, healing and self-expression.</span></li>
-            <li><span class="pt-month">Mar</span><span><strong>Afro-Peruvian dance workshop</strong> Culture celebrated through dance, colour and joy.</span></li>
-            <li><span class="pt-month">Apr</span><span><strong>Art clay workshop</strong> Hands-on creativity with clay.</span></li>
-            <li><span class="pt-month">May</span><span><strong>Health &amp; wellness workshop</strong> Healthy-living information, activities and blood pressure checks.</span></li>
-            <li><span class="pt-month">Jun</span><span><strong>Zumba, merengue &amp; bingo</strong> A day of movement, music, laughter and games.</span></li>
-            <li><span class="pt-month">Jul</span><span><strong>Fashion show &amp; celebration lunch</strong> Closing the series with style, pride and culture.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-drum"/></svg></span><span class="pt-month">Jan</span><span><strong>Drumming for Wellness</strong> Rhythm and connection to start the year.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-quill"/></svg></span><span class="pt-month">Feb</span><span><strong>Healing Grief Through Poetry</strong> A four-week series for reflection, healing and self-expression.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-dance"/></svg></span><span class="pt-month">Mar</span><span><strong>Afro-Peruvian dance workshop</strong> Culture celebrated through dance, colour and joy.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-pottery"/></svg></span><span class="pt-month">Apr</span><span><strong>Art clay workshop</strong> Hands-on creativity with clay.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-health"/></svg></span><span class="pt-month">May</span><span><strong>Health &amp; wellness workshop</strong> Healthy-living information, activities and blood pressure checks.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-music"/></svg></span><span class="pt-month">Jun</span><span><strong>Zumba, merengue &amp; bingo</strong> A day of movement, music, laughter and games.</span></li>
+            <li><span class="pt-icon"><svg aria-hidden="true"><use href="#a-celebrate"/></svg></span><span class="pt-month">Jul</span><span><strong>Fashion show &amp; celebration lunch</strong> Closing the series with style, pride and culture.</span></li>
           </ol>
-          <p class="source-line">Source: <a class="source" href="https://www.facebook.com/Islandbreezeseniors/" target="_blank" rel="noopener">Island Breeze 2026 program highlights, Facebook and Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></p>
         <!-- /@content:project -->
         </div>
       </div>
@@ -400,7 +531,7 @@
     <section id="join" class="section section-tint" aria-labelledby="join-title">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">How to join</p>
+          <p class="eyebrow has-ico"><svg class="eyebrow-ico draw" aria-hidden="true"><use href="#i-people"/></svg>How to join</p>
           <h2 id="join-title">Planning your <span class="mark">first visit</span></h2>
           <p class="intro">Joining starts with a friendly conversation. There&rsquo;s no form to fill in first.</p>
         </div>
@@ -408,9 +539,9 @@
           <div>
           <ol class="steps" role="list">
 <!-- @content:steps -->
-            <li class="step reveal"><span class="step-num" aria-hidden="true">1</span><div><h3>Give us a call</h3><p>Call <a href="tel:+14163197763">416-319-7763</a>, or send a message below and ask us to call you back.</p></div></li>
+            <li class="step reveal"><span class="step-num" aria-hidden="true">1</span><div><h3>Call or email us</h3><p>Call <a class="tel-link" href="tel:+14163197763">416-319-7763</a>, or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll reply. You can also <a href="#contact">send a message below</a> and ask us to call you back.</p></div></li>
             <li class="step reveal"><span class="step-num" aria-hidden="true">2</span><div><h3>Ask your questions</h3><p>Ask what's on this month, where to meet, and anything else you'd like to know before you come.</p></div></li>
-            <li class="step reveal"><span class="step-num" aria-hidden="true">3</span><div><h3>Plan your first visit</h3><p>Pick an activity to try first. If anything would make your visit easier, just let us know when you call.</p></div></li>
+            <li class="step reveal"><span class="step-num" aria-hidden="true">3</span><div><h3>Plan your first visit</h3><p>Pick an activity to try first. If anything would make your visit easier, just let us know when you call or email.</p></div></li>
           <!-- /@content:steps -->
           </ol>
           <!-- @content:join-photo -->
@@ -428,27 +559,27 @@
 <!-- @content:faq -->
             <details class="faq-item">
               <summary><span>Who can join?</span><svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-answer"><p>Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, please give us a call.</p></div>
+              <div class="faq-answer"><p>Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, call <a class="tel-link" href="tel:+14163197763">416-319-7763</a> or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a>.</p></div>
             </details>
             <details class="faq-item">
               <summary><span>How do I register?</span><svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-answer"><p>Call <a href="tel:+14163197763">416-319-7763</a> and we'll talk you through it. You can also send us a message and ask for a call back.</p></div>
+              <div class="faq-answer"><p>Call <a class="tel-link" href="tel:+14163197763">416-319-7763</a> or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a> and we'll talk you through it. You can also send us a message below and ask for a call back.</p></div>
             </details>
             <details class="faq-item">
               <summary><span>What does it cost?</span><svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-answer"><p>Costs can vary by activity. Please call us to ask about the activity you're interested in.</p></div>
+              <div class="faq-answer"><p>Costs can vary by activity. Call <a class="tel-link" href="tel:+14163197763">416-319-7763</a> or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a> to ask about the activity you're interested in.</p></div>
             </details>
             <details class="faq-item">
               <summary><span>Can a caregiver attend?</span><svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-answer"><p>Our mission includes older adults and their caregivers. Please call to talk about coming together, so we can plan the visit with you.</p></div>
+              <div class="faq-answer"><p>Our mission includes older adults and their caregivers in Markham. Call <a class="tel-link" href="tel:+14163197763">416-319-7763</a> or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a> to talk about coming together, so we can plan the visit with you.</p></div>
             </details>
             <details class="faq-item">
               <summary><span>What are the current program times?</span><svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-answer"><p>Our schedule changes through the year. Please call <a href="tel:+14163197763">416-319-7763</a> for this month's activities and times.</p></div>
+              <div class="faq-answer"><p>Our schedule changes through the year. Call <a class="tel-link" href="tel:+14163197763">416-319-7763</a> or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a> for this month's activities and times.</p></div>
             </details>
             <details class="faq-item">
               <summary><span>What accessibility or transportation arrangements are available?</span><svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-answer"><p>Please call before your visit so we can talk through access, mobility needs and how you'll get there.</p></div>
+              <div class="faq-answer"><p>Please call <a class="tel-link" href="tel:+14163197763">416-319-7763</a> or email <a class="mail-link" href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a> before your visit so we can talk through access, mobility needs and how you'll get there.</p></div>
             </details>
           <!-- /@content:faq -->
           </div>
@@ -460,10 +591,10 @@
     <section id="about" class="section" aria-labelledby="about-title">
       <div class="wrap about-grid">
         <div class="reveal">
-          <p class="eyebrow">About Island Breeze</p>
+          <p class="eyebrow has-ico"><svg class="eyebrow-ico draw" aria-hidden="true"><use href="#i-heart"/></svg>About Island Breeze</p>
           <h2 id="about-title">A community built on friendship</h2>
-          <p>Island Breeze Seniors Day Program is a not-for-profit organization run by a volunteer board with the help of volunteers and community facilitators. We bring older adults together to stay active, stay connected and enjoy life &mdash; and we welcome the caregivers who support them.</p>
-          <p>Our roots are Caribbean, and so is our welcome: warm, friendly and full of good conversation.</p>
+          <p>Island Breeze Seniors Day Program is a not-for-profit organization run by a volunteer board with the help of volunteers and community facilitators. Our social programs for seniors in Markham and York Region bring older adults together to stay active, stay connected and enjoy life &mdash; and we welcome the caregivers who support them.</p>
+          <p>Our roots are Caribbean, and so is our welcome: warm, friendly and full of good conversation. We&rsquo;re a Caribbean-rooted seniors program in the Greater Toronto Area, open to adults 55 and older.</p>
         </div>
         <figure class="mission reveal">
           <blockquote><p>Supporting seniors&rsquo; well-being through advocacy and resources.</p></blockquote>
@@ -473,10 +604,10 @@
       <div class="wrap reveal"><!-- @content:about-art -->
             <figure class="photo photo-wide">
               <picture>
-                <source type="image/webp" srcset="img/photo-lunch-800.webp 800w, img/photo-lunch-1280.webp 1280w" sizes="(max-width: 1200px) 92vw, 1160px">
-                <img src="img/photo-lunch-800.jpg" srcset="img/photo-lunch-800.jpg 800w, img/photo-lunch-1280.jpg 1280w" sizes="(max-width: 1200px) 92vw, 1160px" alt="Members chatting around tables with sunflower tablecloths at a community lunch." width="800" height="800" loading="lazy" decoding="async" style="object-position: 50% 45%">
+                <source type="image/webp" srcset="img/photo-group-wide-800.webp 800w, img/photo-group-wide-1280.webp 1280w" sizes="(max-width: 1200px) 92vw, 1160px">
+                <img src="img/photo-group-wide-800.jpg" srcset="img/photo-group-wide-800.jpg 800w, img/photo-group-wide-1280.jpg 1280w" sizes="(max-width: 1200px) 92vw, 1160px" alt="About thirty Island Breeze members and volunteers, most in matching white Island Breeze T-shirts, gathered for a group photo in a bright community room. Some sit in the front row, two people in black T-shirts kneel at the front, and one member sits in a power wheelchair." width="1280" height="720" loading="lazy" decoding="async">
               </picture>
-              <figcaption>Community lunch</figcaption>
+              <figcaption>Our Island Breeze family</figcaption>
             </figure>
       <!-- /@content:about-art --></div>
     </section>
@@ -485,27 +616,26 @@
     <section id="story" class="section section-story" aria-labelledby="story-title">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Community stories &amp; milestones</p>
+          <p class="eyebrow has-ico"><svg class="eyebrow-ico draw" aria-hidden="true"><use href="#i-clock"/></svg>Community stories &amp; milestones</p>
           <h2 id="story-title">Our story so far</h2>
-          <p class="intro">A few moments from our history, each linked to its public source.</p>
+          <p class="intro">A few moments from our history.</p>
           <!-- @content:story-photo -->
             <figure class="photo photo-story">
               <picture>
-                <source type="image/webp" srcset="img/photo-celebration-800.webp 800w, img/photo-celebration-1280.webp 1280w" sizes="(max-width: 1000px) 92vw, 380px">
-                <img src="img/photo-celebration-800.jpg" srcset="img/photo-celebration-800.jpg 800w, img/photo-celebration-1280.jpg 1280w" sizes="(max-width: 1000px) 92vw, 380px" alt="A large group of members in colourful clothing standing together in front of a decorated wall with an “Honoring” banner." width="800" height="800" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="img/photo-lunch-800.webp 800w, img/photo-lunch-1280.webp 1280w" sizes="(max-width: 1000px) 92vw, 380px">
+                <img src="img/photo-lunch-800.jpg" srcset="img/photo-lunch-800.jpg 800w, img/photo-lunch-1280.jpg 1280w" sizes="(max-width: 1000px) 92vw, 380px" alt="Members chatting around tables with sunflower tablecloths at a community lunch." width="800" height="800" loading="lazy" decoding="async" style="object-position: 50% 45%">
               </picture>
-              <figcaption>Celebrating culture together</figcaption>
+              <figcaption>Community lunch</figcaption>
             </figure>
           <!-- /@content:story-photo -->
         </div>
-        <ol class="timeline" role="list">
+        <ol class="timeline glow" role="list">
 <!-- @content:milestones -->
             <li class="milestone reveal">
               <p class="milestone-date">October 2018</p>
               <div class="milestone-body">
                 <h3>Incorporated as a not-for-profit</h3>
                 <p>Island Breeze Seniors Day Program Ltd. was incorporated under the Canada Not-for-profit Corporations Act.</p>
-                <p class="source-line">Source: <a class="source" href="https://www.canadacompanyregistry.com/companies/island-breeze-seniors-day-program-ltd/" target="_blank" rel="noopener">Corporations Canada record<span class="visually-hidden"> (opens in a new tab)</span></a></p>
               </div>
             </li>
             <li class="milestone reveal">
@@ -513,7 +643,6 @@
               <div class="milestone-body">
                 <h3>Guiding Light</h3>
                 <p>Received a $4,000 federal grant for the Guiding Light project through the Supporting Black Communities stream (September 2021 to September 2022).</p>
-                <p class="source-line">Source: <a class="source" href="https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q2-00250%2Ccurrent" target="_blank" rel="noopener">Government of Canada grants record<span class="visually-hidden"> (opens in a new tab)</span></a></p>
               </div>
             </li>
             <li class="milestone reveal">
@@ -521,7 +650,6 @@
               <div class="milestone-body">
                 <h3>Moment In Time</h3>
                 <p>Received an $18,750 New Horizons for Seniors Program grant for the Moment In Time project (March 2022 to March 2023).</p>
-                <p class="source-line">Source: <a class="source" href="https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q4-03583%2Ccurrent" target="_blank" rel="noopener">Government of Canada grants record<span class="visually-hidden"> (opens in a new tab)</span></a></p>
               </div>
             </li>
             <li class="milestone reveal">
@@ -529,7 +657,6 @@
               <div class="milestone-body">
                 <h3>Markham Museum visit</h3>
                 <p>Members visited the Markham Museum's older adults program.</p>
-                <p class="source-line">Source: <a class="source" href="https://www.instagram.com/p/C3N3If2JFYM/" target="_blank" rel="noopener">Island Breeze on Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></p>
               </div>
             </li>
             <li class="milestone reveal">
@@ -537,7 +664,6 @@
               <div class="milestone-body">
                 <h3>Part of Carefirst's partner network</h3>
                 <p>Carefirst Seniors and Community Services Association listed Island Breeze among its social care and community support partners in presentations in January and July 2025.</p>
-                <p class="source-line">Source: <a class="source" href="https://hspn.ca/wp-content/uploads/2025/07/HSPN_LDPHM_July-22_2025.pdf" target="_blank" rel="noopener">HSPN webinar slides, July 22, 2025<span class="visually-hidden"> (opens in a new tab)</span></a></p>
               </div>
             </li>
             <li class="milestone reveal">
@@ -545,7 +671,6 @@
               <div class="milestone-body">
                 <h3>Cultural Arts for Holistic Healing</h3>
                 <p>A United Way–funded workshop series for seniors in South Markham, closing with a celebration luncheon in July.</p>
-                <p class="source-line">Source: <a class="source" href="https://www.facebook.com/Islandbreezeseniors/" target="_blank" rel="noopener">Island Breeze on Facebook<span class="visually-hidden"> (opens in a new tab)</span></a></p>
               </div>
             </li>
           <!-- /@content:milestones -->
@@ -557,7 +682,7 @@
     <section id="supporters" class="section section-tint" aria-labelledby="supporters-title">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Collaborators &amp; past funding</p>
+          <p class="eyebrow has-ico"><svg class="eyebrow-ico draw" aria-hidden="true"><use href="#i-heart"/></svg>Collaborators &amp; past funding</p>
           <h2 id="supporters-title">Thank you to those who&rsquo;ve helped</h2>
           <p class="intro">We&rsquo;re grateful to the organizations we&rsquo;ve worked with. Grants listed here were for specific projects and have ended.</p>
         </div>
@@ -608,9 +733,12 @@
         <div>
           <p class="eyebrow">Ready when you are</p>
           <h2 id="callband-title">The best way to start is a conversation.</h2>
-          <p>Call and ask what&rsquo;s on this month. We&rsquo;ll help you plan your first visit.</p>
+          <p>Call or email and ask what&rsquo;s on this month. We&rsquo;ll help you plan your first visit.</p>
         </div>
-        <a class="big-call" href="tel:+14163197763"><span class="big-call-label"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call about joining</span><span class="big-call-number">416-319-7763</span></a>
+        <div class="big-contact">
+          <a class="big-call" href="tel:+14163197763"><span class="big-call-label"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call about joining</span><span class="big-call-number">416-319-7763</span></a>
+          <a class="big-call big-mail" href="mailto:islandbreezeseniors@gmail.com"><span class="big-call-label"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Or email us</span><span class="big-call-number">islandbreezeseniors@<wbr>gmail.com</span></a>
+        </div>
       </div>
     </section>
 
@@ -618,9 +746,9 @@
     <section id="visit" class="section" aria-labelledby="visit-title">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow">Visit &amp; contact</p>
+          <p class="eyebrow has-ico"><svg class="eyebrow-ico draw" aria-hidden="true"><use href="#i-pin"/></svg>Visit &amp; contact</p>
           <h2 id="visit-title">Come say hello</h2>
-          <p class="intro">The easiest way to reach us is by phone. Please call before your first visit so we can tell you where to meet.</p>
+          <p class="intro">Call or email us before your first visit so we can tell you where to meet.</p>
         </div>
         <div class="visit-grid">
           <div class="contact-card reveal">
@@ -628,9 +756,9 @@
               <span class="contact-icon"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
               <span><span class="contact-label">Call us</span><span class="contact-value">416-319-7763</span></span>
             </a>
-            <a class="contact-row" href="mailto:islandbreezeseniors@gmail.com">
+            <a class="contact-row big" href="mailto:islandbreezeseniors@gmail.com">
               <span class="contact-icon"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
-              <span><span class="contact-label">Email</span><span class="contact-value contact-email">islandbreezeseniors@gmail.com</span></span>
+              <span><span class="contact-label">Email us</span><span class="contact-value contact-email">islandbreezeseniors@<wbr>gmail.com</span></span>
             </a>
             <div class="contact-row">
               <span class="contact-icon"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>
@@ -722,7 +850,7 @@
       </nav>
       <div class="footer-links">
         <a href="tel:+14163197763">416-319-7763</a>
-        <a href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@gmail.com</a>
+        <a href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@<wbr>gmail.com</a>
         <a href="https://www.facebook.com/Islandbreezeseniors/" target="_blank" rel="noopener">Facebook<span class="visually-hidden"> (opens in a new tab)</span></a>
         <a href="https://www.instagram.com/islandbreezeseniors55/" target="_blank" rel="noopener">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a>
       </div>
@@ -732,9 +860,96 @@
     </div>
   </footer>
 
+  <!-- Join Now panel (C). Opened by the header button; without JS that button is a link to the contact form. -->
+  <dialog class="sheet" id="join-panel" aria-labelledby="join-title">
+    <div class="sheet-grab" aria-hidden="true"><span></span></div>
+    <div class="sheet-head">
+      <h2 id="join-title">Join Island Breeze</h2>
+      <button class="icon-btn" type="button" data-close><svg class="ico" aria-hidden="true"><use href="#a-close"/></svg><span class="visually-hidden">Close</span></button>
+    </div>
+    <div class="sheet-view" data-view="choices">
+      <p class="sheet-intro">Choose whatever is easiest for you. A real person will help you get started.</p>
+      <div class="options">
+        <a class="option" href="tel:+14163197763"><span class="option-icon"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span><span><span class="option-label">Call us</span><span class="option-big">416-319-7763</span></span></a>
+        <a class="option" href="mailto:islandbreezeseniors@gmail.com?subject=Joining%20Island%20Breeze"><span class="option-icon"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><span><span class="option-label">Email us</span><span class="option-detail">islandbreezeseniors@<wbr>gmail.com</span></span></a>
+        <button class="option" type="button" data-show="message"><span class="option-icon"><svg class="ico" aria-hidden="true"><use href="#a-chat"/></svg></span><span><span class="option-label">Send a message</span><span class="option-detail">We&rsquo;ll call or email you back</span></span></button>
+      </div>
+    </div>
+    <div class="sheet-view" data-view="message" hidden>
+      <button class="back-btn" type="button" data-show="choices"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>Other ways to reach us</button>
+      <form class="mini-form" id="join-form" novalidate>
+        <input type="hidden" name="_subject" value="Island Breeze website: Join Now message">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="sent_from" value="Join Now panel">
+        <input type="hidden" name="question_asked" value="">
+        <div class="hp" aria-hidden="true">
+          <label for="j-honey">Leave this field empty</label>
+          <input type="text" id="j-honey" name="_honey" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="j-name">Your name</label>
+          <input id="j-name" name="name" type="text" autocomplete="name" required aria-describedby="j-name-err">
+          <p class="field-error" id="j-name-err" hidden>Please tell us your name.</p>
+        </div>
+        <div class="field">
+          <label for="j-phone">Phone number <span class="req-note" data-req-phone>(needed for a call back)</span></label>
+          <input id="j-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="j-phone-err">
+          <p class="field-error" id="j-phone-err" hidden>Please enter a phone number so we can call you back.</p>
+        </div>
+        <div class="field">
+          <label for="j-email">Email address <span class="req-note" data-req-email>(optional)</span></label>
+          <input id="j-email" name="email" type="email" autocomplete="email" inputmode="email" aria-describedby="j-email-err">
+          <p class="field-error" id="j-email-err" hidden>Please enter an email address like name@example.com.</p>
+        </div>
+        <fieldset class="field reach">
+          <legend>Best way to reach me</legend>
+          <div class="choice">
+            <input type="radio" id="j-by-phone" name="preferred_contact" value="Phone call back" checked>
+            <label for="j-by-phone">Phone call</label>
+          </div>
+          <div class="choice">
+            <input type="radio" id="j-by-email" name="preferred_contact" value="Email">
+            <label for="j-by-email">Email</label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="j-message">Message <span class="optional">(optional)</span></label>
+          <textarea id="j-message" name="message" rows="3"></textarea>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span class="btn-text">Send message</span></button>
+        <div class="form-status" role="status" aria-live="polite" tabindex="-1"></div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Help assistant (D): scripted answers from data/faq.json only. No AI, no tracking, no cookies. -->
+  <button class="help-launcher" type="button" data-opens="help-panel" hidden><svg class="ico" aria-hidden="true"><use href="#a-help"/></svg>Help</button>
+  <dialog class="sheet help-panel" id="help-panel" aria-labelledby="help-title">
+    <div class="sheet-grab" aria-hidden="true"><span></span></div>
+    <div class="sheet-head">
+      <div>
+        <h2 id="help-title">Questions? Ask here</h2>
+        <p class="sheet-sub">Quick answers from this website. For anything else, a real person can help.</p>
+      </div>
+      <button class="icon-btn" type="button" data-close><svg class="ico" aria-hidden="true"><use href="#a-close"/></svg><span class="visually-hidden">Close</span></button>
+    </div>
+    <div class="help-log" role="log" aria-live="polite" aria-label="Conversation" tabindex="0">
+      <div class="msg msg-bot"><p>Hello! Tap a question below, or type your own.</p><div class="help-chips" role="group" aria-label="Suggested questions"></div></div>
+    </div>
+    <form class="help-ask">
+      <label for="help-q">Or type your question</label>
+      <div class="help-ask-row">
+        <input id="help-q" type="text" autocomplete="off" enterkeyhint="send">
+        <button class="btn btn-primary" type="submit">Ask</button>
+      </div>
+    </form>
+  </dialog>
+
   <!-- Mobile call bar: hidden near the top, over the form, and while typing -->
-  <div class="call-bar" aria-hidden="true">
-    <a class="btn btn-primary" href="tel:+14163197763" tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span class="cb-long">Call about joining &middot;</span><span class="cb-short">Call</span> <span class="nowrap">416-319-7763</span></a>
+  <div class="call-bar glass" aria-hidden="true">
+    <a class="btn btn-primary" href="tel:+14163197763" tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span class="cb-short">Call</span> <span class="nowrap">416-319-7763</span></a>
+    <a class="btn btn-ghost" href="mailto:islandbreezeseniors@gmail.com" tabindex="-1"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Email</a>
   </div>
 </body>
 </html>
