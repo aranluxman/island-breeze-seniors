@@ -70,9 +70,11 @@
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scrollbar-gutter: stable; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); -webkit-text-size-adjust: 100%; }
 body { margin: 0; font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: var(--t-base); line-height: 1.65; color: var(--ink); background: var(--sand); overflow-wrap: break-word; padding-bottom: var(--callbar-h); }
 body.menu-open, html.has-modal body { overflow: hidden; }
+/* Reserve the scrollbar gutter on wider screens so locking scroll for a panel never shifts the layout */
+@media (min-width: 701px) { html { scrollbar-gutter: stable; } }
 h1, h2, h3, h4 { font-family: "Fraunces", Georgia, serif; line-height: 1.15; margin: 0 0 var(--s-4); color: var(--ocean-900); letter-spacing: -.01em; text-wrap: balance; }
 h1 { font-size: var(--t-2xl); font-weight: 800; line-height: 1.05; letter-spacing: -.02em; }
 h2 { font-size: var(--t-xl); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
