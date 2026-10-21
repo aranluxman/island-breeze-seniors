@@ -17,9 +17,11 @@ let html = readFileSync(htmlPath, 'utf8');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // Rich fields are author-controlled and may hold simple inline HTML.
 const rich = (s) => String(s);
+// Rich text as plain text (for structured data): tags dropped, the entities we use decoded.
+const plain = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '\u2019').replace(/&mdash;/g, '\u2014').replace(/&amp;/g, '&');
 const src = (s) => !s ? '' : !s.url ? esc(s.label) : `<a class="source" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a>`;
 const statusLabel = { regular: 'Regular activity', project: 'Past workshop', event: 'Event' };
-const icon = (id, cls = '') => `<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const icon = (id, cls = '') => `<svg${cls ? ` class="${cls}"` : ''} aria-hidden="true"><use href="#${id}"/></svg>`;
 
 
 // Responsive photo, rendered only when its optimized files exist (no empty placeholders).
@@ -44,19 +46,30 @@ const photo = (key, cls, sizes) => {
 };
 
 const blocks = {
-  latest: () => `${rich(content.latest.text)} ${src(content.latest.source)}`,
-
-  activities: () => content.activityGroups.map((g) => `
-          <section class="activity-group reveal" aria-labelledby="ag-${g.id}" data-accent="${g.accent}">
-            <h3 id="ag-${g.id}"><span class="ag-icon">${icon(g.icon, 'draw')}</span>${esc(g.title)}</h3>${photo(photoKey(g.id), 'photo photo-group', '(max-width: 860px) 92vw, 540px')}
-            <ul class="activity-list" role="list">${g.items.map((it) => `
-              <li>
-                <p class="activity-name">${esc(it.name)} <span class="tag tag-${it.status}">${statusLabel[it.status] || ''}</span></p>
-                <p class="activity-desc">${rich(it.desc)}</p>
-                <p class="activity-note">${esc(it.note)}</p>
-              </li>`).join('')}
-            </ul>
-          </section>`).join('') + '\n        ',
+  // Every group gets a visual: its photo, or (until one exists) an illustrated panel of its activity icons.
+  activities: () => content.activityGroups.map((g) => {
+    const visual = photo(photoKey(g.id), 'photo ag-photo', '(max-width: 860px) 92vw, 520px')
+      || `
+            <div class="ag-art" aria-hidden="true">${(g.art || g.items.map((it) => it.icon)).map((id) => `<span>${icon(id)}</span>`).join('')}</div>`;
+    return `
+          <section class="activity-group glow reveal" aria-labelledby="ag-${g.id}" data-accent="${g.accent}">
+            <div class="ag-body">
+              <h3 id="ag-${g.id}"><span class="ag-icon">${icon(g.icon, 'draw')}</span>${esc(g.title)}</h3>
+              <ul class="activity-list" role="list">${g.items.map((it) => `
+                <li>
+                  <span class="act-icon">${icon(it.icon)}</span>
+                  <div>
+                    <p class="activity-name">${esc(it.name)} <span class="tag tag-${it.status}">${statusLabel[it.status] || ''}</span></p>
+                    <p class="activity-desc">${rich(it.desc)}</p>
+                    <p class="activity-note">${esc(it.note)}</p>
+                  </div>
+                </li>`).join('')}
+              </ul>
+            </div>
+            <div class="ag-visual">${visual}
+            </div>
+          </section>`;
+  }).join('') + '\n        ',
 
   project: () => {
     const p = content.featuredProject;
@@ -65,9 +78,9 @@ const blocks = {
           <h3>${esc(p.title)}</h3>
           <p>${rich(p.text)}</p>
           <ol class="project-timeline" role="list">${(p.timeline || []).map((t) => `
-            <li><span class="pt-month">${esc(t.month)}</span><span><strong>${esc(t.title)}</strong> ${rich(t.text)}</span></li>`).join('')}
-          </ol>
-          <p class="source-line">Source: ${src(p.source)}</p>
+            <li><span class="pt-icon">${icon(t.icon)}</span><span class="pt-month">${esc(t.month)}</span><span><strong>${esc(t.title)}</strong> ${rich(t.text)}</span></li>`).join('')}
+          </ol>${p.source ? `
+          <p class="source-line">Source: ${src(p.source)}</p>` : ''}
         `;
   },
 
@@ -78,12 +91,12 @@ const blocks = {
           `,
 
   gallery: () => content.gallery.filter((k) => pic(k, '')).map((k, i, all) => `
-          <li class="slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${all.length}">
+          <div class="slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${all.length}">
             <figure>
               ${pic(k, '(max-width: 700px) 86vw, 640px', i > 1)}
               <figcaption>${esc(content.photos[k].caption)}</figcaption>
             </figure>
-          </li>`).join('') + '\n        ',
+          </div>`).join('') + '\n        ',
 
   'join-photo': () => photo(photoKey('join'), 'photo photo-join reveal', '(max-width: 900px) 92vw, 480px') + '\n          ',
 
@@ -107,10 +120,17 @@ const blocks = {
               <p class="milestone-date">${esc(m.date)}</p>
               <div class="milestone-body">
                 <h3>${esc(m.title)}</h3>
-                <p>${rich(m.text)}</p>
-                <p class="source-line">Source: ${src(m.source)}</p>
+                <p>${rich(m.text)}</p>${m.source ? `
+                <p class="source-line">Source: ${src(m.source)}</p>` : ''}
               </div>
             </li>`).join('') + '\n          ',
+
+  // FAQPage structured data, built from the same answers as the "Common questions" accordion.
+  'faq-schema': () => '\n  <script type="application/ld+json">\n  ' + JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: content.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })),
+  }, null, 2).replace(/\n/g, '\n  ') + '\n  </script>\n  ',
 
   collaborators: () => content.collaborators.map((c) => `
               <li><h4>${esc(c.name)}</h4><p>${rich(c.text)}</p><p class="source-line">${src(c.source)}</p></li>`).join('') + '\n            ',

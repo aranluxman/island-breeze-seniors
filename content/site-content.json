@@ -1,12 +1,5 @@
 {
-  "_readme": "Edit this file to update activities, milestones, collaborators, funding and FAQ, then run: node scripts/render-content.mjs. Text fields may contain simple HTML (<a>, <strong>, <em>). Only add facts with a source or confirmed by the owner. 'status' for activities: 'regular' (shared as recurring), 'project' (time-limited workshop series), 'event' (one-off or annual).",
-  "latest": {
-    "text": "Most recently, members joined the Carefirst Health Fair at the YMCA in Markham (September 2026).",
-    "source": {
-      "label": "Instagram",
-      "url": "https://www.instagram.com/p/DdRtvXkET1U/"
-    }
-  },
+  "_readme": "Edit this file to update activities, milestones, collaborators, funding and FAQ, then run: node scripts/render-content.mjs. Text fields may contain simple HTML (<a>, <strong>, <em>). Only add facts with a source or confirmed by the owner. 'status' for activities: 'regular' (shared as recurring), 'project' (time-limited workshop series), 'event' (one-off or annual). 'icon' on activities and timeline months is a sprite id (#a-...) in public/index.html; icons are decorative.",
   "activityGroups": [
     {
       "id": "creative",
@@ -16,22 +9,30 @@
       "items": [
         {
           "name": "Crochet circle",
+          "icon": "a-yarn",
           "desc": "A relaxed crochet class led by a volunteer instructor, held at Hagerman Corners Community Homes.",
           "status": "regular",
           "note": "Shared as a weekly class in 2024 and 2025"
         },
         {
           "name": "Arts and crafts",
+          "icon": "a-palette",
           "desc": "Hands-on creative sessions, including a colour therapy workshop.",
           "status": "event",
           "note": "Colour therapy workshop, October 2025"
         },
         {
           "name": "Pottery with Markham Museum",
+          "icon": "a-pottery",
           "desc": "A seniors pottery workshop led by Markham Museum.",
           "status": "event",
           "note": "October 2025"
         }
+      ],
+      "art": [
+        "a-yarn",
+        "a-palette",
+        "a-pottery"
       ]
     },
     {
@@ -42,18 +43,14 @@
       "items": [
         {
           "name": "Game night",
+          "icon": "a-domino",
           "desc": "Dominoes, friendly competition and plenty of conversation.",
           "status": "regular",
           "note": "Shared in 2025"
         },
         {
-          "name": "Black History Month luncheon",
-          "desc": "An annual celebration lunch each February.",
-          "status": "event",
-          "note": "Held in 2025 (third annual) and 2026"
-        },
-        {
           "name": "Christmas dinner",
+          "icon": "a-dinner",
           "desc": "A holiday dinner to close out the year together.",
           "status": "event",
           "note": "Described as annual in 2022"
@@ -68,18 +65,21 @@
       "items": [
         {
           "name": "Drumming for Wellness",
+          "icon": "a-drum",
           "desc": "Rhythm and movement for mind and body.",
           "status": "project",
           "note": "January 2026 workshop"
         },
         {
           "name": "Healing Grief Through Poetry",
+          "icon": "a-quill",
           "desc": "A gentle workshop on grief and healing through the written word.",
           "status": "project",
           "note": "February 2026 workshop"
         },
         {
           "name": "Laughter Yoga",
+          "icon": "a-yoga",
           "desc": "Laughter, breathing and gentle movement.",
           "status": "project",
           "note": "Part of the 2026 workshop series"
@@ -94,18 +94,21 @@
       "items": [
         {
           "name": "Markham Museum",
+          "icon": "a-museum",
           "desc": "A visit to the museum's older adults program.",
           "status": "event",
           "note": "February 2024"
         },
         {
           "name": "Carefirst tea party",
+          "icon": "a-teacup",
           "desc": "A tea party hosted by the Carefirst team for Island Breeze members.",
           "status": "event",
           "note": "July 2026"
         },
         {
           "name": "Carefirst Health Fair",
+          "icon": "a-health",
           "desc": "Members attended the Carefirst Health Fair at the YMCA in Markham.",
           "status": "event",
           "note": "September 2026"
@@ -117,52 +120,55 @@
     "title": "Cultural Arts for Holistic Healing of Mind, Body and Spirit",
     "when": "2026",
     "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze and funded by United Way Greater Toronto through the South Markham Community Action Grants. From January to July, members drummed, wrote, danced, sculpted and celebrated together.",
-    "source": {
-      "label": "Island Breeze 2026 program highlights, Facebook and Instagram",
-      "url": "https://www.facebook.com/Islandbreezeseniors/"
-    },
     "timeline": [
       {
         "month": "Jan",
         "title": "Drumming for Wellness",
-        "text": "Rhythm and connection to start the year."
+        "text": "Rhythm and connection to start the year.",
+        "icon": "a-drum"
       },
       {
         "month": "Feb",
         "title": "Healing Grief Through Poetry",
-        "text": "A four-week series for reflection, healing and self-expression."
+        "text": "A four-week series for reflection, healing and self-expression.",
+        "icon": "a-quill"
       },
       {
         "month": "Mar",
         "title": "Afro-Peruvian dance workshop",
-        "text": "Culture celebrated through dance, colour and joy."
+        "text": "Culture celebrated through dance, colour and joy.",
+        "icon": "a-dance"
       },
       {
         "month": "Apr",
         "title": "Art clay workshop",
-        "text": "Hands-on creativity with clay."
+        "text": "Hands-on creativity with clay.",
+        "icon": "a-pottery"
       },
       {
         "month": "May",
         "title": "Health & wellness workshop",
-        "text": "Healthy-living information, activities and blood pressure checks."
+        "text": "Healthy-living information, activities and blood pressure checks.",
+        "icon": "a-health"
       },
       {
         "month": "Jun",
         "title": "Zumba, merengue & bingo",
-        "text": "A day of movement, music, laughter and games."
+        "text": "A day of movement, music, laughter and games.",
+        "icon": "a-music"
       },
       {
         "month": "Jul",
         "title": "Fashion show & celebration lunch",
-        "text": "Closing the series with style, pride and culture."
+        "text": "Closing the series with style, pride and culture.",
+        "icon": "a-celebrate"
       }
     ]
   },
   "joinSteps": [
     {
-      "title": "Give us a call",
-      "text": "Call <a href=\"tel:+14163197763\">416-319-7763</a>, or send a message below and ask us to call you back."
+      "title": "Call or email us",
+      "text": "Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a>, or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll reply. You can also <a href=\"#contact\">send a message below</a> and ask us to call you back."
     },
     {
       "title": "Ask your questions",
@@ -170,89 +176,65 @@
     },
     {
       "title": "Plan your first visit",
-      "text": "Pick an activity to try first. If anything would make your visit easier, just let us know when you call."
+      "text": "Pick an activity to try first. If anything would make your visit easier, just let us know when you call or email."
     }
   ],
   "faq": [
     {
       "q": "Who can join?",
-      "a": "Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, please give us a call."
+      "a": "Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a>."
     },
     {
       "q": "How do I register?",
-      "a": "Call <a href=\"tel:+14163197763\">416-319-7763</a> and we'll talk you through it. You can also send us a message and ask for a call back."
+      "a": "Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we'll talk you through it. You can also send us a message below and ask for a call back."
     },
     {
       "q": "What does it cost?",
-      "a": "Costs can vary by activity. Please call us to ask about the activity you're interested in."
+      "a": "Costs can vary by activity. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to ask about the activity you're interested in."
     },
     {
       "q": "Can a caregiver attend?",
-      "a": "Our mission includes older adults and their caregivers. Please call to talk about coming together, so we can plan the visit with you."
+      "a": "Our mission includes older adults and their caregivers in Markham. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to talk about coming together, so we can plan the visit with you."
     },
     {
       "q": "What are the current program times?",
-      "a": "Our schedule changes through the year. Please call <a href=\"tel:+14163197763\">416-319-7763</a> for this month's activities and times."
+      "a": "Our schedule changes through the year. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> for this month's activities and times."
     },
     {
       "q": "What accessibility or transportation arrangements are available?",
-      "a": "Please call before your visit so we can talk through access, mobility needs and how you'll get there."
+      "a": "Please call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> before your visit so we can talk through access, mobility needs and how you'll get there."
     }
   ],
   "milestones": [
     {
       "date": "October 2018",
       "title": "Incorporated as a not-for-profit",
-      "text": "Island Breeze Seniors Day Program Ltd. was incorporated under the Canada Not-for-profit Corporations Act.",
-      "source": {
-        "label": "Corporations Canada record",
-        "url": "https://www.canadacompanyregistry.com/companies/island-breeze-seniors-day-program-ltd/"
-      }
+      "text": "Island Breeze Seniors Day Program Ltd. was incorporated under the Canada Not-for-profit Corporations Act."
     },
     {
       "date": "2021–2022",
       "title": "Guiding Light",
-      "text": "Received a $4,000 federal grant for the Guiding Light project through the Supporting Black Communities stream (September 2021 to September 2022).",
-      "source": {
-        "label": "Government of Canada grants record",
-        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q2-00250%2Ccurrent"
-      }
+      "text": "Received a $4,000 federal grant for the Guiding Light project through the Supporting Black Communities stream (September 2021 to September 2022)."
     },
     {
       "date": "2022–2023",
       "title": "Moment In Time",
-      "text": "Received an $18,750 New Horizons for Seniors Program grant for the Moment In Time project (March 2022 to March 2023).",
-      "source": {
-        "label": "Government of Canada grants record",
-        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q4-03583%2Ccurrent"
-      }
+      "text": "Received an $18,750 New Horizons for Seniors Program grant for the Moment In Time project (March 2022 to March 2023)."
     },
     {
       "date": "February 2024",
       "title": "Markham Museum visit",
-      "text": "Members visited the Markham Museum's older adults program.",
-      "source": {
-        "label": "Island Breeze on Instagram",
-        "url": "https://www.instagram.com/p/C3N3If2JFYM/"
-      }
+      "text": "Members visited the Markham Museum's older adults program."
     },
     {
       "date": "2025",
       "title": "Part of Carefirst's partner network",
-      "text": "Carefirst Seniors and Community Services Association listed Island Breeze among its social care and community support partners in presentations in January and July 2025.",
-      "source": {
-        "label": "HSPN webinar slides, July 22, 2025",
-        "url": "https://hspn.ca/wp-content/uploads/2025/07/HSPN_LDPHM_July-22_2025.pdf"
-      }
+      "text": "Carefirst Seniors and Community Services Association listed Island Breeze among its social care and community support partners in presentations in January and July 2025."
     },
     {
       "date": "2026",
       "title": "Cultural Arts for Holistic Healing",
-      "text": "A United Way–funded workshop series for seniors in South Markham, closing with a celebration luncheon in July.",
-      "source": {
-        "label": "Island Breeze on Facebook",
-        "url": "https://www.facebook.com/Islandbreezeseniors/"
-      }
+      "text": "A United Way–funded workshop series for seniors in South Markham, closing with a celebration luncheon in July."
     }
   ],
   "collaborators": [
@@ -316,13 +298,20 @@
     }
   ],
   "photos": {
-    "_note": "Consented photos of Island Breeze members, supplied by the owner (October 2026). Files: public/img/<base>-{800,1280}.{webp,jpg}, made with scripts/optimize-images.mjs. A photo appears only once its files exist. 'w'/'h' are the image's proportions; 'pos' is an optional CSS object-position for cropped slots.",
+    "_note": "Consented photos of Island Breeze members, supplied by the owner (October 2026). Files: public/img/<base>-{800,1280}.{webp,jpg}, made with scripts/optimize-images.mjs. A photo appears only once its files exist. 'w'/'h' are the image's proportions; 'pos' is an optional CSS object-position for cropped slots. 'group-wide' is a 16:9 crop of the group photo, made at full resolution from photo-group-1280.",
     "group": {
       "base": "photo-group",
       "w": 800,
       "h": 1066,
       "pos": "50% 60%",
       "alt": "About thirty Island Breeze members and volunteers, many in matching white T-shirts, posing together for a group photo in a bright community room.",
+      "caption": "Our Island Breeze family"
+    },
+    "group-wide": {
+      "base": "photo-group-wide",
+      "w": 1280,
+      "h": 720,
+      "alt": "About thirty Island Breeze members and volunteers, most in matching white Island Breeze T-shirts, gathered for a group photo in a bright community room. Some sit in the front row, two people in black T-shirts kneel at the front, and one member sits in a power wheelchair.",
       "caption": "Our Island Breeze family"
     },
     "celebration": {
@@ -400,11 +389,13 @@
   "photoSlots": {
     "_note": "Where photos appear outside the carousel. Activity keys match activityGroups ids.",
     "hero": "group",
+    "creative": null,
     "social": "bingo",
+    "wellness": "celebration",
     "outings": "tea-party",
     "join": "friends",
-    "about": "lunch",
-    "story": "celebration",
+    "about": "group-wide",
+    "story": "lunch",
     "callband": "wave"
   }
 }
