@@ -23,7 +23,10 @@ Last reviewed: 30 September 2026. Everything on the site should trace to a sourc
 | Carefirst tea party (Jul 2026); Carefirst Health Fair at the YMCA in Markham (Sep 2026) | Instagram |
 | 2026 program month by month (Afro-Peruvian dance Mar, art clay Apr, health & wellness with blood pressure checks May, Zumba/merengue/bingo Jun, fashion show & celebration lunch Jul); ACSA Community Services as a program partner; South Markham as a program sponsor | Owner confirmed sponsor name and ACSA role (Oct 2026); "2026 Program Highlights" poster supplied by the owner (Oct 2026) |
 | Member photos (9) and consent to publish | Supplied by the owner, consent confirmed (Oct 2026) |
-| Map point for 4460 14th Avenue (43.8431, −79.3071) | OpenStreetMap Nominatim |
+| Map point for 4460 14th Avenue (43.8431, −79.3071) | OpenStreetMap Nominatim (also used as `geo` in the structured data) |
+
+## Not shown on the page (Oct 2026)
+Source links were removed from the hero, the 2026 project and the milestones at the owner's request; the sources above still back every claim. The Black History Month luncheon was removed from the activity list at the owner's request.
 
 ## Corrected from the previous site
 - **"Listed among community partners of the EYRND Ontario Health Team" — removed.** In the Jan 2025 OHT deck, Island Breeze appears on a **Carefirst** slide listing Carefirst's partners. The OHT itself is also listed there as a Carefirst partner. The site now names Carefirst as the collaborator.
@@ -45,7 +48,9 @@ Last reviewed: 30 September 2026. Everything on the site should trace to a sourc
 - [ ] **Logos:** permission from Carefirst, United Way and others before showing any logo.
 - [ ] **Photo details:** event and date for the group photo (white T-shirts), the "Honoring" celebration, the tea party (is it the Carefirst tea party, July 2026?) and the community lunch. Captions stay general until confirmed.
 - [ ] **Poster thumbnails:** the small photos on the 2026 poster look AI-generated, so they're not used as member photos.
-- [ ] **Form recipient:** currently a temporary address; switch to the organization's inbox.
+- [ ] **Form recipient:** currently a temporary address; switch to the organization's inbox (the Join Now and Help forms follow automatically).
+- [ ] **Creative activities photo:** no crochet, crafts or pottery photo yet; the card shows an illustrated icon panel until one exists (add it as `photoSlots.creative`).
+- [ ] **Program hours:** not published, and deliberately left out of structured data (`openingHours`) until confirmed.
 
 ## Do not confuse with
 Unrelated "Island Breeze" resorts, bands, restaurants, churches and ministries, and US organizations with similar names (for example Lewisville Estates' tea party posts).

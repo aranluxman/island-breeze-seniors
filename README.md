@@ -9,7 +9,8 @@ docs/content-checklist.md   sources + open questions (not published)
 public/
   index.html        the whole site (single page)
   styles.css        design tokens, layout, components, motion (reduced-motion safe)
-  main.js           menu, scroll reveal, scroll-spy, lazy map, contact form
+  main.js           menu, scroll reveal, scroll-spy, lazy map, contact form, Join Now panel, Help assistant
+  data/faq.json     knowledge for the scripted Help assistant (page facts only; no AI)
   thanks.html       no-JS form landing page
   404.html          real 404 (stops Pages serving the home page for missing URLs)
   robots.txt, sitemap.xml, _headers
@@ -51,6 +52,13 @@ The form posts to `https://formsubmit.co/aran.luxman@gmail.com` (**temporary** r
 - **Activation:** the first real submission sends a confirmation email to the recipient, and nothing is delivered until it's clicked. Test once from the live site after publishing.
 - After activating, replace the email in the form `action` with the random alias FormSubmit provides, so the address isn't visible in the page source.
 - Before handover, switch to the organization's inbox (it needs its own activation) and keep the privacy note accurate.
+
+## Join Now panel and Help assistant
+
+- **Join Now** (header) opens a panel: Call, Email, or Send a message. Without JavaScript it's a link to the contact form.
+- **Help** (bottom-right) is a *scripted* assistant, not an AI. It matches questions to `public/data/faq.json` by keywords, phrases, aliases and one-letter typos, and never guesses: anything it can't match gets "I don't have an answer to that" plus Call / Email / Send a message. No tracking, cookies or third-party scripts; nothing is stored.
+- Edit `public/data/faq.json` to change answers. Only add facts that are on the page.
+- Both new forms send through the **same FormSubmit address as the main contact form** — they read it from that form's `action`, so changing the recipient is one edit.
 
 ## Images
 
