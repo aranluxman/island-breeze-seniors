@@ -55,7 +55,7 @@
   /* ---------- Scroll reveal: once, at 12% visible; list items staggered ---------- */
   var reveals = document.querySelectorAll('.reveal');
   if (!reduce && hasIO && reveals.length) {
-    each(document.querySelectorAll('.steps, .timeline, .activity-grid, .supporter-cols'), function (list) {
+    each(document.querySelectorAll('.steps, .timeline, .past-grid, .supporter-cols'), function (list) {
       each(list.children, function (item, i) {
         if (item.classList.contains('reveal')) item.style.setProperty('--delay', (i % 4 * 0.08).toFixed(2) + 's');
       });
@@ -526,72 +526,375 @@
     });
   }
 
-  /* ---------- Help assistant (D): scripted, never guesses. Matches a question to data/faq.json
-     by keywords, phrases, aliases and one-letter typos. Nothing is stored or sent anywhere. ---------- */
+  /* ---------- Calendar data (shared by the calendar and the Help assistant) ---------- */
+  var calLoading = null, calData = null;
+  function loadCal() {
+    if (calLoading) return calLoading;
+    calLoading = window.fetch ? fetch('data/calendar.json').then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+      .then(function (j) { calData = j; return j; })
+      .catch(function () { calLoading = null; return null; }) : Promise.resolve(null);
+    return calLoading;
+  }
+  // "Now" in Markham, whatever the visitor's own time zone: { date: "2026-11-06", min: 845 }
+  function nowToronto() {
+    var d = new Date();
+    try {
+      var parts = {};
+      new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })
+        .formatToParts(d).forEach(function (p) { parts[p.type] = p.value; });
+      return { date: parts.year + '-' + parts.month + '-' + parts.day, min: (+parts.hour % 24) * 60 + +parts.minute };
+    } catch (e) {
+      var p2 = function (n) { return (n < 10 ? '0' : '') + n; };
+      return { date: d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()), min: d.getHours() * 60 + d.getMinutes() };
+    }
+  }
+  var toMin = function (t) { var a = t.split(':'); return +a[0] * 60 + +a[1]; };
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var dateObj = function (s) { var a = s.split('-'); return new Date(Date.UTC(+a[0], a[1] - 1, +a[2])); };
+  var isoDate = function (d) { return d.toISOString().slice(0, 10); };
+  var addDays = function (s, n) { var d = dateObj(s); d.setUTCDate(d.getUTCDate() + n); return isoDate(d); };
+  var longDate = function (s) { var d = dateObj(s); return DAYS[d.getUTCDay()] + ', ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate(); };
+  function allEvents(data) {
+    var list = [];
+    data.months.forEach(function (m) { m.events.forEach(function (e) { list.push(e); }); });
+    return list.sort(function (a, b) { return (a.date + a.start) < (b.date + b.start) ? -1 : 1; });
+  }
+  var venueOf = function (data, e) { return data.venues[e.venue || data.defaultVenue]; };
+  var venueText = function (data, e) {
+    var v = venueOf(data, e);
+    return (v.room ? v.room + ', ' : '') + v.name + (e.venue && e.venue !== data.defaultVenue ? ', ' + v.street : '');
+  };
+  // Upcoming = hasn't finished yet (an event happening right now still counts)
+  function upcoming(data, now) {
+    return allEvents(data).filter(function (e) { return e.date > now.date || (e.date === now.date && toMin(e.end) > now.min); });
+  }
+
+  // Add to my calendar: a one-event .ics file (works with Apple, Google and Outlook calendars)
+  function icsFor(data, e) {
+    var stamp = function (d, t) { return d.replace(/-/g, '') + 'T' + t.replace(':', '') + '00'; };
+    var v = venueOf(data, e), k = data.kinds[e.kind];
+    var loc = [v.room, v.name, v.street, v.city + ' ' + v.region].filter(Boolean).join(', ').replace(/,/g, '\\,');
+    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Island Breeze Seniors//Calendar//EN', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
+      'UID:' + e.date + '-' + e.kind + '@islandbreezeseniors', 'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z',
+      'DTSTART;TZID=America/Toronto:' + stamp(e.date, e.start), 'DTEND;TZID=America/Toronto:' + stamp(e.date, e.end),
+      'SUMMARY:' + k.name + ' (Island Breeze)', 'LOCATION:' + loc,
+      'DESCRIPTION:' + (k.desc + ' Questions? Call ' + data.owner.name + ' at ' + data.owner.phone + '.').replace(/,/g, '\\,'),
+      'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  }
+  function downloadIcs(data, e) {
+    var blob = new Blob([icsFor(data, e)], { type: 'text/calendar' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'island-breeze-' + e.kind + '-' + e.date + '.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+
+  /* ---------- Calendar: today, past days, next program, earlier weeks, print ---------- */
+  var calRoot = document.getElementById('calendar');
+  if (calRoot) {
+    var now = nowToronto();
+    // Stagger order for the one-time entrance (reading order: week by week)
+    each(calRoot.querySelectorAll('.cal-card'), function (card) {
+      each(card.querySelectorAll('.ev'), function (el, i) { el.style.setProperty('--i', Math.min(i, 14)); });
+      each(card.querySelectorAll('.cl-item'), function (el, i) { el.style.setProperty('--i', Math.min(i, 8)); });
+    });
+    each(calRoot.querySelectorAll('.cal-grid td[data-date]'), function (td) {
+      var d = td.getAttribute('data-date');
+      if (d < now.date) td.classList.add('is-past');
+      if (d === now.date) {
+        td.classList.add('is-today');
+        td.setAttribute('aria-current', 'date');
+        var badge = document.createElement('span');
+        badge.className = 'today-badge'; badge.textContent = 'Today';
+        td.querySelector('.d-num').appendChild(badge);
+      }
+    });
+    // Phones: weeks that are over fold away behind one button
+    each(calRoot.querySelectorAll('.cal-list'), function (list) {
+      var past = Array.prototype.filter.call(list.querySelectorAll('.cl-week'), function (w) { return w.getAttribute('data-last') < now.date; });
+      each(list.querySelectorAll('.cl-item'), function (li) {
+        var d = li.getAttribute('data-date');
+        if (d < now.date) li.classList.add('is-past');
+        if (d === now.date) li.classList.add('is-today');
+      });
+      var wrap = list.querySelector('.cl-earlier');
+      if (!past.length || !wrap || past.length === list.querySelectorAll('.cl-week').length) return;
+      var btn = wrap.querySelector('.cl-toggle'), label = btn.querySelector('span');
+      var setOpen = function (open) {
+        past.forEach(function (w) { w.hidden = !open; w.classList.toggle('cl-unfold', open && !reduce); });
+        btn.setAttribute('aria-expanded', String(open));
+        label.textContent = open ? 'Hide earlier dates' : 'Show earlier dates (' + past.length + (past.length === 1 ? ' week)' : ' weeks)');
+      };
+      btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+      setOpen(false);
+      wrap.hidden = false;
+    });
+    // Print just the calendar (landscape, in colour)
+    each(calRoot.querySelectorAll('.cal-print'), function (b) {
+      if (!window.print) return;
+      b.hidden = false;
+      b.addEventListener('click', function () { doc.classList.add('print-cal'); window.print(); });
+    });
+    window.addEventListener('afterprint', function () { doc.classList.remove('print-cal'); });
+
+    // Next program card
+    var nextUp = calRoot.querySelector('.next-up');
+    loadCal().then(function (data) {
+      if (!data || !nextUp) return;
+      var up = upcoming(data, now)[0];
+      var T = '<a href="tel:+14163197763">' + data.owner.phone + '</a>';
+      if (!up) {
+        nextUp.innerHTML = '<div class="nu-body"><p class="nu-label">Coming soon</p><p class="nu-name">The next calendar is on its way</p><p class="nu-when">For upcoming programs, call ' + esc(data.owner.name) + ' at ' + T + '.</p></div>';
+      } else {
+        var k = data.kinds[up.kind], v = venueOf(data, up);
+        var live = up.date === now.date && toMin(up.start) <= now.min;
+        var label = live ? 'Happening now' : up.date === now.date ? 'Today' : up.date === addDays(now.date, 1) ? 'Tomorrow' : 'Next program';
+        nextUp.setAttribute('data-accent', k.accent);
+        nextUp.innerHTML =
+          '<span class="nu-icon"><svg aria-hidden="true"><use href="#' + k.icon + '"/></svg></span>' +
+          '<div class="nu-body"><p class="nu-label">' + label + '</p>' +
+          '<p class="nu-name">' + esc(k.name) + '</p>' +
+          '<p class="nu-when"><strong>' + esc(up.when) + '</strong><span class="nu-dot" aria-hidden="true"> &middot; </span><span class="nowrap">' + esc(up.time) + '</span></p>' +
+          '<p class="nu-where"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>' + esc(venueText(data, up)) + '</p></div>' +
+          '<div class="nu-actions">' +
+          (window.Blob && window.URL ? '<button class="btn btn-light" type="button" data-ics><svg class="ico" aria-hidden="true"><use href="#a-calendar"/></svg>Add to my calendar</button>' : '') +
+          '<a class="btn btn-outline-light" href="' + esc(v.map) + '" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Directions<span class="visually-hidden"> (opens Google Maps in a new tab)</span></a></div>';
+        var icsBtn = nextUp.querySelector('[data-ics]');
+        if (icsBtn) icsBtn.addEventListener('click', function () { downloadIcs(data, up); });
+      }
+      nextUp.hidden = false;
+    });
+  }
+
+  /* ---------- Help assistant (D): scripted, never guesses. Understands the calendar ("what's on
+     Tuesday?", "when is bingo?"), and matches everything else to data/faq.json by keywords,
+     phrases, aliases and typos (including swapped letters). Nothing is stored or sent anywhere. ---------- */
   var help = document.getElementById('help-panel');
   var launcher = document.querySelector('.help-launcher');
   var helpLog = help && help.querySelector('.help-log');
-  var kb = null, kbLoading = null;
+  var kb = null, kbLoading = null, df = {};
   var STOP = {};
-  'a an the is are am be been i im you your youre we us our it its my me to of for in on at and or with do does did can could would should will what whats how which there this that please hi hello hey just know tell want like any some have has get go if so too also'.split(' ').forEach(function (w) { STOP[w] = 1; });
+  'a an the is are am be been being i im ive id you your youre we us our it its my me to of for in on at and or with do does did can could would should will shall what whats how which there theres this that these those please hi hello hey just know tell want wanted like any some have has had get got go going if so too also about from by up out there then than them they their he she his her who whom was were wondering need okay ok yes no'.split(' ').forEach(function (w) { STOP[w] = 1; });
+  // Words that carry meaning even though they look like filler
+  ['who', 'where', 'when', 'what', 'need', 'about'].forEach(function (w) { delete STOP[w]; });
   var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  function baseNorm(t) {
+    return ' ' + String(t).toLowerCase().replace(/[’']/g, '').replace(/&/g, ' and ').replace(/(\d)(st|nd|rd|th)\b/g, '$1 $1$2')
+      .replace(/[^a-z0-9\s-]/g, ' ').replace(/([a-z])\1{2,}/g, '$1$1').replace(/-/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+  }
+  var aliasKeys = [];
   function norm(t) {
-    t = ' ' + String(t).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
-    Object.keys(kb.aliases || {}).forEach(function (k) { t = t.split(' ' + k + ' ').join(' ' + kb.aliases[k] + ' '); });
-    return t.replace(/-/g, ' ').replace(/\s+/g, ' ');
+    t = baseNorm(t);
+    aliasKeys.forEach(function (k) { if (t.indexOf(' ' + k + ' ') > -1) t = t.split(' ' + k + ' ').join(' ' + kb.aliases[k] + ' '); });
+    return t.replace(/\s+/g, ' ');
   }
-  function lev1(a, b) { // true when a and b differ by at most one edit
-    if (Math.abs(a.length - b.length) > 1) return false;
-    var i = 0, j = 0, edits = 0;
-    while (i < a.length && j < b.length) {
-      if (a[i] === b[j]) { i++; j++; continue; }
-      if (++edits > 1) return false;
-      if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; }
+  var wordsOf = function (t) { return t.trim().split(' ').filter(function (w) { return w && !STOP[w]; }); };
+  var stem = function (w) { return w.length > 4 ? w.replace(/(ing|ed|es|s)$/, '') : w; };
+  // Optimal string alignment distance (insert, delete, change, swap two letters), with an early exit
+  function dist(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev2 = null, prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i]; var low = i;
+      for (j = 1; j <= b.length; j++) {
+        var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (prev2 && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+        cur[j] = v; if (v < low) low = v;
+      }
+      if (low > max) return max + 1;
+      prev2 = prev; prev = cur;
     }
-    return edits + (a.length - i) + (b.length - j) <= 1;
+    return prev[b.length];
   }
-  function match(question) {
-    var t = norm(question);
-    var words = t.trim().split(' ').filter(function (w) { return w && !STOP[w]; });
-    var best = null, bestScore = 0;
-    kb.entries.forEach(function (entry) {
-      var score = 0;
-      entry.keywords.forEach(function (kw) {
-        kw = norm(kw).trim();
-        if (kw.indexOf(' ') > -1) { if (t.indexOf(' ' + kw + ' ') > -1) score += 3; return; }
-        if (words.some(function (w) { return w === kw || w === kw + 's' || w + 's' === kw; })) score += 2;
-        else if (kw.length >= 5 && words.some(function (w) { return w.length >= 4 && lev1(w, kw); })) score += 1;
-      });
-      if (score > bestScore) { best = entry; bestScore = score; }
+  // How alike two words are: 1 exact, .95 same stem, .75 one typo, .6 two typos; short words must start the same
+  var vocab = {};
+  function sim(w, k) {
+    if (w === k) return 1;
+    if (stem(w) === stem(k)) return 0.95;
+    if (vocab[w]) return 0; // a word we know is not a typo of a different word
+    if (k.length < 4 || w.length < 3 || /\d/.test(k)) return 0;
+    var max = k.length <= 5 ? 1 : k.length <= 8 ? 2 : 3;
+    if (k.length <= 6 && w[0] !== k[0]) return 0;
+    var d = dist(w, k, max);
+    return d > max ? 0 : d === 1 ? 0.75 : d === 2 ? 0.6 : 0.5;
+  }
+  // Best match for a (possibly multi-word) keyword among the question's words
+  function kwScore(words, kw) {
+    var parts = kw.split(' ');
+    if (parts.length === 1) {
+      var best = 0;
+      words.forEach(function (w) { var s = sim(w, kw); if (s > best) best = s; });
+      // "chairyoga", "pricesright": a phrase typed as one word
+      return best;
+    }
+    var all = words.join(' '), bestP = 0;
+    if ((' ' + all + ' ').indexOf(' ' + kw + ' ') > -1) return 1;
+    var joined = parts.join('');
+    words.forEach(function (w) { if (w.length > 6) { var s = sim(w, joined); if (s > bestP) bestP = s; } });
+    for (var i = 0; i + parts.length <= words.length; i++) {
+      var tot = 0, ok = true;
+      for (var j = 0; j < parts.length; j++) { var s2 = sim(words[i + j], parts[j]); if (!s2) { ok = false; break; } tot += s2; }
+      if (ok) bestP = Math.max(bestP, tot / parts.length);
+    }
+    return bestP;
+  }
+  function prepareKb() {
+    aliasKeys = Object.keys(kb.aliases || {}).sort(function (a, b) { return b.split(' ').length - a.split(' ').length; });
+    // Phrases keep their small words ("get there", "what is on"); single keywords never match filler
+    kb.entries.forEach(function (e) {
+      e._kw = e.keywords.map(function (k) { var t = norm(k).trim(); return t.indexOf(' ') > -1 || !STOP[t] ? t : ''; }).filter(Boolean);
+      e._kw.forEach(function (k) { df[k] = (df[k] || 0) + 1; k.split(' ').forEach(function (w) { if (w.length > 3) vocab[w] = 1; }); });
     });
-    return bestScore >= 2 ? best : null;
   }
+  function rank(question) {
+    var all = norm(question).trim().split(' ').filter(Boolean), words = wordsOf(all.join(' '));
+    if (!all.length) return [];
+    return kb.entries.map(function (e) {
+      var score = 0;
+      e._kw.forEach(function (k) {
+        var s = kwScore(k.indexOf(' ') > -1 ? all : words, k);
+        if (s) score += s * (k.indexOf(' ') > -1 ? 3 : 2) / Math.sqrt(df[k]);
+      });
+      return { e: e, score: score };
+    }).filter(function (r) { return r.score > 0; }).sort(function (a, b) { return b.score - a.score; });
+  }
+
+  /* Calendar understanding */
+  var KIND_WORDS = {
+    'exercise': ['exercise', 'exercise class', 'workout', 'fitness', 'gym', 'work out'],
+    'chair-yoga': ['chair yoga', 'yoga'],
+    'pancake': ['pancake', 'breakfast', 'pancake breakfast'],
+    'price-is-right': ['price is right', 'game show', 'guessing game'],
+    'seniors-circle': ['seniors circle', 'circle', 'milliken'],
+    'bingo': ['bingo']
+  };
+  function kindsIn(words) {
+    var found = [];
+    Object.keys(KIND_WORDS).forEach(function (k) {
+      if (KIND_WORDS[k].some(function (kw) { return kwScore(words, wordsOf(norm(kw)).join(' ')) >= 0.75; })) found.push(k);
+    });
+    if (found.indexOf('chair-yoga') > -1 && found.indexOf('exercise') > -1 && words.indexOf('exercise') < 0) found.splice(found.indexOf('exercise'), 1);
+    return found;
+  }
+  // Which day(s) the question is about, as ISO dates. Weekday names mean the next one (today included).
+  function daysIn(text, words, now) {
+    var t = ' ' + words.join(' ') + ' ', out = [], i;
+    if (/ (today|tonight|now|this morning|this afternoon) /.test(t)) out.push(now.date);
+    if (/ tomorrow /.test(t)) out.push(addDays(now.date, 1));
+    var wd = dateObj(now.date).getUTCDay();
+    var weekFrom = function (start, n) { var r = []; for (var j = 0; j < n; j++) r.push(addDays(start, j)); return r; };
+    if (/ next week /.test(t)) return { range: weekFrom(addDays(now.date, 8 - (wd || 7)), 7), label: 'next week' };
+    if (/ (this week|week) /.test(t)) return { range: weekFrom(now.date, 7 - ((wd + 6) % 7)), label: 'this week' };
+    if (/ weekend /.test(t)) { var sat = addDays(now.date, (6 - wd + 7) % 7); return { range: wd === 0 ? [now.date] : [sat, addDays(sat, 1)], label: 'this weekend' }; }
+    words.forEach(function (w) {
+      if (w.length < 5) return;
+      var w2 = w.replace(/s$/, ''), best = -1, bestD = 9, tie = false;
+      DAYS.forEach(function (name, n) {
+        var d = dist(w2, name.toLowerCase(), 3);
+        if (d < bestD) { bestD = d; best = n; tie = false; } else if (d === bestD) tie = true;
+      });
+      if (best > -1 && !tie && bestD <= (w2.length >= 7 ? 2 : 1)) {
+        var iso = addDays(now.date, (best - wd + 7) % 7);
+        if (out.indexOf(iso) < 0) out.push(iso);
+      }
+    });
+    // "November 18", "nov 18th", "the 18th"
+    var m = text.toLowerCase().match(/\b(?:november|nov)\.?\s*(\d{1,2})|\b(\d{1,2})(?:st|nd|rd|th)\b|\bthe\s+(\d{1,2})\b/);
+    if (m) { var day = +(m[1] || m[2] || m[3]); if (day >= 1 && day <= 31) out.push(now.date.slice(0, 8) + (day < 10 ? '0' : '') + day); }
+    return out.length ? { range: out, label: '' } : null;
+  }
+  var evLine = function (data, e) {
+    return '<strong>' + esc(data.kinds[e.kind].name) + '</strong>, ' + esc(e.time) + ', ' + esc(venueText(data, e));
+  };
+  function answerDays(data, q, now) {
+    var events = allEvents(data);
+    var lastDate = events.length ? events[events.length - 1].date : '';
+    var rows = q.range.map(function (d) {
+      var list = events.filter(function (e) { return e.date === d; });
+      var obs = [];
+      data.months.forEach(function (m) { (m.observances || []).forEach(function (o) { if (o.date === d) obs.push(o.name); }); });
+      var head = (d === now.date ? 'Today, ' : d === addDays(now.date, 1) ? 'Tomorrow, ' : '') + longDate(d);
+      if (d > lastDate) return '<li><strong>' + head + ':</strong> that calendar isn&rsquo;t posted yet.</li>';
+      if (!list.length) return q.label ? '' : '<li><strong>' + head + ':</strong> no program' + (obs.length ? ' (' + esc(obs.join(', ')) + ')' : '') + '.</li>';
+      return '<li><strong>' + head + ':</strong> ' + list.map(function (e) {
+        var done = d === now.date && toMin(e.end) <= now.min;
+        return evLine(data, e) + (done ? ' (finished for today)' : '');
+      }).join('; ') + (obs.length ? ' (' + esc(obs.join(', ')) + ')' : '') + '</li>';
+    }).filter(Boolean);
+    var html = rows.length ? '<ul class="msg-list">' + rows.join('') + '</ul>' : '<p>There&rsquo;s no program ' + q.label + '.</p>';
+    if (q.label && rows.length) html = '<p>Here&rsquo;s what&rsquo;s on ' + q.label + ':</p>' + html;
+    var empty = !rows.length || rows.every(function (r) { return r.indexOf('no program') > -1; });
+    if (empty) {
+      var nx = upcoming(data, now)[0];
+      if (nx) html += '<p>The next program is ' + evLine(data, nx) + ' on <strong>' + esc(nx.when) + '</strong>.</p>';
+    }
+    return html;
+  }
+  function answerKinds(data, kinds, now) {
+    var up = upcoming(data, now);
+    return kinds.map(function (k) {
+      var kind = data.kinds[k], list = up.filter(function (e) { return e.kind === k; });
+      if (!list.length) {
+        var past = allEvents(data).filter(function (e) { return e.kind === k; }).pop();
+        return '<p><strong>' + esc(kind.name) + '</strong>' + (past ? ' was on <strong>' + esc(past.when) + '</strong>, ' + esc(past.time) + '. It isn&rsquo;t on the calendar again yet' : ' isn&rsquo;t on the calendar right now') + '. For future dates, call ' + esc(data.owner.name) + ' at <a href="tel:+14163197763">' + esc(data.owner.phone) + '</a>.</p>';
+      }
+      var first = list[0];
+      var html = '<p><strong>' + esc(kind.name) + '</strong>: ' + esc(kind.desc) + '</p>';
+      if (list.length === 1) html += '<p>Next: <strong>' + (first.date === now.date ? 'today, ' : '') + esc(first.when) + '</strong>, ' + esc(first.time) + ', ' + esc(venueText(data, first)) + '.</p>';
+      else html += '<p>' + esc(first.time) + ', ' + esc(venueText(data, first)) + '. Coming up:</p><ul class="msg-list">' + list.slice(0, 4).map(function (e) { return '<li>' + (e.date === now.date ? '<strong>Today</strong>, ' : '') + esc(e.when) + '</li>'; }).join('') + '</ul>';
+      return html;
+    }).join('');
+  }
+  function answerSchedule(data, now) {
+    var nx = upcoming(data, now)[0];
+    return '<p>' + esc(data.weekly) + '</p>' + (nx ? '<p>Next up: ' + evLine(data, nx) + ' on <strong>' + (nx.date === now.date ? 'today, ' : '') + esc(nx.when) + '</strong>.</p>' : '<p>That&rsquo;s the end of the posted calendar. Call ' + esc(data.owner.name) + ' at <a href="tel:+14163197763">' + esc(data.owner.phone) + '</a> for what&rsquo;s next.</p>');
+  }
+  function answerGames(data, now) {
+    var kinds = ['price-is-right', 'bingo'].filter(function (k) { return upcoming(data, now).some(function (e) { return e.kind === k; }); });
+    return (kinds.length ? answerKinds(data, kinds, now) : '<p>There are no more games on this month&rsquo;s calendar.</p>') + '<p>Members have also enjoyed game nights with dominoes.</p>';
+  }
+  var fillTokens = function (html) {
+    return html.replace('{{months}}', calData ? calData.months.map(function (m) { return esc(m.title); }).join(' and ') : 'this month&rsquo;s calendar');
+  };
+
   function loadKb() {
     if (kbLoading) return kbLoading;
-    kbLoading = fetch('data/faq.json').then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
-      .then(function (j) { kb = j; renderChips(); })
-      .catch(function () { kbLoading = null; addBot('<p>Sorry, the quick answers didn&rsquo;t load. A real person can help:</p>', ''); });
+    kbLoading = Promise.all([
+      fetch('data/faq.json').then(function (r) { if (!r.ok) throw new Error(); return r.json(); }),
+      loadCal()
+    ]).then(function (res) { kb = res[0]; prepareKb(); renderChips(); })
+      .catch(function () { kbLoading = null; addBot('<p>Sorry, the quick answers didn&rsquo;t load. A real person can help:</p>', '', { full: true }); });
     return kbLoading;
+  }
+  function chip(label, q) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'help-chip'; b.textContent = label;
+    b.addEventListener('click', function () { ask(q || label); });
+    return b;
   }
   function renderChips() {
     var wrap = help.querySelector('.help-chips');
     if (!wrap || wrap.children.length) return;
     kb.suggest.forEach(function (id) {
       var entry = kb.entries.filter(function (x) { return x.id === id; })[0];
-      if (!entry) return;
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'help-chip'; b.textContent = entry.q;
-      b.addEventListener('click', function () { ask(entry.q); });
-      wrap.appendChild(b);
+      if (entry) wrap.appendChild(chip(entry.q));
     });
   }
-  function actions(question) {
+  function actions(question, opts) {
+    opts = opts || {};
     var body = question ? '\n\nMy question: ' + question + '\n' : '';
+    var extra = '';
+    if (opts.calendar) extra += '<a class="btn btn-ghost" href="#calendar" data-goto><svg class="ico" aria-hidden="true"><use href="#a-calendar"/></svg>See the calendar</a>';
+    if (opts.directions) extra += '<a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Get directions<span class="visually-hidden"> (opens Google Maps in a new tab)</span></a>';
+    if (!opts.full) return extra ? '<div class="msg-actions msg-actions-row">' + extra + '</div>' : '';
     return '<div class="msg-actions">' +
       '<a class="btn btn-primary" href="tel:+14163197763"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call 416-319-7763</a>' +
       '<a class="btn btn-ghost" href="mailto:islandbreezeseniors@gmail.com?subject=' + encodeURIComponent('Question from the website') + '&amp;body=' + encodeURIComponent(body) + '"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>Email us</a>' +
       '<button class="btn btn-ghost" type="button" data-send-q="' + esc(question || '') + '"><svg class="ico" aria-hidden="true"><use href="#a-chat"/></svg>Send a message</button>' +
-      '</div>';
+      extra + '</div>';
   }
   function addMsg(cls, html) {
     var m = document.createElement('div');
@@ -600,26 +903,83 @@
     helpLog.appendChild(m);
     return m;
   }
-  function addBot(html, question) { return addMsg('msg-bot', html + actions(question)); }
+  function addBot(html, question, opts) { return addMsg('msg-bot', html + actions(question, opts)); }
+  function related(msg, list) {
+    if (!list.length) return;
+    var box = document.createElement('div');
+    box.className = 'msg-related';
+    box.innerHTML = '<p class="msg-label">You might also ask</p>';
+    var chips = document.createElement('div');
+    chips.className = 'help-chips';
+    list.forEach(function (e) { chips.appendChild(chip(e.q)); });
+    box.appendChild(chips);
+    msg.appendChild(box);
+  }
+  var PRACTICAL = { cost: 1, register: 1, caregivers: 1, bring: 1, access: 1, transit: 1, parking: 1, join: 1, 'fitness-level': 1, food: 1, friend: 1, dropin: 1 };
   function ask(question) {
     question = String(question).trim().slice(0, 300);
     if (!question) return;
     var user = addMsg('msg-user', '<p>' + esc(question) + '</p>');
-    var reply;
-    if (/^(thanks|thank you|thx|ty)\b/i.test(question)) {
-      reply = addMsg('msg-bot', '<p>You&rsquo;re welcome! Ask anything else, or reach a real person here:</p>' + actions(''));
-    } else if (/^(hi|hello|hey|good (morning|afternoon|evening))\W*$/i.test(question)) {
-      reply = addMsg('msg-bot', '<p>Hello! Tap one of the questions above, or type your own question below.</p>');
+    var reply, t = baseNorm(question).trim();
+    if (/^(thanks|thank you|thank u|thx|ty|thanx|cheers)\b/.test(t)) {
+      reply = addBot('<p>You&rsquo;re welcome! Ask anything else, or reach a real person here:</p>', '', { full: true });
+    } else if (/^(hi|hello|hey|hiya|good (morning|afternoon|evening))( there)?$/.test(t)) {
+      reply = addMsg('msg-bot', '<p>Hello! Ask me about this month&rsquo;s programs, where we meet, joining, or anything else about Island Breeze.</p>');
+    } else if (/^(bye|goodbye|good bye|see you|cya)\b/.test(t)) {
+      reply = addMsg('msg-bot', '<p>Goodbye, and take care! We hope to see you soon.</p>');
     } else {
-      var entry = match(question);
-      reply = entry
-        ? addBot('<p>' + entry.answer + '</p>', question)
-        : addBot('<p>Sorry, I don&rsquo;t have an answer to that on this website, and I don&rsquo;t want to guess. A real person can help:</p>', question);
+      reply = answer(question);
     }
     user.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
     return reply;
   }
-  if (help && helpLog && launcher && window.fetch) {
+  function answer(question) {
+    var now = nowToronto();
+    var words = wordsOf(norm(question));
+    var ranked = rank(question);
+    var top = ranked[0], best = top && top.score >= 1.5 ? top.e : null;
+    var opts = { calendar: false, directions: false };
+    var html = '', usedPractical = '', fromCalendar = false;
+    if (calData) {
+      var kinds = kindsIn(words);
+      var days = daysIn(question, words, now);
+      if (kinds.length) {
+        html = answerKinds(calData, kinds, now); opts.calendar = true;
+      } else if (days) {
+        html = answerDays(calData, days, now); opts.calendar = true;
+      } else if (best && best.dynamic) {
+        if (best.dynamic === 'games') html = answerGames(calData, now);
+        else if (best.dynamic === 'today') html = answerDays(calData, { range: [now.date], label: '' }, now);
+        else if (best.dynamic === 'weekend') html = answerDays(calData, daysIn('weekend', ['weekend'], now), now);
+        else html = answerSchedule(calData, now);
+        opts.calendar = true;
+      }
+      fromCalendar = !!html;
+      // "How much is bingo?", "Can my daughter come to chair yoga?": add the practical answer too
+      var prac = ranked.filter(function (r) { return r.score >= 1.5 && PRACTICAL[r.e.id]; })[0];
+      if (html && prac) { html += '<p>' + fillTokens(prac.e.answer) + '</p>'; usedPractical = prac.e.id; }
+    }
+    if (!html && best && !best.dynamic) {
+      html = '<p>' + fillTokens(best.answer) + '</p>';
+      (best.show || []).forEach(function (s) { opts[s] = true; });
+    } else if (!html && best && best.dynamic) {
+      html = '<p>For this month&rsquo;s programs and times, see the calendar on this page or call Charmaine at <a href="tel:+14163197763">416-319-7763</a>.</p>';
+      opts.calendar = true;
+    }
+    if (!html) {
+      opts.full = true;
+      var msg = addBot('<p>Sorry, I don&rsquo;t have an answer to that on this website, and I don&rsquo;t want to guess. A real person can help:</p>', question, opts);
+      related(msg, ranked.filter(function (r) { return r.score >= 0.9; }).slice(0, 3).map(function (r) { return r.e; }));
+      return msg;
+    }
+    var reply = addBot(html, question, opts);
+    var shown = best ? best.id : '';
+    related(reply, ranked.filter(function (r) {
+      return r.e.id !== shown && r.e.id !== usedPractical && !(fromCalendar && r.e.dynamic) && r.score >= Math.max(1.2, top.score * 0.55);
+    }).slice(0, 2).map(function (r) { return r.e; }));
+    return reply;
+  }
+  if (help && helpLog && launcher && window.fetch && window.Promise) {
     launcher.hidden = false;
     launcher.addEventListener('click', loadKb);
     help.querySelector('.help-ask').addEventListener('submit', function (e) {
@@ -631,6 +991,14 @@
       (kb ? Promise.resolve() : loadKb()).then(function () { if (kb) ask(q); });
     });
     helpLog.addEventListener('click', function (e) {
+      var go = e.target.closest('[data-goto]');
+      if (go) { // close the panel first, then take the visitor to the calendar
+        e.preventDefault();
+        closePanel(help, 'instant');
+        var target = document.querySelector(go.getAttribute('href'));
+        if (target) { target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); var h = target.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+        return;
+      }
       var b = e.target.closest('[data-send-q]');
       if (!b) return;
       var q = b.getAttribute('data-send-q');
@@ -638,7 +1006,6 @@
       openJoinWithMessage(q, launcher);
     });
   }
-
   // The launcher steps aside over the contact form and footer, and while a panel is open.
   var launcherBlocked = {};
   function updateLauncher() {

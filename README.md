@@ -3,20 +3,23 @@
 Hand-written static site for Island Breeze Seniors Day Program (Markham, ON). Plain HTML/CSS/JS, no framework, no build step.
 
 ```
-content/site-content.json   editable content (activities, milestones, FAQ, partners)
+content/site-content.json   editable content (monthly calendar, activities, milestones, FAQ, partners)
 scripts/                    render-content.mjs, optimize-images.mjs (dev tools, no deps)
 docs/content-checklist.md   sources + open questions (not published)
 public/
   index.html        the whole site (single page)
   styles.css        design tokens, layout, components, motion (reduced-motion safe)
-  main.js           menu, scroll reveal, scroll-spy, lazy map, contact form, Join Now panel, Help assistant
-  data/faq.json     knowledge for the scripted Help assistant (page facts only; no AI)
+  main.js           menu, scroll reveal, scroll-spy, lazy map, contact form, Join Now panel, calendar (today, next program, print, add to calendar), Help assistant
+  data/faq.json     knowledge for the scripted Help assistant (site facts only; no AI)
+  data/calendar.json generated from the content file: the calendar data the page and Help assistant read
+  calendar/         the original monthly calendar flyers (PDF), offered as downloads
   thanks.html       no-JS form landing page
   404.html          real 404 (stops Pages serving the home page for missing URLs)
   robots.txt, sitemap.xml, _headers
   fonts/            self-hosted Atkinson Hyperlegible + Fraunces (SIL OFL)
   img/              og-image.jpg (1200x630 share image) + optimized photos
-  logo.svg, logo-full.svg, logo-full-light.svg, favicon.svg
+  logo.png / logo-600.png / logo-*.webp   the organization's own logo (transparent background)
+  favicon-32.png, icon-192.png, apple-touch-icon.png   the logo's sun, cut from the same image
 wrangler.toml       pages_build_output_dir = ./public
 ```
 
@@ -31,6 +34,15 @@ wrangler.toml       pages_build_output_dir = ./public
 | Production branch | `main` |
 
 CLI alternative: `npx wrangler pages deploy public --project-name island-breeze-seniors`
+
+## Each month: the program calendar
+
+1. Put the new flyer in `public/calendar/` (for example `december-2026.pdf`).
+2. In `content/site-content.json`, under `calendar.months`, add a month (copy November's): `id` (`2026-12`), `title`, `pdf`, and one line per program day under `events`: `date`, `kind`, `start` and `end` in 24-hour time. Add `"venue": "milliken"` (or a new venue under `calendar.venues`) only when an event isn't in the Amenity Room. Days without a line show as "No program".
+3. New kind of event? Add it under `calendar.kinds` with a name, an icon id (`a-...` in the sprite in `index.html`), an accent (`palm`, `ocean`, `sunset`, `pink`) and a one-line description.
+4. Run `node scripts/render-content.mjs`.
+
+That rebuilds the month grid and phone list, the "Every Monday…" cards, the hero's "Times", the "When are the programs?" FAQ answer, the Event structured data for Google, and `public/data/calendar.json`, which the Help assistant uses to answer questions like "what's on Tuesday?". The page shows the first month that hasn't ended yet. On the live page, `main.js` marks today and past days (Toronto time), shows the next program with **Add to my calendar** (.ics) and **Directions**, folds away past weeks on phones, and prints just the calendar on one landscape page.
 
 ## Updating content (activities, milestones, FAQ, partners)
 
@@ -56,8 +68,10 @@ The form posts to `https://formsubmit.co/aran.luxman@gmail.com` (**temporary** r
 ## Join Now panel and Help assistant
 
 - **Join Now** (header) opens a panel: Call, Email, or Send a message. Without JavaScript it's a link to the contact form.
-- **Help** (bottom-right) is a *scripted* assistant, not an AI. It matches questions to `public/data/faq.json` by keywords, phrases, aliases and one-letter typos, and never guesses: anything it can't match gets "I don't have an answer to that" plus Call / Email / Send a message. No tracking, cookies or third-party scripts; nothing is stored.
-- Edit `public/data/faq.json` to change answers. Only add facts that are on the page.
+- **Help** (bottom-right) is a *scripted* assistant, not an AI, so it never invents facts. It knows about 70 topics (owner, location and room, directions, joining, cost, caregivers, every calendar event, past activities, partners and more) from `public/data/faq.json`, and answers schedule questions live from `data/calendar.json` ("what's on Wednesday?", "when is bingo?", "this week", "November 18", "today").
+- Typos are fine: about 300 common misspellings are fixed first ("loction", "excercise", "wensday", "Charmain"), and any remaining word within one or two letters of a keyword (including swapped letters) still matches. Words it already knows are never treated as typos of other words.
+- When it isn't sure, it says so and offers Call / Email / Send a message, plus "You might also ask" suggestions. No tracking, cookies or third-party scripts; nothing is stored.
+- To add an answer, add an entry to `faq.json` (`q`, `keywords`, `answer`). Only add facts that are on the site or confirmed by the owner.
 - Both new forms send through the **same FormSubmit address as the main contact form** — they read it from that form's `action`, so changing the recipient is one edit.
 
 ## Images
@@ -79,9 +93,7 @@ The carousel is a native scroll-snap strip: it swipes on touch, scrolls with the
 
 ## Logo
 
-- `public/logo.svg`: the sun-and-sea mark (header, footer, simple pages).
-- `public/favicon.svg`: the same mark with an opaque sea, so it reads at tab size.
-- `public/logo-full.svg` / `logo-full-light.svg` (footer, on dark): the full lockup (mark, palm-tree "I", wordmark, "Where Every Senior Matters"), with the lettering outlined as paths from TeX Gyre Chorus (GUST Font License), a close match to the original logo's calligraphic lettering. Use it for print or partner materials.
+The site uses the organization's own logo, exactly as supplied (Nov 2026): sun over the sea, palm-tree "I", "Island Breeze / Seniors Day Program" and "Where Every Senior Matters". The white background was made transparent without redrawing anything, so it sits on the sand-coloured header and on a sand plaque in the footer. The favicons are the logo's sun, cut from the same image. To replace it, export a new transparent PNG at the same names (`logo.png`, `logo-600.png`, `logo-600.webp`, `logo-400.webp`).
 
 ## Before launch — owner questions
 

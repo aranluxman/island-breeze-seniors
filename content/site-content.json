@@ -1,5 +1,5 @@
 {
-  "_readme": "Edit this file to update activities, milestones, collaborators, funding and FAQ, then run: node scripts/render-content.mjs. Text fields may contain simple HTML (<a>, <strong>, <em>). Only add facts with a source or confirmed by the owner. 'status' for activities: 'regular' (shared as recurring), 'project' (time-limited workshop series), 'event' (one-off or annual). 'icon' on activities and timeline months is a sprite id (#a-...) in public/index.html; icons are decorative.",
+  "_readme": "Edit this file to update the monthly calendar, activities, milestones, collaborators, sponsors and FAQ, then run: node scripts/render-content.mjs. Text fields may contain simple HTML (<a>, <strong>, <em>). Only add facts with a source or confirmed by the owner. NEW MONTH: add an object to calendar.months (copy the November one), list each program day under 'events' (date, kind, start, end; 'venue' only if it isn't the usual room), and the render script rebuilds the calendar, the weekly summary, the hero 'Times', the Help assistant's schedule answers and the Event structured data. 'status' for activities: 'regular', 'project' (time-limited workshop series), 'event' (one-off or annual). 'icon' values are sprite ids (#a-...) in public/index.html; icons are decorative.",
   "activityGroups": [
     {
       "id": "creative",
@@ -119,7 +119,7 @@
   "featuredProject": {
     "title": "Cultural Arts for Holistic Healing of Mind, Body and Spirit",
     "when": "2026",
-    "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze and funded by United Way Greater Toronto through the South Markham Community Action Grants. From January to July, members drummed, wrote, danced, sculpted and celebrated together.",
+    "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze with ACSA Community Services and supported by United Way Greater Toronto. From January to July, members drummed, wrote, danced, sculpted and celebrated together.",
     "timeline": [
       {
         "month": "Jan",
@@ -189,6 +189,10 @@
       "a": "Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we'll talk you through it. You can also send us a message below and ask for a call back."
     },
     {
+      "q": "Where are programs held?",
+      "a": "In the Amenity Room at Hagerman Corners Community Homes, 4460 14th Avenue, Markham. Some events meet elsewhere (for example, Seniors Circle on November 18 is at Milliken Church, 3 Clayton Drive), and the calendar always shows the location. <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions<span class=\"visually-hidden\"> (opens Google Maps in a new tab)</span></a>."
+    },
+    {
       "q": "What does it cost?",
       "a": "Costs can vary by activity. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to ask about the activity you're interested in."
     },
@@ -197,29 +201,23 @@
       "a": "Our mission includes older adults and their caregivers in Markham. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to talk about coming together, so we can plan the visit with you."
     },
     {
-      "q": "What are the current program times?",
-      "a": "Our schedule changes through the year. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> for this month's activities and times."
+      "q": "When are the programs?",
+      "a": "{{weekly}} Every date and time is in <a href=\"#calendar\">this month&rsquo;s calendar</a>. Questions? Call Charmaine at <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a>."
     },
     {
       "q": "What accessibility or transportation arrangements are available?",
       "a": "Please call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> before your visit so we can talk through access, mobility needs and how you'll get there."
+    },
+    {
+      "q": "Who runs Island Breeze?",
+      "a": "Island Breeze was founded by Charmaine. It&rsquo;s a not-for-profit run by a volunteer board, with the help of volunteers and community facilitators. For program information, call Charmaine at <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a>."
     }
   ],
   "milestones": [
     {
       "date": "October 2018",
       "title": "Incorporated as a not-for-profit",
-      "text": "Island Breeze Seniors Day Program Ltd. was incorporated under the Canada Not-for-profit Corporations Act."
-    },
-    {
-      "date": "2021–2022",
-      "title": "Guiding Light",
-      "text": "Received a $4,000 federal grant for the Guiding Light project through the Supporting Black Communities stream (September 2021 to September 2022)."
-    },
-    {
-      "date": "2022–2023",
-      "title": "Moment In Time",
-      "text": "Received an $18,750 New Horizons for Seniors Program grant for the Moment In Time project (March 2022 to March 2023)."
+      "text": "Island Breeze Seniors Day Program was founded by Charmaine and incorporated as a not-for-profit under the Canada Not-for-profit Corporations Act."
     },
     {
       "date": "February 2024",
@@ -234,57 +232,36 @@
     {
       "date": "2026",
       "title": "Cultural Arts for Holistic Healing",
-      "text": "A United Way–funded workshop series for seniors in South Markham, closing with a celebration luncheon in July."
+      "text": "A workshop series for seniors in South Markham with drumming, poetry, dance, clay, wellness and a closing fashion show and celebration luncheon in July."
+    },
+    {
+      "date": "November 2026",
+      "title": "Weekly programs at Hagerman Corners",
+      "text": "Exercise Class on Mondays and Chair Yoga on Tuesdays in the Amenity Room, with a special event most Wednesdays: a pancake breakfast, a Price Is Right game, Seniors Circle and bingo."
     }
   ],
   "collaborators": [
     {
       "name": "Carefirst Seniors and Community Services Association",
-      "text": "Lists Island Breeze in its partner network (since 2022). Hosted a tea party for our members in 2026.",
-      "source": {
-        "label": "HSPN slides, 2025",
-        "url": "https://hspn.ca/wp-content/uploads/2025/07/HSPN_LDPHM_July-22_2025.pdf"
-      }
+      "text": "Includes Island Breeze in its partner network (since 2022) and hosted a tea party for our members in 2026.",
+      "source": null
     },
     {
       "name": "ACSA Community Services",
       "text": "Partner on the 2026 Cultural Arts for Holistic Healing program.",
-      "source": {
-        "label": "2026 program highlights (supplied by Island Breeze)"
-      }
+      "source": null
     }
   ],
   "funding": [
     {
-      "name": "Government of Canada — New Horizons for Seniors Program",
-      "text": "Moment In Time, $18,750, 2022–2023",
-      "source": {
-        "label": "Grant record",
-        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q4-03583%2Ccurrent"
-      }
-    },
-    {
-      "name": "Government of Canada — Supporting Black Communities",
-      "text": "Guiding Light, $4,000, 2021–2022",
-      "source": {
-        "label": "Grant record",
-        "url": "https://search.open.canada.ca/grants/record/esdc-edsc%2C141-2021-2022-Q2-00250%2Ccurrent"
-      }
-    },
-    {
-      "name": "United Way Greater Toronto — South Markham Community Action Grants",
-      "text": "Cultural Arts for Holistic Healing workshop series, 2026",
-      "source": {
-        "label": "Island Breeze on Facebook",
-        "url": "https://www.facebook.com/Islandbreezeseniors/"
-      }
+      "name": "United Way Greater Toronto",
+      "text": "Supported the 2026 Cultural Arts for Holistic Healing workshop series.",
+      "source": null
     },
     {
       "name": "South Markham",
-      "text": "Sponsor of the Cultural Arts for Holistic Healing program, 2026",
-      "source": {
-        "label": "2026 program highlights (supplied by Island Breeze)"
-      }
+      "text": "Sponsor of the 2026 Cultural Arts for Holistic Healing program.",
+      "source": null
     }
   ],
   "outings": [
@@ -397,5 +374,169 @@
     "about": "group-wide",
     "story": "lunch",
     "callband": "wave"
+  },
+  "owner": {
+    "name": "Charmaine",
+    "role": "Founder",
+    "phone": "416-319-7763",
+    "_source": "Owner/site builder, Nov 2026 (name and role). The November 2026 calendar says: Contact Charmaine for information, 416-319-7763."
+  },
+  "calendar": {
+    "_note": "From the program calendar flyer supplied by Island Breeze (November 2026: public/calendar/november-2026.pdf). Times are 24-hour. Days not listed have no program. Toronto time (EST, UTC-5, in November).",
+    "timezone": "-05:00",
+    "defaultVenue": "hagerman",
+    "venues": {
+      "hagerman": {
+        "name": "Hagerman Corners Community Homes",
+        "room": "Amenity Room",
+        "street": "4460 14th Avenue",
+        "city": "Markham",
+        "region": "ON",
+        "postal": "L3R 1H1",
+        "map": "https://www.google.com/maps/dir/?api=1&destination=4460+14th+Avenue%2C+Markham%2C+ON"
+      },
+      "milliken": {
+        "name": "Milliken Church",
+        "room": "",
+        "street": "3 Clayton Drive",
+        "city": "Markham",
+        "region": "ON",
+        "postal": "",
+        "map": "https://www.google.com/maps/dir/?api=1&destination=3+Clayton+Drive%2C+Markham%2C+ON"
+      }
+    },
+    "kinds": {
+      "exercise": {
+        "name": "Exercise Class",
+        "icon": "a-exercise",
+        "accent": "palm",
+        "desc": "A group exercise class to keep moving together."
+      },
+      "chair-yoga": {
+        "name": "Chair Yoga",
+        "icon": "a-chair-yoga",
+        "accent": "ocean",
+        "desc": "Yoga done seated or with the support of a chair."
+      },
+      "pancake": {
+        "name": "Pancake Breakfast",
+        "icon": "a-pancake",
+        "accent": "sunset",
+        "desc": "A pancake breakfast together."
+      },
+      "price-is-right": {
+        "name": "Price Is Right Game",
+        "icon": "a-tag",
+        "accent": "pink",
+        "desc": "A price-guessing game in the style of the TV show."
+      },
+      "seniors-circle": {
+        "name": "Seniors Circle",
+        "icon": "a-circle",
+        "accent": "pink",
+        "desc": "A Seniors Circle gathering. Note the different location: Milliken Church."
+      },
+      "bingo": {
+        "name": "Bingo",
+        "icon": "a-bingo",
+        "accent": "sunset",
+        "desc": "Bingo with friends."
+      }
+    },
+    "months": [
+      {
+        "id": "2026-11",
+        "title": "November 2026",
+        "pdf": "calendar/november-2026.pdf",
+        "events": [
+          {
+            "date": "2026-11-02",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-03",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-04",
+            "kind": "pancake",
+            "start": "10:00",
+            "end": "12:00"
+          },
+          {
+            "date": "2026-11-09",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-10",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-11",
+            "kind": "price-is-right",
+            "start": "11:00",
+            "end": "13:00"
+          },
+          {
+            "date": "2026-11-16",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-17",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-18",
+            "kind": "seniors-circle",
+            "start": "13:00",
+            "end": "15:00",
+            "venue": "milliken"
+          },
+          {
+            "date": "2026-11-23",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-24",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-25",
+            "kind": "bingo",
+            "start": "11:00",
+            "end": "12:45"
+          },
+          {
+            "date": "2026-11-30",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          }
+        ],
+        "observances": [
+          {
+            "date": "2026-11-11",
+            "name": "Remembrance Day",
+            "icon": "a-poppy"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -1,85 +1,1706 @@
 {
-  "_readme": "Knowledge for the Help assistant (main.js). Written ONLY from what the home page says. The assistant matches a visitor's words against 'keywords' (whole words or phrases) and shows 'answer'; if nothing matches well it says so and offers phone, email or a message. Never add a fact here that isn't on the site. 'answer' may hold simple HTML links. 'suggest' entries become the tap-to-ask chips (4-6).",
-  "suggest": ["join", "register", "cost", "times", "location", "caregivers"],
-  "aliases": {
-    "regester": "register", "registar": "register", "registeration": "register", "signup": "sign up", "enrol": "enroll", "enrolment": "enroll",
-    "carer": "caregiver", "caretaker": "caregiver", "care giver": "caregiver", "care-giver": "caregiver",
-    "adress": "address", "addres": "address", "derections": "directions", "direcions": "directions", "locaton": "location",
-    "schedual": "schedule", "shedule": "schedule", "skedule": "schedule", "scedule": "schedule",
-    "wheel chair": "wheelchair", "walkers": "walker", "transportaion": "transportation", "transport": "transportation",
-    "crotchet": "crochet", "crochetting": "crochet", "knitting": "crochet", "dominos": "dominoes", "domino": "dominoes",
-    "excercise": "exercise", "exersize": "exercise", "pryce": "price", "prices": "price", "fees": "fee", "costs": "cost",
-    "phone number": "phone", "telephone": "phone", "e-mail": "email", "mail": "email",
-    "non profit": "nonprofit", "non-profit": "nonprofit", "not for profit": "nonprofit", "not-for-profit": "nonprofit",
-    "work shop": "workshop", "workshops": "workshop", "activites": "activities", "activitys": "activities", "activity": "activities",
-    "yrs": "years", "yr": "year", "senior": "seniors"
+ "_readme": "Knowledge for the Help assistant (main.js). Written ONLY from what the site says or the owner confirmed (Charmaine, founder). Schedule answers ('dynamic') are built live from data/calendar.json, which scripts/render-content.mjs generates from the content file, so they update with each month's calendar. 'keywords' are whole words or phrases; 'aliases' fix common misspellings before matching, and main.js also tolerates small typos. 'answer' may hold simple HTML links. Tokens: {{months}} = the calendar months on the site. 'show' adds buttons (calendar, directions). Never add a fact here that isn't on the site.",
+ "suggest": [
+  "schedule",
+  "location",
+  "join",
+  "register",
+  "cost",
+  "owner"
+ ],
+ "aliases": {
+  "wher": "where",
+  "whare": "where",
+  "were is": "where is",
+  "wheres": "where is",
+  "whereabouts": "where",
+  "wat": "what",
+  "wut": "what",
+  "wht": "what",
+  "whats": "what is",
+  "whens": "when is",
+  "wen": "when",
+  "wehn": "when",
+  "hw": "how",
+  "howmuch": "how much",
+  "hows": "how is",
+  "u": "you",
+  "ur": "your",
+  "yr": "your",
+  "pls": "please",
+  "plz": "please",
+  "r": "are",
+  "schedual": "schedule",
+  "shedule": "schedule",
+  "skedule": "schedule",
+  "scedule": "schedule",
+  "schedul": "schedule",
+  "sched": "schedule",
+  "calender": "calendar",
+  "calander": "calendar",
+  "calandar": "calendar",
+  "calendr": "calendar",
+  "kalendar": "calendar",
+  "tyme": "time",
+  "tme": "time",
+  "timings": "times",
+  "hrs": "hours",
+  "hr": "hours",
+  "oclock": "",
+  "pm": "",
+  "am": "",
+  "p m": "",
+  "a m": "",
+  "tmrw": "tomorrow",
+  "tmr": "tomorrow",
+  "tomorow": "tomorrow",
+  "tommorow": "tomorrow",
+  "tommorrow": "tomorrow",
+  "tomorro": "tomorrow",
+  "2day": "today",
+  "todays": "today",
+  "tday": "today",
+  "tonite": "tonight",
+  "wk": "week",
+  "wkend": "weekend",
+  "week end": "weekend",
+  "nxt": "next",
+  "upcomming": "upcoming",
+  "comming": "coming",
+  "mon": "monday",
+  "tue": "tuesday",
+  "tues": "tuesday",
+  "wed": "wednesday",
+  "weds": "wednesday",
+  "thu": "thursday",
+  "thur": "thursday",
+  "thurs": "thursday",
+  "fri": "friday",
+  "nov": "november",
+  "dec": "december",
+  "excercise": "exercise",
+  "exersize": "exercise",
+  "exercize": "exercise",
+  "excersize": "exercise",
+  "exersise": "exercise",
+  "excersise": "exercise",
+  "exerise": "exercise",
+  "excercize": "exercise",
+  "workouts": "workout",
+  "yogga": "yoga",
+  "yoda": "yoga",
+  "yogo": "yoga",
+  "chiar": "chair",
+  "chare": "chair",
+  "cheir": "chair",
+  "chairs": "chair",
+  "pancakes": "pancake",
+  "pankake": "pancake",
+  "pancke": "pancake",
+  "pan cake": "pancake",
+  "pancak": "pancake",
+  "brekfast": "breakfast",
+  "breakfest": "breakfast",
+  "breckfast": "breakfast",
+  "brakfast": "breakfast",
+  "breakfst": "breakfast",
+  "bingos": "bingo",
+  "bngo": "bingo",
+  "bigno": "bingo",
+  "bimgo": "bingo",
+  "bingoo": "bingo",
+  "the price is right": "price is right",
+  "prize is right": "price is right",
+  "price its right": "price is right",
+  "price is rite": "price is right",
+  "prices right": "price is right",
+  "price right": "price is right",
+  "senior circle": "seniors circle",
+  "seniors circel": "seniors circle",
+  "senior circel": "seniors circle",
+  "circel": "circle",
+  "cirle": "circle",
+  "milikan": "milliken",
+  "milliken": "milliken",
+  "milikin": "milliken",
+  "millikin": "milliken",
+  "milican": "milliken",
+  "rememberance": "remembrance",
+  "remembrence": "remembrance",
+  "remberance": "remembrance",
+  "rememberence": "remembrance",
+  "poppies": "poppy",
+  "adress": "address",
+  "addres": "address",
+  "adresss": "address",
+  "addresss": "address",
+  "adres": "address",
+  "derections": "directions",
+  "direcions": "directions",
+  "directons": "directions",
+  "drections": "directions",
+  "diretions": "directions",
+  "locaton": "location",
+  "loction": "location",
+  "locatoin": "location",
+  "lacation": "location",
+  "locatin": "location",
+  "loaction": "location",
+  "locashun": "location",
+  "locate": "location",
+  "hagermen": "hagerman",
+  "hagerton": "hagerman",
+  "hagarman": "hagerman",
+  "haggerman": "hagerman",
+  "hegerman": "hagerman",
+  "hagermans": "hagerman",
+  "corner": "corners",
+  "amenty": "amenity",
+  "ammenity": "amenity",
+  "amenaty": "amenity",
+  "amenities": "amenity",
+  "amenitys": "amenity",
+  "14th": "14th avenue",
+  "fourteenth avenue": "14th avenue",
+  "14 avenue": "14th avenue",
+  "14th ave": "14th avenue",
+  "ave": "avenue",
+  "parkin": "parking",
+  "parkng": "parking",
+  "transportaion": "transportation",
+  "transportation": "transportation",
+  "transport": "transportation",
+  "trasportation": "transportation",
+  "buss": "bus",
+  "busses": "bus",
+  "buses": "bus",
+  "wheel chair": "wheelchair",
+  "wheelchairs": "wheelchair",
+  "weelchair": "wheelchair",
+  "wheelchar": "wheelchair",
+  "walkers": "walker",
+  "acessible": "accessible",
+  "accesible": "accessible",
+  "accessable": "accessible",
+  "acessibility": "accessibility",
+  "handicap": "disability",
+  "handicapped": "disability",
+  "regester": "register",
+  "registar": "register",
+  "registeration": "register",
+  "regiser": "register",
+  "registr": "register",
+  "rejister": "register",
+  "sighn up": "sign up",
+  "sign-up": "sign up",
+  "enrol": "enroll",
+  "enrolment": "enroll",
+  "enrollment": "enroll",
+  "joinning": "joining",
+  "joing": "join",
+  "memebership": "membership",
+  "membeship": "membership",
+  "carer": "caregiver",
+  "caretaker": "caregiver",
+  "care giver": "caregiver",
+  "care-giver": "caregiver",
+  "caregiever": "caregiver",
+  "caregivr": "caregiver",
+  "cargiver": "caregiver",
+  "pryce": "price",
+  "prices": "price",
+  "fees": "fee",
+  "costs": "cost",
+  "cst": "cost",
+  "coast": "cost",
+  "payment": "pay",
+  "charmain": "charmaine",
+  "charmane": "charmaine",
+  "sharmaine": "charmaine",
+  "sharmain": "charmaine",
+  "charmine": "charmaine",
+  "charmayne": "charmaine",
+  "charmian": "charmaine",
+  "charmanie": "charmaine",
+  "owener": "owner",
+  "ownr": "owner",
+  "foundr": "founder",
+  "fonder": "founder",
+  "founer": "founder",
+  "dirctor": "director",
+  "directer": "director",
+  "phone number": "phone",
+  "telephone": "phone",
+  "phon": "phone",
+  "fone": "phone",
+  "numbr": "number",
+  "nmber": "number",
+  "e-mail": "email",
+  "emial": "email",
+  "emal": "email",
+  "mail": "email",
+  "gmail": "email",
+  "non profit": "nonprofit",
+  "non-profit": "nonprofit",
+  "not for profit": "nonprofit",
+  "not-for-profit": "nonprofit",
+  "nonprofitt": "nonprofit",
+  "charaty": "charity",
+  "charitty": "charity",
+  "volenteer": "volunteer",
+  "volunter": "volunteer",
+  "volentier": "volunteer",
+  "voluntear": "volunteer",
+  "volunteeer": "volunteer",
+  "donat": "donate",
+  "donnation": "donation",
+  "carribean": "caribbean",
+  "caribean": "caribbean",
+  "carribbean": "caribbean",
+  "carribian": "caribbean",
+  "caribian": "caribbean",
+  "carib": "caribbean",
+  "jamacian": "jamaican",
+  "jamacia": "jamaica",
+  "crotchet": "crochet",
+  "crochetting": "crochet",
+  "crocheting": "crochet",
+  "croshay": "crochet",
+  "crochay": "crochet",
+  "knitting": "knitting",
+  "dominos": "dominoes",
+  "domino": "dominoes",
+  "dominoe": "dominoes",
+  "work shop": "workshop",
+  "workshops": "workshop",
+  "worshop": "workshop",
+  "activites": "activities",
+  "activitys": "activities",
+  "actvities": "activities",
+  "activies": "activities",
+  "activitie": "activities",
+  "actiities": "activities",
+  "potery": "pottery",
+  "pottary": "pottery",
+  "musuem": "museum",
+  "museam": "museum",
+  "musem": "museum",
+  "fasion": "fashion",
+  "fashon": "fashion",
+  "danse": "dance",
+  "dancin": "dancing",
+  "zoomba": "zumba",
+  "merangue": "merengue",
+  "meringue": "merengue",
+  "poety": "poetry",
+  "poetery": "poetry",
+  "helth": "health",
+  "heath": "health",
+  "wellnes": "wellness",
+  "blod pressure": "blood pressure",
+  "yrs": "years",
+  "yr old": "years old",
+  "senior": "seniors",
+  "seniours": "seniors",
+  "senoirs": "seniors",
+  "sr": "seniors",
+  "srs": "seniors",
+  "photoes": "photos",
+  "fotos": "photos",
+  "foto": "photo",
+  "pix": "pics",
+  "facebok": "facebook",
+  "facebk": "facebook",
+  "instagramm": "instagram",
+  "instgram": "instagram"
+ },
+ "entries": [
+  {
+   "id": "schedule",
+   "q": "What's on this week?",
+   "keywords": [
+    "schedule",
+    "calendar",
+    "whats on",
+    "what is on",
+    "whats happening",
+    "happening",
+    "this week",
+    "events",
+    "event",
+    "programs",
+    "program",
+    "times",
+    "time",
+    "when",
+    "hours",
+    "open",
+    "opening",
+    "days",
+    "what days",
+    "which days",
+    "how often",
+    "weekly",
+    "every week",
+    "upcoming",
+    "coming up",
+    "next",
+    "this month",
+    "month"
+   ],
+   "answer": "",
+   "dynamic": "schedule",
+   "show": [
+    "calendar"
+   ]
   },
-  "entries": [
-    {
-      "id": "join",
-      "q": "Who can join?",
-      "keywords": ["who can join", "join", "joining", "eligible", "eligibility", "qualify", "age", "55", "old enough", "how old", "seniors", "member", "membership", "for me"],
-      "answer": "Island Breeze serves adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, just call or email and we'll talk it through."
-    },
-    {
-      "id": "register",
-      "q": "How do I sign up?",
-      "keywords": ["register", "registration", "sign up", "enroll", "apply", "application", "get started", "start", "first visit", "how do i join", "how to join", "form"],
-      "answer": "Joining starts with a friendly conversation. Call 416-319-7763 or email islandbreezeseniors@<wbr>gmail.com and we'll talk you through it. You can also send us a message and ask for a call back."
-    },
-    {
-      "id": "cost",
-      "q": "What does it cost?",
-      "keywords": ["cost", "price", "fee", "pay", "paying", "money", "free", "charge", "expensive", "afford", "how much", "dollars"],
-      "answer": "Costs can vary by activity. Please call or email us to ask about the activity you're interested in."
-    },
-    {
-      "id": "caregivers",
-      "q": "Can my caregiver come with me?",
-      "keywords": ["caregiver", "caregivers", "family", "daughter", "son", "husband", "wife", "spouse", "partner", "friend", "come with", "bring", "accompany", "attend with", "support worker", "psw"],
-      "answer": "Our mission includes older adults and their caregivers. Please call or email to talk about coming together, so we can plan the visit with you."
-    },
-    {
-      "id": "times",
-      "q": "When are the programs?",
-      "keywords": ["time", "times", "schedule", "when", "hours", "open", "day", "days", "week", "weekly", "today", "tomorrow", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "morning", "afternoon", "this month", "calendar"],
-      "answer": "Our schedule changes through the year, so we don't list times here. Please call or email for this month's activities and times."
-    },
-    {
-      "id": "access",
-      "q": "Is it accessible? Is there transportation?",
-      "keywords": ["accessible", "accessibility", "wheelchair", "walker", "cane", "mobility", "elevator", "stairs", "transportation", "ride", "rides", "drive", "driving", "pick up", "pickup", "bus", "transit", "parking", "park", "disability", "hearing", "vision"],
-      "answer": "Please call or email before your visit so we can talk through access, mobility needs and how you'll get there."
-    },
-    {
-      "id": "location",
-      "q": "Where are you?",
-      "keywords": ["where", "location", "located", "address", "directions", "find you", "map", "hagerman", "14th avenue", "markham", "place", "venue", "building", "room", "meet"],
-      "answer": "We're at Hagerman Corners Community Homes, 4460 14th Avenue, Markham, Ontario. Please call or email before your first visit so we can tell you where to meet. <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions on Google Maps<span class=\"visually-hidden\"> (opens in a new tab)</span></a>."
-    },
-    {
-      "id": "activities",
-      "q": "What activities do you offer?",
-      "keywords": ["activities", "programs", "program", "what do you do", "offer", "things to do", "crochet", "crafts", "arts", "art", "pottery", "games", "game night", "dominoes", "bingo", "christmas", "dinner", "lunch", "outings", "trips", "museum", "tea party", "health fair", "social"],
-      "answer": "Recent activities include a crochet circle, arts and crafts, pottery with Markham Museum, game night with dominoes, a Christmas dinner, and outings like the Markham Museum, a Carefirst tea party and the Carefirst Health Fair. Some run regularly and some are one-time events, so please call or email to hear what's on this month. <a href=\"#activities\">See all activities</a>."
-    },
-    {
-      "id": "workshops",
-      "q": "What was the 2026 workshop series?",
-      "keywords": ["workshop", "series", "2026", "drumming", "drum", "poetry", "grief", "dance", "dancing", "zumba", "merengue", "clay", "yoga", "laughter yoga", "fashion show", "wellness", "exercise", "united way", "cultural arts", "healing"],
-      "answer": "In 2026, Island Breeze ran Cultural Arts for Holistic Healing, a workshop series for seniors in South Markham funded by United Way Greater Toronto. From January to July, members tried drumming, poetry for healing grief, Afro-Peruvian dance, art clay, a health and wellness day with blood pressure checks, Zumba and merengue, and a closing fashion show and lunch. Laughter Yoga was part of the series too. Please call or email to ask what's coming up next."
-    },
-    {
-      "id": "contact",
-      "q": "How do I contact you?",
-      "keywords": ["contact", "phone", "call", "number", "email", "reach", "talk to", "speak", "person", "someone", "facebook", "instagram", "social media", "message"],
-      "answer": "Call 416-319-7763 or email islandbreezeseniors@<wbr>gmail.com. You can also find us on <a href=\"https://www.facebook.com/Islandbreezeseniors/\" target=\"_blank\" rel=\"noopener\">Facebook<span class=\"visually-hidden\"> (opens in a new tab)</span></a> and <a href=\"https://www.instagram.com/islandbreezeseniors55/\" target=\"_blank\" rel=\"noopener\">Instagram<span class=\"visually-hidden\"> (opens in a new tab)</span></a>."
-    },
-    {
-      "id": "about",
-      "q": "Who runs Island Breeze?",
-      "keywords": ["who runs", "about", "nonprofit", "organization", "organisation", "volunteer board", "board", "since", "history", "founded", "started", "caribbean", "mission"],
-      "answer": "Island Breeze Seniors Day Program is a federal not-for-profit, incorporated in 2018 and run by a volunteer board with help from volunteers and community facilitators. Our roots are Caribbean, and so is our welcome. Our mission: supporting seniors' well-being through advocacy and resources."
-    }
-  ]
+  {
+   "id": "today",
+   "q": "What's on today?",
+   "keywords": [
+    "today",
+    "tonight",
+    "right now",
+    "now",
+    "this morning",
+    "this afternoon"
+   ],
+   "answer": "",
+   "dynamic": "today",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "weekend",
+   "q": "Is there anything on weekends?",
+   "keywords": [
+    "weekend",
+    "weekends",
+    "saturday",
+    "sunday",
+    "saturdays",
+    "sundays"
+   ],
+   "answer": "",
+   "dynamic": "weekend",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "next-month",
+   "q": "When is next month's calendar out?",
+   "keywords": [
+    "december",
+    "next month",
+    "new calendar",
+    "january",
+    "2027",
+    "christmas schedule",
+    "holiday schedule"
+   ],
+   "answer": "Each month&rsquo;s calendar is posted here once it&rsquo;s ready. Right now I have {{months}}. For dates after that, please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll be happy to help.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "pdf",
+   "q": "Can I print or download the calendar?",
+   "keywords": [
+    "print",
+    "printable",
+    "printed",
+    "download",
+    "pdf",
+    "flyer",
+    "paper copy",
+    "copy of the calendar",
+    "poster"
+   ],
+   "answer": "Yes. In the calendar section there&rsquo;s a <strong>Print calendar</strong> button and a <strong>Download PDF</strong> button for the original flyer. You can also ask us to email it to you.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "location",
+   "q": "Where is it?",
+   "keywords": [
+    "where",
+    "location",
+    "located",
+    "address",
+    "place",
+    "venue",
+    "held",
+    "meet",
+    "meeting place",
+    "find you",
+    "hagerman",
+    "hagerman corners",
+    "4460",
+    "14th avenue",
+    "14th ave",
+    "fourteenth"
+   ],
+   "answer": "Programs are held in the <strong>Amenity Room</strong> at <strong>Hagerman Corners Community Homes, 4460 14th Avenue, Markham, ON</strong>. Some events meet somewhere else: <strong>Seniors Circle</strong> on November 18 is at <strong>Milliken Church, 3 Clayton Drive</strong>. The calendar always shows the place. <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions in Google Maps</a>.",
+   "show": [
+    "directions",
+    "calendar"
+   ]
+  },
+  {
+   "id": "room",
+   "q": "Which room do I go to?",
+   "keywords": [
+    "room",
+    "amenity room",
+    "amenity",
+    "which room",
+    "what room",
+    "entrance",
+    "door",
+    "buzzer",
+    "front desk",
+    "inside",
+    "floor",
+    "unit",
+    "unit 314"
+   ],
+   "answer": "Programs meet in the <strong>Amenity Room</strong> at Hagerman Corners Community Homes, 4460 14th Avenue. If it&rsquo;s your first visit and you&rsquo;d like help finding the entrance, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> before you come.",
+   "show": [
+    "directions"
+   ]
+  },
+  {
+   "id": "directions",
+   "q": "How do I get there?",
+   "keywords": [
+    "directions",
+    "direction",
+    "how do i get",
+    "get there",
+    "map",
+    "google maps",
+    "route",
+    "drive",
+    "driving",
+    "navigate",
+    "gps",
+    "nearest intersection",
+    "intersection",
+    "cross street",
+    "major intersection"
+   ],
+   "answer": "We&rsquo;re at <strong>4460 14th Avenue, Markham, ON</strong> (Hagerman Corners Community Homes, Amenity Room). <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions in Google Maps</a>. For help planning your trip, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a>.",
+   "show": [
+    "directions"
+   ]
+  },
+  {
+   "id": "parking",
+   "q": "Is there parking?",
+   "keywords": [
+    "parking",
+    "park",
+    "car",
+    "parking lot",
+    "where to park",
+    "free parking"
+   ],
+   "answer": "I don&rsquo;t have parking details on this website, and I don&rsquo;t want to guess. Charmaine can tell you where to park: <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "transit",
+   "q": "Can I take the bus?",
+   "keywords": [
+    "bus",
+    "transit",
+    "yrt",
+    "viva",
+    "ttc",
+    "public transit",
+    "subway",
+    "train",
+    "go train",
+    "bus stop",
+    "bus route",
+    "wheel trans",
+    "mobility plus"
+   ],
+   "answer": "I don&rsquo;t have transit details on this website. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> so we can help you plan the trip, or use <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions in Google Maps</a>.",
+   "show": [
+    "directions"
+   ]
+  },
+  {
+   "id": "rides",
+   "q": "Do you offer rides?",
+   "keywords": [
+    "ride",
+    "rides",
+    "pick up",
+    "pickup",
+    "picked up",
+    "transportation",
+    "drive me",
+    "driver",
+    "shuttle",
+    "van",
+    "taxi",
+    "lift"
+   ],
+   "answer": "The website doesn&rsquo;t promise any transportation. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> to talk about how you&rsquo;ll get there, and we&rsquo;ll help where we can."
+  },
+  {
+   "id": "access",
+   "q": "Is it wheelchair accessible?",
+   "keywords": [
+    "wheelchair",
+    "accessible",
+    "accessibility",
+    "walker",
+    "cane",
+    "scooter",
+    "mobility",
+    "elevator",
+    "stairs",
+    "ramp",
+    "disability",
+    "disabled",
+    "hearing",
+    "vision",
+    "washroom",
+    "bathroom",
+    "restroom",
+    "toilet"
+   ],
+   "answer": "Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> before your visit so we can talk through access, mobility needs and anything that would make the day easier. Members using wheelchairs are part of our community."
+  },
+  {
+   "id": "postal",
+   "q": "What is the postal code?",
+   "keywords": [
+    "postal code",
+    "postal",
+    "zip",
+    "zip code",
+    "postcode"
+   ],
+   "answer": "The address we use is 4460 14th Avenue, Markham, ON L3R 1H1."
+  },
+  {
+   "id": "milliken",
+   "q": "Where is Milliken Church?",
+   "keywords": [
+    "milliken",
+    "milliken church",
+    "church",
+    "clayton",
+    "3 clayton",
+    "clayton drive",
+    "clayton dr"
+   ],
+   "answer": "Seniors Circle on <strong>Wednesday, November 18, 1:00 – 3:00 p.m.</strong> meets at <strong>Milliken Church, 3 Clayton Drive, Markham</strong>, not at Hagerman Corners. Here are <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=3+Clayton+Drive%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">directions to Milliken Church</a>."
+  },
+  {
+   "id": "owner",
+   "q": "Who runs Island Breeze?",
+   "keywords": [
+    "owner",
+    "owns",
+    "founder",
+    "founded",
+    "found",
+    "started",
+    "start",
+    "who started",
+    "who runs",
+    "run",
+    "runs",
+    "in charge",
+    "director",
+    "boss",
+    "manager",
+    "head",
+    "president",
+    "leader",
+    "organizer",
+    "organiser",
+    "coordinator",
+    "charmaine",
+    "who is charmaine",
+    "staff",
+    "team",
+    "founder of",
+    "who founded",
+    "who owns"
+   ],
+   "answer": "Island Breeze was <strong>founded by Charmaine</strong>. It&rsquo;s a not-for-profit run by a volunteer board, with the help of volunteers and community facilitators. Charmaine is the person to call for program information: <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "contact-person",
+   "q": "Who should I talk to?",
+   "keywords": [
+    "talk to",
+    "speak to",
+    "speak with",
+    "contact person",
+    "person to call",
+    "someone",
+    "real person",
+    "human",
+    "call someone",
+    "who do i call",
+    "who to call",
+    "who do i contact",
+    "information",
+    "info",
+    "more information",
+    "more info",
+    "questions",
+    "question",
+    "help",
+    "need help",
+    "i need help",
+    "can you help"
+   ],
+   "answer": "Please contact <strong>Charmaine</strong> at <a href=\"tel:+14163197763\">416-319-7763</a>, or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a>. You can also use <em>Send a message</em> below and ask for a call back."
+  },
+  {
+   "id": "phone",
+   "q": "What is your phone number?",
+   "keywords": [
+    "phone",
+    "number",
+    "phone number",
+    "call",
+    "telephone",
+    "cell",
+    "ring",
+    "text"
+   ],
+   "answer": "Call Charmaine at <strong><a href=\"tel:+14163197763\">416-319-7763</a></strong>."
+  },
+  {
+   "id": "email",
+   "q": "What is your email?",
+   "keywords": [
+    "email",
+    "email address",
+    "write",
+    "send email"
+   ],
+   "answer": "Our email is <strong><a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a></strong>."
+  },
+  {
+   "id": "about",
+   "q": "What is Island Breeze?",
+   "keywords": [
+    "what is island breeze",
+    "about",
+    "about you",
+    "who are you",
+    "what do you do",
+    "what is this",
+    "organization",
+    "organisation",
+    "day program",
+    "seniors day program",
+    "purpose",
+    "describe",
+    "tell me about"
+   ],
+   "answer": "Island Breeze Seniors Day Program is a <strong>not-for-profit seniors day program in Markham, Ontario</strong>, for adults 55 and older and the people who care for them. Founded by Charmaine and incorporated in 2018, it offers exercise, chair yoga, games, breakfasts, workshops and outings, with a warm Caribbean welcome."
+  },
+  {
+   "id": "mission",
+   "q": "What is your mission?",
+   "keywords": [
+    "mission",
+    "goal",
+    "goals",
+    "values",
+    "vision",
+    "why",
+    "motto",
+    "slogan",
+    "tagline",
+    "where every senior matters"
+   ],
+   "answer": "Our mission: <strong>Supporting seniors&rsquo; well-being through advocacy and resources.</strong> Our motto is <em>Where Every Senior Matters</em>, and our promise is <em>Stay Active. Stay Connected. Live Better.</em>"
+  },
+  {
+   "id": "history",
+   "q": "How long have you been around?",
+   "keywords": [
+    "history",
+    "how long",
+    "since",
+    "when did",
+    "year",
+    "founded in",
+    "2018",
+    "incorporated",
+    "old is",
+    "when were you founded",
+    "when was it founded",
+    "how old",
+    "founded in",
+    "when did it start"
+   ],
+   "answer": "Island Breeze was founded by Charmaine and incorporated as a federal not-for-profit in <strong>October 2018</strong>. Since then members have enjoyed workshops, outings, celebrations and weekly programs. See <em>Our story so far</em> on this page."
+  },
+  {
+   "id": "caribbean",
+   "q": "Is it a Caribbean program?",
+   "keywords": [
+    "caribbean",
+    "culture",
+    "cultural",
+    "jamaica",
+    "jamaican",
+    "trinidad",
+    "trinidadian",
+    "guyana",
+    "guyanese",
+    "barbados",
+    "west indian",
+    "black",
+    "african",
+    "heritage",
+    "roots"
+   ],
+   "answer": "Our roots are Caribbean, and so is our welcome: warm, friendly and full of good conversation. Everyone aged 55 and older is welcome. You don&rsquo;t need to be from the Caribbean to join."
+  },
+  {
+   "id": "nonprofit",
+   "q": "Are you a charity?",
+   "keywords": [
+    "nonprofit",
+    "charity",
+    "charitable",
+    "registered charity",
+    "tax receipt",
+    "receipt",
+    "receipts",
+    "tax",
+    "business number",
+    "corporation",
+    "incorporated",
+    "government"
+   ],
+   "answer": "Island Breeze Seniors Day Program Ltd. is a <strong>federal not-for-profit corporation</strong>. For questions about donations or receipts, please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll be happy to help."
+  },
+  {
+   "id": "area",
+   "q": "Do you serve my area?",
+   "keywords": [
+    "area",
+    "areas",
+    "markham",
+    "york region",
+    "scarborough",
+    "toronto",
+    "gta",
+    "unionville",
+    "milliken",
+    "richmond hill",
+    "pickering",
+    "stouffville",
+    "live",
+    "near",
+    "nearby",
+    "close",
+    "neighbourhood",
+    "neighborhood",
+    "city"
+   ],
+   "answer": "We serve seniors in <strong>Markham and York Region</strong>. Programs are at 4460 14th Avenue in Markham. If you live nearby but outside Markham, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> and ask."
+  },
+  {
+   "id": "join",
+   "q": "Who can join?",
+   "keywords": [
+    "who can join",
+    "join",
+    "joining",
+    "eligible",
+    "eligibility",
+    "qualify",
+    "age",
+    "55",
+    "fifty five",
+    "old enough",
+    "how old",
+    "age limit",
+    "seniors",
+    "member",
+    "membership",
+    "for me",
+    "older adults",
+    "retired",
+    "retiree",
+    "elderly"
+   ],
+   "answer": "Island Breeze serves <strong>adults aged 55 and older</strong> in Markham. If you&rsquo;re not sure whether a program is right for you or someone you care for, just call or email and we&rsquo;ll talk it through."
+  },
+  {
+   "id": "younger",
+   "q": "I'm under 55. Can I come?",
+   "keywords": [
+    "under 55",
+    "younger",
+    "too young",
+    "50",
+    "fifty",
+    "not 55",
+    "54",
+    "53",
+    "52",
+    "age requirement"
+   ],
+   "answer": "Our programs are for adults 55 and older. If you&rsquo;re close to that age, or you&rsquo;re coming as a caregiver, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> and ask."
+  },
+  {
+   "id": "register",
+   "q": "How do I sign up?",
+   "keywords": [
+    "register",
+    "registration",
+    "sign up",
+    "signup",
+    "enroll",
+    "apply",
+    "application",
+    "get started",
+    "start",
+    "first time",
+    "how do i join",
+    "how to join",
+    "form",
+    "waitlist",
+    "waiting list",
+    "spot",
+    "book",
+    "booking",
+    "reserve",
+    "rsvp"
+   ],
+   "answer": "Joining starts with a friendly conversation. Call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll talk you through it. You can also tap <em>Send a message</em> and ask for a call back."
+  },
+  {
+   "id": "dropin",
+   "q": "Can I just show up?",
+   "keywords": [
+    "drop in",
+    "drop-in",
+    "just show up",
+    "walk in",
+    "walk-in",
+    "show up",
+    "come by",
+    "stop by",
+    "without calling",
+    "need to call"
+   ],
+   "answer": "We&rsquo;d love to meet you. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email first, so we can welcome you properly and tell you where to go."
+  },
+  {
+   "id": "cost",
+   "q": "What does it cost?",
+   "keywords": [
+    "cost",
+    "costs",
+    "price",
+    "fee",
+    "fees",
+    "pay",
+    "paying",
+    "money",
+    "free",
+    "charge",
+    "expensive",
+    "afford",
+    "how much",
+    "dollars",
+    "cash",
+    "membership fee",
+    "subsidy"
+   ],
+   "answer": "Costs can vary by activity. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to ask about the program you&rsquo;re interested in."
+  },
+  {
+   "id": "caregivers",
+   "q": "Can a caregiver come?",
+   "keywords": [
+    "caregiver",
+    "caregivers",
+    "care giver",
+    "psw",
+    "personal support worker",
+    "helper",
+    "aide",
+    "daughter",
+    "son",
+    "family",
+    "spouse",
+    "husband",
+    "wife",
+    "partner",
+    "bring someone",
+    "come with",
+    "accompany",
+    "companion"
+   ],
+   "answer": "Our mission includes older adults and the caregivers who support them. Call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to talk about coming together, so we can plan the visit with you."
+  },
+  {
+   "id": "friend",
+   "q": "Can I bring a friend?",
+   "keywords": [
+    "friend",
+    "friends",
+    "bring a friend",
+    "neighbour",
+    "neighbor",
+    "guest",
+    "bring my",
+    "together"
+   ],
+   "answer": "Friends aged 55+ are welcome to join too. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> first so we can plan for everyone."
+  },
+  {
+   "id": "first-visit",
+   "q": "What happens on my first visit?",
+   "keywords": [
+    "first visit",
+    "first day",
+    "expect",
+    "what to expect",
+    "what happens",
+    "new member",
+    "new here",
+    "nervous",
+    "shy",
+    "alone",
+    "dont know anyone",
+    "meet people"
+   ],
+   "answer": "It starts with a phone call or email. We&rsquo;ll answer your questions and help you pick an activity to try first. Then you come along and we&rsquo;ll make you feel welcome. Many members first came on their own. Call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "bring",
+   "q": "What should I bring or wear?",
+   "keywords": [
+    "bring",
+    "wear",
+    "clothes",
+    "clothing",
+    "shoes",
+    "dress",
+    "outfit",
+    "mat",
+    "water bottle",
+    "supplies",
+    "materials"
+   ],
+   "answer": "We&rsquo;ll let you know when you call. For Exercise Class and Chair Yoga, comfortable clothes and shoes usually help. Ask Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> if anything else is needed."
+  },
+  {
+   "id": "care-needs",
+   "q": "Do you provide care or nursing?",
+   "keywords": [
+    "nurse",
+    "nursing",
+    "medical",
+    "medication",
+    "medicine",
+    "dementia",
+    "alzheimers",
+    "memory",
+    "care needs",
+    "personal care",
+    "supervision",
+    "respite",
+    "adult day care",
+    "daycare",
+    "day care",
+    "health care",
+    "doctor"
+   ],
+   "answer": "Island Breeze offers social, creative and wellness activities for older adults. If you have questions about specific care needs, please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> to talk it through before a visit."
+  },
+  {
+   "id": "fitness-level",
+   "q": "I'm not very fit. Can I still join?",
+   "keywords": [
+    "not fit",
+    "beginner",
+    "beginners",
+    "easy",
+    "gentle",
+    "hard",
+    "difficult",
+    "cant stand",
+    "can't stand",
+    "sit",
+    "sitting",
+    "seated",
+    "knees",
+    "back pain",
+    "arthritis",
+    "balance",
+    "slow",
+    "level",
+    "pace"
+   ],
+   "answer": "<strong>Chair Yoga</strong> is done seated or with the support of a chair. If you&rsquo;re unsure what suits you, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> and we&rsquo;ll help you choose.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "language",
+   "q": "What languages are spoken?",
+   "keywords": [
+    "language",
+    "languages",
+    "english",
+    "french",
+    "patois",
+    "creole",
+    "spanish",
+    "tamil",
+    "mandarin",
+    "cantonese",
+    "translate",
+    "translator",
+    "interpreter"
+   ],
+   "answer": "Programs and this website are in English. For other language needs, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> and ask."
+  },
+  {
+   "id": "food",
+   "q": "Is food served?",
+   "keywords": [
+    "food",
+    "eat",
+    "eating",
+    "lunch",
+    "lunches",
+    "meal",
+    "meals",
+    "snack",
+    "snacks",
+    "coffee",
+    "tea",
+    "drinks",
+    "dinner",
+    "potluck",
+    "buffet",
+    "diet",
+    "allergy",
+    "allergies"
+   ],
+   "answer": "Food is part of many gatherings. This month there&rsquo;s a <strong>Pancake Breakfast</strong> (Wednesday, November 4, 10:00 a.m. to noon), and members have enjoyed community lunches, buffets and a tea party. For food on other days, or allergies, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "cancel",
+   "q": "What if I can't make it?",
+   "keywords": [
+    "cant make it",
+    "can't make it",
+    "cancel",
+    "cancelled",
+    "canceled",
+    "miss",
+    "missed",
+    "late",
+    "running late",
+    "sick",
+    "ill",
+    "weather",
+    "snow",
+    "storm",
+    "closed",
+    "closure"
+   ],
+   "answer": "No problem. Just let Charmaine know at <a href=\"tel:+14163197763\">416-319-7763</a>. On bad-weather days, please call before you head out."
+  },
+  {
+   "id": "exercise",
+   "q": "When is Exercise Class?",
+   "keywords": [
+    "exercise",
+    "exercise class",
+    "workout",
+    "fitness",
+    "exercising",
+    "gym",
+    "work out",
+    "physical activity",
+    "movement",
+    "keep fit",
+    "active"
+   ],
+   "answer": "",
+   "dynamic": "kind:exercise",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "chair-yoga",
+   "q": "When is Chair Yoga?",
+   "keywords": [
+    "chair yoga",
+    "yoga",
+    "stretch",
+    "stretching",
+    "chair exercise",
+    "seated yoga",
+    "seniors yoga"
+   ],
+   "answer": "",
+   "dynamic": "kind:chair-yoga",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "pancake",
+   "q": "When is the pancake breakfast?",
+   "keywords": [
+    "pancake",
+    "pancakes",
+    "breakfast",
+    "pancake breakfast",
+    "brunch"
+   ],
+   "answer": "",
+   "dynamic": "kind:pancake",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "price-is-right",
+   "q": "When is the Price Is Right game?",
+   "keywords": [
+    "price is right",
+    "price right",
+    "game show",
+    "guessing game",
+    "guess the price"
+   ],
+   "answer": "",
+   "dynamic": "kind:price-is-right",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "seniors-circle",
+   "q": "When is Seniors Circle?",
+   "keywords": [
+    "seniors circle",
+    "senior circle",
+    "circle",
+    "support group",
+    "discussion",
+    "chat group",
+    "talk group"
+   ],
+   "answer": "",
+   "dynamic": "kind:seniors-circle",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "bingo",
+   "q": "When is bingo?",
+   "keywords": [
+    "bingo",
+    "bingo game",
+    "play bingo"
+   ],
+   "answer": "",
+   "dynamic": "kind:bingo",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "games",
+   "q": "Do you play games?",
+   "keywords": [
+    "games",
+    "game",
+    "play",
+    "cards",
+    "card games",
+    "dominoes",
+    "board games",
+    "fun",
+    "entertainment"
+   ],
+   "answer": "",
+   "dynamic": "games",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "remembrance",
+   "q": "Is there a program on Remembrance Day?",
+   "keywords": [
+    "remembrance",
+    "remembrance day",
+    "november 11",
+    "poppy",
+    "veterans",
+    "lest we forget",
+    "11th"
+   ],
+   "answer": "<strong>Remembrance Day</strong> is Wednesday, November 11. That day there&rsquo;s a <strong>Price Is Right Game</strong> from 11:00 a.m. to 1:00 p.m. in the Amenity Room.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "holidays",
+   "q": "Do you celebrate holidays?",
+   "keywords": [
+    "holiday",
+    "holidays",
+    "christmas",
+    "christmas dinner",
+    "xmas",
+    "new year",
+    "easter",
+    "thanksgiving",
+    "party",
+    "parties",
+    "celebration",
+    "celebrate",
+    "black history month"
+   ],
+   "answer": "Yes. Members have celebrated together at a holiday Christmas dinner (described as an annual event) and other special lunches and parties. The December calendar isn&rsquo;t posted yet. For holiday plans, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "activities",
+   "q": "What activities do you offer?",
+   "keywords": [
+    "activities",
+    "activity",
+    "things to do",
+    "what do you offer",
+    "offer",
+    "options",
+    "classes",
+    "class",
+    "workshops",
+    "workshop",
+    "variety",
+    "interests",
+    "hobbies"
+   ],
+   "answer": "Every week in November there&rsquo;s <strong>Exercise Class</strong> (Mondays) and <strong>Chair Yoga</strong> (Tuesdays), plus a special Wednesday event: a pancake breakfast, a Price Is Right game, Seniors Circle and bingo. Members have also enjoyed crochet, dominoes, arts and crafts, pottery, drumming, poetry, dance, laughter yoga, a fashion show, a tea party and outings.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "crochet",
+   "q": "Do you have crochet or knitting?",
+   "keywords": [
+    "crochet",
+    "crocheting",
+    "knit",
+    "knitting",
+    "sewing",
+    "yarn",
+    "needlework",
+    "quilting"
+   ],
+   "answer": "A relaxed crochet class led by a volunteer instructor was shared as a weekly class in 2024 and 2025. It isn&rsquo;t on the November calendar, so call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> to ask if it&rsquo;s running now."
+  },
+  {
+   "id": "dominoes",
+   "q": "Do you play dominoes?",
+   "keywords": [
+    "dominoes",
+    "domino",
+    "game night",
+    "card night",
+    "cards night"
+   ],
+   "answer": "Game night with dominoes, friendly competition and plenty of conversation was shared in 2025. This month the games are a <strong>Price Is Right Game</strong> (Nov 11) and <strong>Bingo</strong> (Nov 25). Ask Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> about dominoes.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "arts",
+   "q": "Do you do arts and crafts?",
+   "keywords": [
+    "arts",
+    "art",
+    "crafts",
+    "craft",
+    "arts and crafts",
+    "painting",
+    "paint",
+    "drawing",
+    "colouring",
+    "coloring",
+    "colour therapy",
+    "color therapy",
+    "creative"
+   ],
+   "answer": "Members have enjoyed hands-on creative sessions, including a <strong>colour therapy workshop</strong> (October 2025), a <strong>pottery workshop with Markham Museum</strong> (October 2025) and an <strong>art clay workshop</strong> (April 2026)."
+  },
+  {
+   "id": "pottery",
+   "q": "Do you do pottery?",
+   "keywords": [
+    "pottery",
+    "clay",
+    "ceramics",
+    "sculpt",
+    "sculpting",
+    "art clay"
+   ],
+   "answer": "Yes, in the past: a seniors <strong>pottery workshop led by Markham Museum</strong> (October 2025) and an <strong>art clay workshop</strong> (April 2026)."
+  },
+  {
+   "id": "dance",
+   "q": "Is there dancing or music?",
+   "keywords": [
+    "dance",
+    "dancing",
+    "zumba",
+    "merengue",
+    "afro peruvian",
+    "music",
+    "drum",
+    "drums",
+    "drumming",
+    "singing",
+    "sing",
+    "choir",
+    "rhythm"
+   ],
+   "answer": "Members have danced and drummed: <strong>Drumming for Wellness</strong> (January 2026), an <strong>Afro-Peruvian dance workshop</strong> (March 2026) and a day of <strong>Zumba, merengue and bingo</strong> (June 2026)."
+  },
+  {
+   "id": "poetry",
+   "q": "Do you have writing or poetry?",
+   "keywords": [
+    "poetry",
+    "poem",
+    "poems",
+    "writing",
+    "write",
+    "grief",
+    "healing",
+    "journal",
+    "journaling",
+    "bereavement",
+    "loss"
+   ],
+   "answer": "<strong>Healing Grief Through Poetry</strong> was a four-week series in February 2026 for reflection, healing and self-expression through the written word."
+  },
+  {
+   "id": "laughter",
+   "q": "What is laughter yoga?",
+   "keywords": [
+    "laughter",
+    "laughter yoga",
+    "laugh",
+    "laughing"
+   ],
+   "answer": "<strong>Laughter Yoga</strong> was part of the 2026 workshop series: laughter, breathing and gentle movement."
+  },
+  {
+   "id": "health",
+   "q": "Do you have health workshops?",
+   "keywords": [
+    "health",
+    "wellness",
+    "blood pressure",
+    "healthy",
+    "health fair",
+    "wellbeing",
+    "well being",
+    "mental health",
+    "checkup",
+    "check up"
+   ],
+   "answer": "Members took part in a <strong>health and wellness workshop</strong> with blood pressure checks (May 2026) and attended the <strong>Carefirst Health Fair</strong> at the YMCA in Markham (September 2026). <strong>Exercise Class</strong> and <strong>Chair Yoga</strong> run every week.",
+   "show": [
+    "calendar"
+   ]
+  },
+  {
+   "id": "fashion",
+   "q": "Was there a fashion show?",
+   "keywords": [
+    "fashion",
+    "fashion show",
+    "runway",
+    "model",
+    "style"
+   ],
+   "answer": "Yes! The 2026 workshop series closed in July with a <strong>fashion show and celebration lunch</strong>, celebrating style, pride and culture."
+  },
+  {
+   "id": "outings",
+   "q": "Do you go on trips or outings?",
+   "keywords": [
+    "outing",
+    "outings",
+    "trip",
+    "trips",
+    "field trip",
+    "excursion",
+    "visit",
+    "visits",
+    "museum",
+    "markham museum",
+    "ymca",
+    "tour"
+   ],
+   "answer": "Members have visited the <strong>Markham Museum</strong>&rsquo;s older adults program (February 2024), taken a seniors pottery workshop there (October 2025), enjoyed a <strong>Carefirst tea party</strong> (July 2026) and attended the <strong>Carefirst Health Fair</strong> at the YMCA in Markham (September 2026)."
+  },
+  {
+   "id": "tea",
+   "q": "Was there a tea party?",
+   "keywords": [
+    "tea party",
+    "high tea",
+    "hats",
+    "carefirst tea"
+   ],
+   "answer": "Yes: the Carefirst team hosted a <strong>tea party</strong> for Island Breeze members in July 2026. There are photos in the gallery."
+  },
+  {
+   "id": "project-2026",
+   "q": "What was the 2026 workshop series?",
+   "keywords": [
+    "cultural arts",
+    "holistic",
+    "holistic healing",
+    "mind body and spirit",
+    "workshop series",
+    "2026 project",
+    "project",
+    "series"
+   ],
+   "answer": "<strong>Cultural Arts for Holistic Healing of Mind, Body and Spirit</strong> ran from January to July 2026 for seniors in South Markham: drumming, poetry, Afro-Peruvian dance, art clay, a health and wellness day, Zumba and merengue, and a closing fashion show and celebration lunch."
+  },
+  {
+   "id": "partners",
+   "q": "Who are your partners?",
+   "keywords": [
+    "partner",
+    "partners",
+    "partnership",
+    "sponsor",
+    "sponsors",
+    "supporters",
+    "support",
+    "carefirst",
+    "acsa",
+    "united way",
+    "south markham",
+    "funding",
+    "funded",
+    "collaborate",
+    "collaborators"
+   ],
+   "answer": "We&rsquo;re grateful to <strong>Carefirst Seniors and Community Services Association</strong> (partner network since 2022), <strong>ACSA Community Services</strong> (2026 program partner), <strong>United Way Greater Toronto</strong> and <strong>South Markham</strong> (2026 program sponsors), plus <strong>Markham Museum</strong> and the <strong>YMCA in Markham</strong>, which have welcomed our members."
+  },
+  {
+   "id": "volunteer",
+   "q": "Can I volunteer?",
+   "keywords": [
+    "volunteer",
+    "volunteering",
+    "volunteers",
+    "help out",
+    "give back",
+    "instructor",
+    "teach",
+    "lead a class",
+    "facilitator",
+    "student hours",
+    "community hours"
+   ],
+   "answer": "Thank you! Island Breeze runs with the help of volunteers and community facilitators. Call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to talk about volunteering."
+  },
+  {
+   "id": "donate",
+   "q": "How can I donate or help?",
+   "keywords": [
+    "donate",
+    "donation",
+    "donations",
+    "give",
+    "giving",
+    "contribute",
+    "support us",
+    "fundraise",
+    "fundraising",
+    "sponsor us",
+    "gift"
+   ],
+   "answer": "Thank you for thinking of us. To talk about supporting Island Breeze, please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll be happy to help."
+  },
+  {
+   "id": "jobs",
+   "q": "Are you hiring?",
+   "keywords": [
+    "job",
+    "jobs",
+    "hiring",
+    "work",
+    "employment",
+    "career",
+    "position",
+    "resume",
+    "paid"
+   ],
+   "answer": "There are no job postings on this website. To ask about opportunities, email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> or call <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "social",
+   "q": "Are you on Facebook or Instagram?",
+   "keywords": [
+    "facebook",
+    "instagram",
+    "social media",
+    "fb",
+    "insta",
+    "ig",
+    "follow",
+    "page",
+    "online",
+    "pictures online"
+   ],
+   "answer": "Yes. Find us on <a href=\"https://www.facebook.com/Islandbreezeseniors/\" target=\"_blank\" rel=\"noopener\">Facebook</a> and <a href=\"https://www.instagram.com/islandbreezeseniors55/\" target=\"_blank\" rel=\"noopener\">Instagram (@islandbreezeseniors55)</a>."
+  },
+  {
+   "id": "photos",
+   "q": "Can I see photos?",
+   "keywords": [
+    "photo",
+    "photos",
+    "pictures",
+    "picture",
+    "pics",
+    "gallery",
+    "images",
+    "see"
+   ],
+   "answer": "Yes. Scroll to <em>Moments from our community</em> near the top of this page for photos of members at lunches, bingo, a tea party and celebrations."
+  },
+  {
+   "id": "newsletter",
+   "q": "Do you have a newsletter?",
+   "keywords": [
+    "newsletter",
+    "mailing list",
+    "email list",
+    "updates",
+    "subscribe",
+    "notify",
+    "notifications",
+    "reminder",
+    "reminders"
+   ],
+   "answer": "There&rsquo;s no mailing list. Check this page for each month&rsquo;s calendar, follow us on Facebook or Instagram, or ask Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> to keep you posted."
+  },
+  {
+   "id": "message",
+   "q": "Can I send a message?",
+   "keywords": [
+    "message",
+    "contact form",
+    "send a message",
+    "leave a message",
+    "call back",
+    "callback",
+    "call me",
+    "contact me",
+    "reach me",
+    "get back to me"
+   ],
+   "answer": "Yes. Tap <em>Send a message</em> below, leave your name and a phone number or email, and we&rsquo;ll call or email you back."
+  },
+  {
+   "id": "pets",
+   "q": "Can I bring my pet?",
+   "keywords": [
+    "pet",
+    "pets",
+    "dog",
+    "dogs",
+    "cat",
+    "service dog",
+    "service animal"
+   ],
+   "answer": "I don&rsquo;t have information about pets on this website. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> and ask."
+  },
+  {
+   "id": "covid",
+   "q": "Do I need a mask?",
+   "keywords": [
+    "covid",
+    "mask",
+    "masks",
+    "vaccine",
+    "vaccinated",
+    "flu",
+    "virus",
+    "covid19"
+   ],
+   "answer": "I don&rsquo;t have health-policy details on this website. Please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> for current guidance."
+  },
+  {
+   "id": "feedback",
+   "q": "How do I give feedback?",
+   "keywords": [
+    "feedback",
+    "complaint",
+    "complain",
+    "suggestion",
+    "suggestions",
+    "review",
+    "reviews",
+    "compliment"
+   ],
+   "answer": "We&rsquo;d love to hear from you. Email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> or call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a>."
+  },
+  {
+   "id": "bot",
+   "q": "Are you a real person?",
+   "keywords": [
+    "robot",
+    "bot",
+    "ai",
+    "computer",
+    "automatic",
+    "real",
+    "are you human",
+    "chatbot",
+    "machine"
+   ],
+   "answer": "I&rsquo;m an automatic helper that answers from this website, so I don&rsquo;t guess. For a real person, call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a>."
+  }
+ ]
 }
