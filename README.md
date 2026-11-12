@@ -16,7 +16,7 @@ public/
   thanks.html       no-JS form landing page
   404.html          real 404 (stops Pages serving the home page for missing URLs)
   robots.txt, sitemap.xml, _headers
-  fonts/            self-hosted Atkinson Hyperlegible + Fraunces (SIL OFL)
+  fonts/            self-hosted Atkinson Hyperlegible (SIL OFL), used for headings and text
   img/              og-image.jpg (1200x630 share image) + optimized photos
   logo.png / logo-600.png / logo-*.webp   the organization's own logo (transparent background)
   favicon-32.png, icon-192.png, apple-touch-icon.png   the logo's sun, cut from the same image

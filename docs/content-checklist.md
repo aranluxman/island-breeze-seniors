@@ -55,3 +55,7 @@ Source links were removed from the hero, the 2026 project and the milestones at 
 
 ## Do not confuse with
 Unrelated "Island Breeze" resorts, bands, restaurants, churches and ministries, and US organizations with similar names (for example Lewisville Estates' tea party posts).
+
+## Founder section (Nov 2026)
+- Bio, education and the tribute to Myrtle Powell come from the "Meet Our Founder & CEO" poster Charmaine supplied (Nov 2026). The full bio is on the page word for word under "Read Charmaine's full story"; the short version above it is a plain-language summary of the same text.
+- [ ] **Original photos:** both portraits are cropped from that poster (328px and 238px wide). Ask Charmaine for the original photos of herself and her mother for sharper images.
