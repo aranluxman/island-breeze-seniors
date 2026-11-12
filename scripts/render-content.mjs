@@ -170,6 +170,7 @@ const blocks = {
             </ul>
             <div class="cal-card reveal">
               <div class="cal-head">
+                <svg class="cal-palms" viewBox="0 0 400 160" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false"><use href="#palm" x="268" y="-6" width="120" height="170"/><g transform="translate(722 0) scale(-1 1)"><use href="#palm" x="318" y="30" width="86" height="132"/></g></svg>
                 <div class="cal-head-text">
                   <h3 class="cal-title">${esc(month.title)}</h3>
                   <p class="cal-sub">${icon('i-pin', 'ico')}${esc(venueFull(home))}</p>

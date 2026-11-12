@@ -657,6 +657,7 @@
       <symbol id="a-print" viewBox="0 0 24 24"><path d="M7 8V3.5h10V8"/><rect x="3.5" y="8" width="17" height="8.5" rx="2"/><path d="M7 13.5h10v7H7Z"/><circle cx="17" cy="11" r=".8" fill="currentColor"/></symbol>
       <symbol id="a-download" viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5M4.5 20.5h15"/></symbol>
       <symbol id="a-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M7.5 14h2M11 14h2M14.5 14h2M7.5 17h2M11 17h2"/></symbol>
+          <symbol id="palm" viewBox="0 0 240 320"><path fill="var(--palm-trunk, currentColor)" d="M113 320c-3-74 2-150 15-222l10 3c-12 70-15 144-9 219Z"/><g fill="var(--palm-leaf, currentColor)"><path d="M133 98C97 68 45 70 6 110c44-12 92-10 127-12Z"/><path d="M133 98C109 50 70 26 26 30c40 18 78 40 107 68Z"/><path d="M133 98c-4-44 9-78 39-98-8 36-14 66-39 98Z"/><path d="M133 98c29-42 71-55 107-42-34 12-70 30-107 42Z"/><path d="M133 98c45-10 84 12 104 52-32-22-70-34-104-52Z"/><path d="M133 98c-33 6-62 30-73 66 22-24 50-42 73-66Z"/><path d="M133 98c25 18 41 47 39 80-14-28-28-50-39-80Z"/></g><g fill="var(--palm-nut, currentColor)"><circle cx="128" cy="104" r="6"/><circle cx="139" cy="106" r="6"/><circle cx="133" cy="114" r="6"/></g></symbol>
     </defs>
   </svg>
 
@@ -714,6 +715,12 @@
           <div><dt>Times</dt><dd><!-- @content:hero-times -->Mondays 2 to 3 p.m., Tuesdays 1 to 2 p.m., Wednesday events. <a href="#calendar">See the calendar</a><!-- /@content:hero-times --></dd></div>
         </dl>
       </div>
+      <div class="horizon" aria-hidden="true">
+        <svg class="horizon-palms hp-left" viewBox="0 0 230 210" focusable="false"><use class="hp-1" href="#palm" x="0" y="0" width="150" height="200"/><use class="hp-2" href="#palm" x="110" y="64" width="104" height="139"/></svg>
+        <svg class="horizon-palms hp-right" viewBox="0 0 230 210" focusable="false"><use class="hp-1" href="#palm" x="0" y="14" width="138" height="186"/><use class="hp-2" href="#palm" x="104" y="80" width="92" height="123"/></svg>
+        <svg class="sea sea-back" viewBox="0 0 1440 80" preserveAspectRatio="none" focusable="false"><path d="M0 40c240 30 480 30 720 0s480-30 720 0v40H0Z"/></svg>
+        <svg class="sea sea-front" viewBox="0 0 1440 80" preserveAspectRatio="none" focusable="false"><path d="M0 50c180-24 360-24 540 0s360 24 540 0 180-12 360-12v42H0Z"/></svg>
+      </div>
     </section>
 
     <!-- CALENDAR -->
@@ -733,6 +740,7 @@
             </ul>
             <div class="cal-card reveal">
               <div class="cal-head">
+                <svg class="cal-palms" viewBox="0 0 400 160" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false"><use href="#palm" x="268" y="-6" width="120" height="170"/><g transform="translate(722 0) scale(-1 1)"><use href="#palm" x="318" y="30" width="86" height="132"/></g></svg>
                 <div class="cal-head-text">
                   <h3 class="cal-title">November 2026</h3>
                   <p class="cal-sub"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Amenity Room, Hagerman Corners Community Homes, 4460 14th Avenue, Markham</p>
@@ -1177,9 +1185,10 @@
     <section id="founder" class="section section-founder" aria-labelledby="founder-title">
       <div class="wrap founder-grid">
         <figure class="founder-photo">
+          <svg class="founder-palm" viewBox="0 0 240 320" aria-hidden="true" focusable="false"><use href="#palm"/></svg>
           <picture>
             <source type="image/webp" srcset="img/founder-charmaine-hugh.webp">
-            <img src="img/founder-charmaine-hugh.jpg" alt="Charmaine Hugh, founder of Island Breeze, smiling, with long curly hair." width="328" height="410" loading="lazy" decoding="async">
+            <img src="img/founder-charmaine-hugh.jpg" alt="Charmaine Hugh, founder of Island Breeze, smiling, with long curly hair." width="314" height="471" loading="lazy" decoding="async">
           </picture>
         </figure>
         <div class="founder-text">
@@ -1428,6 +1437,11 @@
     </section>
   </main>
 
+  <div class="beach" aria-hidden="true">
+    <svg class="beach-palms bl" viewBox="0 0 230 210" focusable="false"><use class="bp bp-1" href="#palm" x="0" y="0" width="150" height="200"/><use class="bp bp-2" href="#palm" x="112" y="70" width="98" height="132"/></svg>
+    <svg class="beach-palms br" viewBox="0 0 230 210" focusable="false"><use class="bp bp-1" href="#palm" x="0" y="10" width="142" height="190"/><use class="bp bp-2" href="#palm" x="106" y="78" width="92" height="124"/></svg>
+    <svg class="beach-sea" viewBox="0 0 1440 70" preserveAspectRatio="none" focusable="false"><path d="M0 22c120-14 240-14 360 0s240 14 360 0 240-14 360 0 240 14 360 0v48H0Z"/></svg>
+  </div>
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div>

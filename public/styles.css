@@ -157,7 +157,7 @@ main:focus { outline: none; }
 @media (max-width: 374px) { .brand-logo { height: 46px; } .join-btn { padding-inline: .625rem; } }
 
 /* ---------- Hero (compact) ---------- */
-.hero { position: relative; padding: var(--s-7) 0 var(--s-7); background: var(--sand); }
+.hero { position: relative; overflow: hidden; padding: var(--s-7) 0 0; background: var(--sand); }
 .hero-inner { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: var(--s-7); align-items: center; }
 .hero-photo { margin: 0; }
 .hero-photo picture { display: block; overflow: hidden; border-radius: var(--radius); }
@@ -167,6 +167,17 @@ main:focus { outline: none; }
 .hero-text { font-size: 1.3125rem; max-width: 34em; color: var(--ink); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5); }
 
+
+/* Shoreline under the hero: the live site's palms on the sand, a still sea meeting the calendar */
+.horizon { position: relative; height: 170px; margin-top: var(--s-2); pointer-events: none; }
+.horizon-palms { position: absolute; bottom: 12px; height: 164px; width: auto; --palm-trunk: #7a4e2c; --palm-leaf: #1f7a3a; --palm-nut: #5a3a22; }
+.hp-left { left: max(-20px, (100% - 1160px) / 2 - 60px); }
+.hp-right { right: max(-20px, (100% - 1160px) / 2 - 60px); transform: scaleX(-1); }
+.horizon .hp-2 { --palm-leaf: #2e9e4f; }
+.sea { position: absolute; left: 0; bottom: 0; width: 100%; }
+.sea-back { height: 64px; fill: rgba(27, 143, 196, .22); }
+.sea-front { height: 40px; fill: var(--tint); }
+@media (max-width: 700px) { .horizon { height: 120px; } .horizon-palms { height: 112px; } .hp-left { left: -30px; } .hp-right { right: -30px; } }
 
 /* At-a-glance fact strip */
 .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: var(--s-7) 0 var(--s-2); padding: var(--s-4) 0; border-top: 2px solid var(--ocean-900); border-bottom: 1px solid var(--line); }
@@ -379,6 +390,15 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
 @media (max-width: 360px) { .big-call { padding: var(--s-4); } .big-call-number { font-size: 1.7rem; white-space: normal; } }
 
 /* ---------- Footer ---------- */
+/* Beach above the footer: sand, palms, and the sea that becomes the footer */
+.beach { position: relative; height: 190px; margin-top: calc(-1 * var(--s-6)); background: linear-gradient(180deg, rgba(255, 248, 239, 0) 0%, #ffe9cf 70%, #ffd9b0 100%); overflow: hidden; pointer-events: none; }
+.beach-sea { position: absolute; left: 0; bottom: 0; width: 100%; height: 70px; fill: var(--ocean-900); }
+.beach-palms { position: absolute; bottom: 30px; height: 170px; width: auto; }
+.beach-palms.bl { left: max(8px, (100% - 1160px) / 2 - 40px); }
+.beach-palms.br { right: max(8px, (100% - 1160px) / 2 - 40px); transform: scaleX(-1); }
+.bp { --palm-trunk: #6b4423; --palm-leaf: #1f7a3a; --palm-nut: #5a3a22; }
+.bp-2 { --palm-leaf: #2e9e4f; }
+@media (max-width: 700px) { .beach { height: 130px; } .beach-palms { height: 112px; bottom: 26px; } .beach-sea { height: 54px; } }
 .site-footer { background: var(--ocean-900); color: #d9ecf7; padding: var(--s-6) 0 var(--s-5); }
 .bp { --palm-trunk: #6b4423; --palm-leaf: #1f7a3a; --palm-nut: #5a3a22; }
 .bp-2 { --palm-leaf: #2e9e4f; }
@@ -451,6 +471,9 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
     .hero-photo:hover img, .founder-photo:hover img { transform: scale(1.02); }
   }
   .cl-week.cl-unfold { animation: rise .35s var(--ease) both; }
+  /* Palms sway, barely: a breeze, not a storm (still when motion is reduced) */
+  .horizon-palms use, .beach-palms use, .cal-palms use, .cal-palms g, .founder-palm use { transform-box: fill-box; transform-origin: 50% 100%; animation: breeze 9s ease-in-out infinite alternate; }
+  .horizon-palms .hp-2, .beach-palms .bp-2 { animation-duration: 7s; animation-delay: -3s; }
   .faq-item[open] .faq-answer { animation: rise .35s var(--ease); }
 
   /* Panels materialize (E8): blur and scale resolve together from the button that opened them,
@@ -666,6 +689,7 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
 /* The month card */
 .cal-card { overflow: hidden; border-radius: calc(var(--radius) + 8px); background: #fff; border: 1px solid var(--line); box-shadow: 0 2px 4px rgba(60, 40, 20, .05), 0 30px 60px -36px rgba(60, 40, 20, .45); }
 .cal-head { position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-4); padding: var(--s-6) var(--s-6) var(--s-5); color: #fff; background: var(--ocean-900); overflow: hidden; isolation: isolate; }
+.cal-palms { position: absolute; right: 0; bottom: 0; z-index: -1; height: 100%; width: auto; max-width: 70%; color: rgba(255, 255, 255, .1); }
 .cal-head-text { min-width: 0; }
 .cal-title { margin: 0; color: #fff; font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.3rem); font-weight: 800; line-height: 1; letter-spacing: -.02em; }
 .cal-sub { display: flex; align-items: flex-start; gap: var(--s-2); margin: var(--s-3) 0 0; font-size: 1.125rem; font-weight: 700; color: #fff4ec; }
@@ -759,7 +783,7 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
 @page cal { size: landscape; margin: 10mm; }
 @media print {
   html.print-cal body { background: #fff; padding: 0; }
-  html.print-cal .skip, html.print-cal .site-header, html.print-cal .site-footer, html.print-cal .help-launcher, html.print-cal .call-bar, html.print-cal dialog, html.print-cal main > section:not(#calendar) { display: none !important; }
+  html.print-cal .skip, html.print-cal .site-header, html.print-cal .beach, html.print-cal .site-footer, html.print-cal .help-launcher, html.print-cal .call-bar, html.print-cal dialog, html.print-cal main > section:not(#calendar) { display: none !important; }
   html.print-cal #calendar { page: cal; padding: 0; background: #fff; }
   html.print-cal #calendar .section-head, html.print-cal .next-up, html.print-cal .weekly, html.print-cal .cal-actions, html.print-cal .cal-deco, html.print-cal .cal-list { display: none !important; }
   html.print-cal .cal-grid { display: table !important; }
@@ -795,11 +819,13 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
 }
 
 /* ---------- Founder: Charmaine Hugh, and the tribute to her mother ---------- */
-.section-founder { background: var(--tint); }
+.section-founder { overflow: clip; background: var(--tint); }
 .founder-grid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: var(--s-8); align-items: start; }
-.founder-photo { margin: 0; }
+.founder-photo { position: relative; isolation: isolate; margin: 0; }
+.founder-palm { position: absolute; z-index: -1; left: -104px; bottom: -4px; width: 190px; height: 254px; --palm-trunk: #7a4e2c; --palm-leaf: #1f7a3a; --palm-nut: #5a3a22; transform: scaleX(-1); }
+@media (max-width: 1240px) { .founder-palm { display: none; } }
 .founder-photo picture { display: block; overflow: hidden; border-radius: var(--radius); }
-.founder-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.founder-photo img { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; object-position: 50% 30%; }
 .founder-text p { max-width: var(--measure); }
 .founder-role { margin-top: calc(-1 * var(--s-2)); font-weight: 700; color: var(--pink-700); }
 .founder-edu { padding-top: var(--s-3); border-top: 1px solid var(--line); }
