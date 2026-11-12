@@ -231,33 +231,6 @@ main:focus { outline: none; }
 [data-accent="ocean"] { --c: var(--ocean); --c-soft: #e3f0f8; }
 [data-accent="sunset"] { --c: var(--accent); --c-soft: #fdebdf; }
 
-/* ---------- Past highlights: four compact cards ---------- */
-.past-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); }
-.past-card { position: relative; padding: var(--s-5); border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
-.past-card h3 { padding-bottom: var(--s-3); margin-bottom: 0; border-bottom: 2px solid var(--ocean-900); }
-.activity-list li { padding: var(--s-4) 0; border-bottom: 1px solid var(--line); }
-.activity-list li:last-child { border-bottom: 0; padding-bottom: 0; }
-.activity-name { margin: 0 0 2px; font-weight: 700; font-size: 1.1875rem; line-height: 1.35; color: var(--ocean-900); }
-.activity-desc { margin: 0; font-size: 1.0625rem; line-height: 1.5; }
-.activity-note { margin: 2px 0 0; font-size: 1rem; color: var(--muted); }
-@media (max-width: 860px) { .past-grid { grid-template-columns: minmax(0, 1fr); } .past-card { padding: var(--s-4); } }
-.tag { display: inline-block; margin-left: var(--s-2); padding: 1px var(--s-2); border-radius: 6px; font: 700 .875rem/1.5 "Atkinson Hyperlegible", sans-serif; vertical-align: 2px; white-space: nowrap; }
-.tag-regular { background: #e6f3ea; color: var(--palm-700); }
-.tag-project { background: #eef0f3; color: #3d4b56; }
-.tag-event { background: #fdebdf; color: var(--accent-dark); }
-.project { margin-top: var(--s-8); padding: var(--s-6); border-radius: var(--radius); background: var(--ocean-900); color: #eef4fa; }
-.project-year { font-weight: 400; color: var(--gold); }
-.project h3 { color: #fff; font-size: clamp(1.4rem, 1.1rem + 1vw, 1.8rem); }
-.project p { max-width: var(--measure); }
-.project .source-line { color: #d7e3ee; }
-.project-timeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: var(--s-3) var(--s-5); margin: var(--s-5) 0; }
-.project-timeline li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-3); align-items: start; padding-top: var(--s-3); border-top: 1px solid rgba(255, 255, 255, .22); line-height: 1.45; }
-.project-timeline strong { display: block; color: #fff; }
-.pt-month { flex: none; min-width: 2.6em; padding-top: 2px; white-space: nowrap; font: 800 1.125rem/1 "Atkinson Hyperlegible", system-ui, sans-serif; color: var(--gold); text-transform: uppercase; }
-.project a { color: #fff; }
-.project :focus-visible { outline-color: #fff; box-shadow: 0 0 0 8px var(--ocean-900); }
-@media (max-width: 860px) { .project { padding: var(--s-5) var(--s-4); } }
-
 /* ---------- Joining: numbered steps + FAQ ---------- */
 .join-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: var(--s-8); align-items: start; }
 .step { position: relative; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--s-4); padding-bottom: var(--s-6); }
@@ -477,11 +450,9 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
   .shutter-r { transform-origin: left center; }
   .frond { transform-box: fill-box; transform-origin: 6% 92%; animation: sway 7s ease-in-out 2s infinite alternate; }
   .sticker { animation: stamp .7s var(--ease) 1.3s both; }
-  /* Cards and photos answer the mouse: a 2px lift, a slight zoom inside the frame */
-  .past-card { transition: translate var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+  /* Photos answer the mouse: a slight zoom inside the frame */
   .founder-photo img { transition: transform .5s var(--ease); }
   @media (hover: hover) and (pointer: fine) {
-    .past-card:hover { translate: 0 -2px; box-shadow: var(--shadow); }
     .founder-photo:hover img { transform: scale(1.02); }
   }
   .cl-week.cl-unfold { animation: rise .35s var(--ease) both; }

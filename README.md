@@ -3,7 +3,7 @@
 Hand-written static site for Island Breeze Seniors Day Program (Markham, ON). Plain HTML/CSS/JS, no framework, no build step.
 
 ```
-content/site-content.json   editable content (monthly calendar, activities, milestones, FAQ, partners)
+content/site-content.json   editable content (monthly calendar, milestones, FAQ, partners)
 scripts/                    render-content.mjs, optimize-images.mjs (dev tools, no deps)
 docs/content-checklist.md   sources + open questions (not published)
 public/
@@ -44,7 +44,9 @@ CLI alternative: `npx wrangler pages deploy public --project-name island-breeze-
 
 That rebuilds the month grid and phone list, the "Every Monday…" cards, the hero's "Times", the "When are the programs?" FAQ answer, the Event structured data for Google, and `public/data/calendar.json`, which the Help assistant uses to answer questions like "what's on Tuesday?". The page shows the first month that hasn't ended yet. On the live page, `main.js` marks today and past days (Toronto time), shows the next program with **Add to my calendar** (.ics) and **Directions**, folds away past weeks on phones, and prints just the calendar on one landscape page.
 
-## Updating content (activities, milestones, FAQ, partners)
+## Updating content (milestones, FAQ, partners)
+
+The past activities (`activityGroups`) and the 2026 project (`featuredProject`) are still kept in the content file for the Help assistant and future use, but the home page no longer shows a section for them (removed at the client's request, Nov 2026).
 
 All of it lives in **`content/site-content.json`**. After editing:
 

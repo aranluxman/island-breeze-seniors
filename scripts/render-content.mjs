@@ -91,20 +91,6 @@ const photo = (key, cls, sizes) => {
 const fill = (t) => String(t).replace('{{weekly}}', weeklyText(featured));
 
 const blocks = {
-  // Past highlights: compact cards (the monthly calendar above shows what's on now).
-  activities: () => content.activityGroups.map((g) => `
-          <section class="past-card" aria-labelledby="ag-${g.id}">
-            <h3 id="ag-${g.id}">${esc(g.title)}</h3>
-            <ul class="activity-list" role="list">${g.items.map((it) => `
-              <li>
-                <p class="activity-name">${esc(it.name)}</p>
-                <p class="activity-desc">${rich(it.desc)}</p>
-                <p class="activity-note">${esc(it.note)}</p>
-              </li>`).join('')}
-            </ul>
-          </section>`).join('') + '\n        ',
-
-  // Monthly calendar: weekly rhythm, a month grid (wide screens, print) and a week-by-week list (phones).
   calendar: () => cal.months.map((month) => {
     const r = rhythm(month);
     const [y, m] = month.id.split('-').map(Number);
@@ -224,18 +210,6 @@ const blocks = {
     const bits = r.regular.map((x) => `${DAYS[x.wd]}s ${shortRange(x.e.start, x.e.end)}`);
     if (r.specialDays.length === 1) bits.push(`${DAYS[r.specialDays[0]]} events`);
     return `${bits.join(', ')}. <a href="#calendar">See the calendar</a>`;
-  },
-
-  project: () => {
-    const p = content.featuredProject;
-    return `
-          <h3>${esc(p.title)} <span class="project-year">(${esc(p.when)})</span></h3>
-          <p>${rich(p.text)}</p>
-          <ol class="project-timeline" role="list">${(p.timeline || []).map((t) => `
-            <li><span class="pt-month">${esc(t.month)}</span><span><strong>${esc(t.title)}</strong> ${rich(t.text)}</span></li>`).join('')}
-          </ol>${p.source ? `
-          <p class="source-line">Source: ${src(p.source)}</p>` : ''}
-        `;
   },
 
   'hero-photo': () => `
