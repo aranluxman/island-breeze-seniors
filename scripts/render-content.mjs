@@ -239,7 +239,7 @@ const blocks = {
   },
 
   'hero-photo': () => `
-          ${pic(photoKey('hero'), '(max-width: 900px) 92vw, 480px', false)}
+          ${pic(photoKey('hero'), '(max-width: 900px) 62vw, 300px', false)}
           `,
 
   gallery: () => content.gallery.filter((k) => pic(k, '')).map((k, i, all) => `
