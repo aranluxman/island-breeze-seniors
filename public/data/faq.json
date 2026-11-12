@@ -603,7 +603,7 @@
     "clayton drive",
     "clayton dr"
    ],
-   "answer": "Seniors Circle on <strong>Wednesday, November 18, 1:00 – 3:00 p.m.</strong> meets at <strong>Milliken Church, 3 Clayton Drive, Markham</strong>, not at Hagerman Corners. Here are <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=3+Clayton+Drive%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">directions to Milliken Church</a>."
+   "answer": "Seniors Circle on <strong>Wednesday, November 18, 1:00 to 3:00 p.m.</strong> meets at <strong>Milliken Church, 3 Clayton Drive, Markham</strong>, not at Hagerman Corners. Here are <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=3+Clayton+Drive%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">directions to Milliken Church</a>."
   },
   {
    "id": "owner",
@@ -636,9 +636,53 @@
     "team",
     "founder of",
     "who founded",
-    "who owns"
+    "who owns",
+    "hugh",
+    "charmaine hugh",
+    "ceo",
+    "chief executive"
    ],
-   "answer": "Island Breeze was <strong>founded by Charmaine</strong>. It&rsquo;s a not-for-profit run by a volunteer board, with the help of volunteers and community facilitators. Charmaine is the person to call for program information: <a href=\"tel:+14163197763\">416-319-7763</a>."
+   "answer": "Island Breeze was <strong>founded by Charmaine Hugh</strong> in 2018, and she is its Founder and CEO. It&rsquo;s a not-for-profit run by a volunteer board, with the help of volunteers and community facilitators. Charmaine is the person to call for program information: <a href=\"tel:+14163197763\">416-319-7763</a>. <a href=\"#founder\">Meet Charmaine</a>."
+  },
+  {
+   "id": "founder-story",
+   "q": "Why did Charmaine start Island Breeze?",
+   "keywords": [
+    "why did charmaine start",
+    "why did charmaine start island breeze",
+    "why did she start",
+    "why did she start it",
+    "why was island breeze started",
+    "why island breeze",
+    "reason for starting",
+    "what inspired",
+    "why did charmaine",
+    "why start",
+    "why was it started",
+    "why founded",
+    "inspiration",
+    "inspired",
+    "mother",
+    "mom",
+    "myrtle",
+    "myrtle powell",
+    "tribute",
+    "in memory",
+    "dedicated",
+    "education",
+    "qualifications",
+    "qualified",
+    "background",
+    "seneca",
+    "gerontology",
+    "social service worker",
+    "sswg",
+    "her story",
+    "charmaine story",
+    "biography",
+    "bio"
+   ],
+   "answer": "Charmaine was inspired by her late mother, <strong>Myrtle Powell</strong>, who often said there was no voice for Black seniors in the community, especially those from Caribbean backgrounds. Charmaine dedicates Island Breeze to her memory. Charmaine is a 2018 graduate of Seneca Polytechnic&rsquo;s Social Service Worker, Gerontology program. <a href=\"#founder\">Read her story</a>."
   },
   {
    "id": "contact-person",

@@ -18,7 +18,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 // Rich fields are author-controlled and may hold simple inline HTML.
 const rich = (s) => String(s);
 // Rich text as plain text (for structured data): tags dropped, the entities we use decoded.
-const plain = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '\u2019').replace(/&mdash;/g, '\u2014').replace(/&amp;/g, '&');
+const plain = (s) => String(s).replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '\u2019').replace(/&amp;/g, '&');
 const src = (s) => !s ? '' : !s.url ? esc(s.label) : `<a class="source" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}<span class="visually-hidden"> (opens in a new tab)</span></a>`;
 const statusLabel = { regular: 'Regular activity', project: 'Past workshop', event: 'Event' };
 const icon = (id, cls = '') => `<svg${cls ? ` class="${cls}"` : ''} aria-hidden="true"><use href="#${id}"/></svg>`;
@@ -34,13 +34,13 @@ const clock = (t) => { const [h, mi] = t.split(':').map(Number); return { h: h %
 const timeRange = (a, b) => {
   const s = clock(a), e = clock(b);
   const end = e.noon ? 'noon' : `${e.h}:${e.mi} ${e.ap}`;
-  return s.ap === e.ap && !e.noon ? `${s.h}:${s.mi} – ${end}` : `${s.h}:${s.mi} ${s.ap} – ${end}`;
+  return s.ap === e.ap && !e.noon ? `${s.h}:${s.mi} to ${end}` : `${s.h}:${s.mi} ${s.ap} to ${end}`;
 };
 const timeHtml = (a, b) => {
-  // No break inside "12:45 p.m."; a break is allowed after the dash
-  return timeRange(a, b).split(' – ').map((x) => x.replace(/ /g, '\u00a0')).join(' – ');
+  // No break inside "12:45 p.m."; a break is allowed around "to"
+  return timeRange(a, b).split(' to ').map((x) => x.replace(/ /g, '\u00a0')).join(' to ');
 };
-const shortRange = (a, b) => timeRange(a, b).replace(/:00/g, '').replace(' – ', '–');
+const shortRange = (a, b) => timeRange(a, b).replace(/:00/g, '');
 const venueOf = (e) => cal.venues[e.venue || cal.defaultVenue];
 const venueLine = (v) => [v.room, v.name].filter(Boolean).join(', ');
 const venueFull = (v) => [v.room, v.name, v.street + ', ' + v.city].filter(Boolean).join(', ');
@@ -85,30 +85,12 @@ const photo = (key, cls, sizes) => {
   return p ? `
             <figure class="${cls}">
               ${p}
-              <figcaption>${esc(content.photos[key].caption)}</figcaption>
             </figure>` : '';
 };
 
 const fill = (t) => String(t).replace('{{weekly}}', weeklyText(featured));
 
 const blocks = {
-  // Past highlights: compact cards (the monthly calendar above shows what's on now).
-  activities: () => content.activityGroups.map((g) => `
-          <section class="past-card glow reveal" aria-labelledby="ag-${g.id}" data-accent="${g.accent}">
-            <h3 id="ag-${g.id}"><span class="ag-icon">${icon(g.icon, 'draw')}</span>${esc(g.title)}</h3>
-            <ul class="activity-list" role="list">${g.items.map((it) => `
-              <li>
-                <span class="act-icon">${icon(it.icon)}</span>
-                <div>
-                  <p class="activity-name">${esc(it.name)}</p>
-                  <p class="activity-desc">${rich(it.desc)}</p>
-                  <p class="activity-note">${esc(it.note)}</p>
-                </div>
-              </li>`).join('')}
-            </ul>
-          </section>`).join('') + '\n        ',
-
-  // Monthly calendar: weekly rhythm, a month grid (wide screens, print) and a week-by-week list (phones).
   calendar: () => cal.months.map((month) => {
     const r = rhythm(month);
     const [y, m] = month.id.split('-').map(Number);
@@ -170,13 +152,12 @@ const blocks = {
           <div class="cal${month === featured ? ' is-featured' : ''}" data-month="${month.id}">
             <ul class="weekly reveal" role="list" aria-label="Every week in ${esc(month.title.split(' ')[0])}">${r.regular.map((x) => `
               <li class="wk" data-accent="${kindOf(x.e).accent}"><span class="wk-icon">${icon(kindOf(x.e).icon)}</span><span class="wk-text"><span class="wk-day">Every ${DAYS[x.wd]}</span><strong class="wk-name">${esc(kindOf(x.e).name)}</strong><span class="wk-time">${timeRange(x.e.start, x.e.end)}</span></span></li>`).join('')}${r.special.length ? `
-              <li class="wk" data-accent="sunset"><span class="wk-icon">${icon('a-celebrate')}</span><span class="wk-text"><span class="wk-day">${r.specialDays.length === 1 ? `${DAYS[r.specialDays[0]]}s` : 'Through the month'}</span><strong class="wk-name">Special events</strong><span class="wk-time">${r.special.map((e) => esc(kindOf(e).name)).join(' &middot; ')}</span></span></li>` : ''}
+              <li class="wk" data-accent="sunset"><span class="wk-icon">${icon('a-celebrate')}</span><span class="wk-text"><span class="wk-day">${r.specialDays.length === 1 ? `${DAYS[r.specialDays[0]]}s` : 'Through the month'}</span><strong class="wk-name">Special events</strong><span class="wk-time">${r.special.map((e) => esc(kindOf(e).name)).join(', ')}</span></span></li>` : ''}
             </ul>
             <div class="cal-card reveal">
               <div class="cal-head">
-                <svg class="cal-palms" viewBox="0 0 400 160" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false"><circle class="cal-sun" cx="250" cy="150" r="64"/><use href="#palm" x="268" y="-6" width="120" height="170"/><g transform="translate(722 0) scale(-1 1)"><use href="#palm" x="318" y="30" width="86" height="132"/></g></svg>
+                <svg class="cal-palms" viewBox="0 0 400 160" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false"><use href="#palm" x="268" y="-6" width="120" height="170"/><g transform="translate(722 0) scale(-1 1)"><use href="#palm" x="318" y="30" width="86" height="132"/></g></svg>
                 <div class="cal-head-text">
-                  <p class="cal-kicker">Program calendar</p>
                   <h3 class="cal-title">${esc(month.title)}</h3>
                   <p class="cal-sub">${icon('i-pin', 'ico')}${esc(venueFull(home))}</p>
                 </div>
@@ -208,7 +189,7 @@ const blocks = {
       const k = kindOf(e), v = venueOf(e);
       return {
         '@type': 'Event',
-        name: `${k.name} — Island Breeze Seniors Day Program`,
+        name: `${k.name}, Island Breeze Seniors Day Program`,
         description: `${k.desc} For adults 55+ in Markham. Contact ${content.owner.name} at ${content.owner.phone}.`,
         startDate: `${e.date}T${e.start}:00${cal.timezone}`,
         endDate: `${e.date}T${e.end}:00${cal.timezone}`,
@@ -231,21 +212,6 @@ const blocks = {
     return `${bits.join(', ')}. <a href="#calendar">See the calendar</a>`;
   },
 
-  project: () => {
-    const p = content.featuredProject;
-    return `
-          <p class="eyebrow">Recent project &middot; ${esc(p.when)}</p>
-          <h3>${esc(p.title)}</h3>
-          <p>${rich(p.text)}</p>
-          <ol class="project-timeline" role="list">${(p.timeline || []).map((t) => `
-            <li><span class="pt-icon">${icon(t.icon)}</span><span class="pt-month">${esc(t.month)}</span><span><strong>${esc(t.title)}</strong> ${rich(t.text)}</span></li>`).join('')}
-          </ol>${p.source ? `
-          <p class="source-line">Source: ${src(p.source)}</p>` : ''}
-        `;
-  },
-
-  'about-art': () => photo(photoKey('about'), 'photo photo-wide', '(max-width: 1200px) 92vw, 1160px') + '\n      ',
-
   'hero-photo': () => `
           ${pic(photoKey('hero'), '(max-width: 900px) 62vw, 300px', false)}
           `,
@@ -254,7 +220,6 @@ const blocks = {
           <div class="slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${all.length}">
             <figure>
               ${pic(k, '(max-width: 700px) 86vw, 640px', i > 1)}
-              <figcaption>${esc(content.photos[k].caption)}</figcaption>
             </figure>
           </div>`).join('') + '\n        ',
 

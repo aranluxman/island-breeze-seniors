@@ -1,4 +1,4 @@
-/* Island Breeze — small, dependency-free enhancements.
+/* Island Breeze: small, dependency-free enhancements.
    Everything is progressive: without JS the page is complete and every link works. */
 (function () {
   'use strict';
@@ -280,7 +280,7 @@
           if (!res.ok || String(res.body.success) !== 'true') throw new Error('not delivered');
           form.reset(); syncRequired();
           [name, phone, email].forEach(function (el) { el.removeAttribute('aria-invalid'); });
-          showStatus('ok', 'Thank you &mdash; your message was sent. We&rsquo;ll be in touch soon. If it&rsquo;s urgent, please call <a href="tel:+14163197763">416-319-7763</a>.');
+          showStatus('ok', 'Thank you, your message was sent. We&rsquo;ll be in touch soon. If it&rsquo;s urgent, please call <a href="tel:+14163197763">416-319-7763</a>.');
         })
         .catch(function () {
           showStatus('err', 'Sorry, we couldn&rsquo;t send your message. Please try again, or call us at <a href="tel:+14163197763">416-319-7763</a>.');
@@ -519,7 +519,7 @@
       postForm(data).then(function () {
         joinForm.reset(); jSync();
         [jName, jPhone, jEmail].forEach(function (el) { el.removeAttribute('aria-invalid'); });
-        jShow('ok', 'Thank you &mdash; your message was sent. We&rsquo;ll be in touch soon. If it&rsquo;s urgent, please call <a href="tel:+14163197763">416-319-7763</a>.');
+        jShow('ok', 'Thank you, your message was sent. We&rsquo;ll be in touch soon. If it&rsquo;s urgent, please call <a href="tel:+14163197763">416-319-7763</a>.');
       }).catch(function () {
         jShow('err', 'Sorry, we couldn&rsquo;t send your message. Please call us at <a href="tel:+14163197763">416-319-7763</a> or email <a href="mailto:islandbreezeseniors@gmail.com">islandbreezeseniors@gmail.com</a>.');
       }).then(function () { jBtn.disabled = false; jBtnText.textContent = 'Send message'; });
