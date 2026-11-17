@@ -810,7 +810,7 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
 .founder-palm { position: absolute; z-index: -1; left: -104px; bottom: -4px; width: 190px; height: 254px; --palm-trunk: #7a4e2c; --palm-leaf: #1f7a3a; --palm-nut: #5a3a22; transform: scaleX(-1); }
 @media (max-width: 1240px) { .founder-palm { display: none; } }
 .founder-photo picture { display: block; overflow: hidden; border-radius: var(--radius); }
-.founder-photo img { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; object-position: 50% 30%; }
+.founder-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
 .founder-text p { max-width: var(--measure); }
 .founder-role { margin-top: calc(-1 * var(--s-2)); font-weight: 700; color: var(--pink-700); }
 .founder-edu { padding-top: var(--s-3); border-top: 1px solid var(--line); }
@@ -829,4 +829,51 @@ a.contact-row:hover .contact-value { color: var(--accent); text-decoration: unde
   .founder-photo { max-width: 320px; }
   .tribute { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); margin-top: var(--s-7); }
   .tribute picture { max-width: 220px; }
+}
+
+/* ---------- Support band (home page, end of Partners) ---------- */
+.support-band { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-5) var(--s-7); align-items: center; margin-top: var(--s-8); padding: var(--s-6); border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--sunset); }
+.support-band h3 { margin-bottom: var(--s-2); font-size: clamp(1.4rem, 1.15rem + 1vw, 1.75rem); }
+.support-band p { margin: 0; max-width: var(--measure); }
+@media (max-width: 760px) { .support-band { grid-template-columns: minmax(0, 1fr); padding: var(--s-5) var(--s-4); } .support-band .btn { width: 100%; } }
+
+/* ---------- Donate page ---------- */
+.nav a[aria-current="page"] { color: var(--accent); }
+.nav a[aria-current="page"]::after { transform: scaleX(1); }
+.donate-hero { padding: var(--s-7) 0 var(--s-8); background: var(--sand); }
+.donate-hero-inner { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: var(--s-7); align-items: center; }
+.donate-hero h1 { max-width: 16ch; margin-bottom: var(--s-4); }
+.donate-lead { max-width: 34em; font-size: 1.3125rem; }
+.donate-strong { margin-bottom: var(--s-5); font-weight: 700; font-size: 1.3125rem; color: var(--pink-700); }
+.donate-photo { margin: 0; }
+.donate-photo picture { display: block; overflow: hidden; border-radius: var(--radius); }
+.donate-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+.ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); margin-top: var(--s-5); }
+.way { display: flex; flex-direction: column; align-items: flex-start; padding: var(--s-5); border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--ocean-900); }
+.way h3 { margin-bottom: var(--s-3); font-size: 1.5rem; }
+.way p { margin: 0; }
+.way-label { font-weight: 700; color: var(--muted); }
+.way-value { margin-top: var(--s-1) !important; font-weight: 700; font-size: 1.25rem; line-height: 1.35; color: var(--ocean-900); overflow-wrap: anywhere; }
+.way-value a { color: var(--ocean); }
+.way-text { margin-bottom: var(--s-2) !important; }
+.way-contact { font-size: 1.125rem; }
+.way-contact a, .way-value a { display: inline-flex; align-items: center; min-height: 44px; }
+.copy-btn { margin-top: var(--s-4); min-height: 48px; }
+.copy-status { min-height: 1.6em; margin-top: var(--s-2) !important; font-weight: 700; color: var(--palm-700); }
+.copy-status:empty { display: none; }
+.notice { max-width: 52rem; margin-top: var(--s-7); padding: var(--s-5) var(--s-6); border-radius: var(--radius); background: #fff8e6; border: 2px solid #e2b33c; }
+.notice h3 { margin-bottom: var(--s-2); font-size: 1.375rem; }
+.notice p { max-width: var(--measure); }
+.notice p:last-child { margin-bottom: 0; }
+.donate-thanks { text-align: center; }
+.donate-thanks-inner { max-width: 46rem; }
+.donate-thanks h2 { margin-inline: auto; }
+.donate-sign { font-weight: 700; color: var(--pink-700); }
+.donate-mission { font-size: 1.1875rem; }
+.donate-back a { font-weight: 700; }
+@media (max-width: 900px) {
+  .donate-hero-inner { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+  .donate-photo { max-width: 520px; }
+  .ways { grid-template-columns: minmax(0, 1fr); }
+  .notice { padding: var(--s-5) var(--s-4); }
 }
