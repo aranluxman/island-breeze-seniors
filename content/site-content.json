@@ -1,0 +1,542 @@
+{
+  "_readme": "Edit this file to update the monthly calendar, activities, milestones, collaborators, sponsors and FAQ, then run: node scripts/render-content.mjs. Text fields may contain simple HTML (<a>, <strong>, <em>). Only add facts with a source or confirmed by the owner. NEW MONTH: add an object to calendar.months (copy the November one), list each program day under 'events' (date, kind, start, end; 'venue' only if it isn't the usual room), and the render script rebuilds the calendar, the weekly summary, the hero 'Times', the Help assistant's schedule answers and the Event structured data. 'status' for activities: 'regular', 'project' (time-limited workshop series), 'event' (one-off or annual). 'icon' values are sprite ids (#a-...) in public/index.html; icons are decorative.",
+  "activityGroups": [
+    {
+      "id": "creative",
+      "title": "Creative activities",
+      "icon": "i-palette",
+      "accent": "pink",
+      "items": [
+        {
+          "name": "Crochet circle",
+          "icon": "a-yarn",
+          "desc": "A relaxed crochet class led by a volunteer instructor, held at Hagerman Corners Community Homes.",
+          "status": "regular",
+          "note": "Shared as a weekly class in 2024 and 2025"
+        },
+        {
+          "name": "Arts and crafts",
+          "icon": "a-palette",
+          "desc": "Hands-on creative sessions, including a colour therapy workshop.",
+          "status": "event",
+          "note": "Colour therapy workshop, October 2025"
+        },
+        {
+          "name": "Pottery with Markham Museum",
+          "icon": "a-pottery",
+          "desc": "A seniors pottery workshop led by Markham Museum.",
+          "status": "event",
+          "note": "October 2025"
+        }
+      ],
+      "art": [
+        "a-yarn",
+        "a-palette",
+        "a-pottery"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Social games & gatherings",
+      "icon": "i-dominoes",
+      "accent": "palm",
+      "items": [
+        {
+          "name": "Game night",
+          "icon": "a-domino",
+          "desc": "Dominoes, friendly competition and plenty of conversation.",
+          "status": "regular",
+          "note": "Shared in 2025"
+        },
+        {
+          "name": "Christmas dinner",
+          "icon": "a-dinner",
+          "desc": "A holiday dinner to close out the year together.",
+          "status": "event",
+          "note": "Described as annual in 2022"
+        }
+      ]
+    },
+    {
+      "id": "wellness",
+      "title": "Wellness workshops",
+      "icon": "i-lotus",
+      "accent": "ocean",
+      "items": [
+        {
+          "name": "Drumming for Wellness",
+          "icon": "a-drum",
+          "desc": "Rhythm and movement for mind and body.",
+          "status": "project",
+          "note": "January 2026 workshop"
+        },
+        {
+          "name": "Healing Grief Through Poetry",
+          "icon": "a-quill",
+          "desc": "A gentle workshop on grief and healing through the written word.",
+          "status": "project",
+          "note": "February 2026 workshop"
+        },
+        {
+          "name": "Laughter Yoga",
+          "icon": "a-yoga",
+          "desc": "Laughter, breathing and gentle movement.",
+          "status": "project",
+          "note": "Part of the 2026 workshop series"
+        }
+      ]
+    },
+    {
+      "id": "outings",
+      "title": "Outings & community events",
+      "icon": "i-bus",
+      "accent": "sunset",
+      "items": [
+        {
+          "name": "Markham Museum",
+          "icon": "a-museum",
+          "desc": "A visit to the museum's older adults program.",
+          "status": "event",
+          "note": "February 2024"
+        },
+        {
+          "name": "Carefirst tea party",
+          "icon": "a-teacup",
+          "desc": "A tea party hosted by the Carefirst team for Island Breeze members.",
+          "status": "event",
+          "note": "July 2026"
+        },
+        {
+          "name": "Carefirst Health Fair",
+          "icon": "a-health",
+          "desc": "Members attended the Carefirst Health Fair at the YMCA in Markham.",
+          "status": "event",
+          "note": "September 2026"
+        }
+      ]
+    }
+  ],
+  "featuredProject": {
+    "title": "Cultural Arts for Holistic Healing of Mind, Body and Spirit",
+    "when": "2026",
+    "text": "A workshop series for seniors in South Markham, facilitated by Island Breeze with ACSA Community Services and supported by United Way Greater Toronto. From January to July, members drummed, wrote, danced, sculpted and celebrated together.",
+    "timeline": [
+      {
+        "month": "Jan",
+        "title": "Drumming for Wellness",
+        "text": "Rhythm and connection to start the year.",
+        "icon": "a-drum"
+      },
+      {
+        "month": "Feb",
+        "title": "Healing Grief Through Poetry",
+        "text": "A four-week series for reflection, healing and self-expression.",
+        "icon": "a-quill"
+      },
+      {
+        "month": "Mar",
+        "title": "Afro-Peruvian dance workshop",
+        "text": "Culture celebrated through dance, colour and joy.",
+        "icon": "a-dance"
+      },
+      {
+        "month": "Apr",
+        "title": "Art clay workshop",
+        "text": "Hands-on creativity with clay.",
+        "icon": "a-pottery"
+      },
+      {
+        "month": "May",
+        "title": "Health & wellness workshop",
+        "text": "Healthy-living information, activities and blood pressure checks.",
+        "icon": "a-health"
+      },
+      {
+        "month": "Jun",
+        "title": "Zumba, merengue & bingo",
+        "text": "A day of movement, music, laughter and games.",
+        "icon": "a-music"
+      },
+      {
+        "month": "Jul",
+        "title": "Fashion show & celebration lunch",
+        "text": "Closing the series with style, pride and culture.",
+        "icon": "a-celebrate"
+      }
+    ]
+  },
+  "joinSteps": [
+    {
+      "title": "Call or email us",
+      "text": "Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a>, or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll reply. You can also <a href=\"#contact\">send a message below</a> and ask us to call you back."
+    },
+    {
+      "title": "Ask your questions",
+      "text": "Ask what's on this month, where to meet, and anything else you'd like to know before you come."
+    },
+    {
+      "title": "Plan your first visit",
+      "text": "Pick an activity to try first. If anything would make your visit easier, just let us know when you call or email."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Who can join?",
+      "a": "Island Breeze describes its programs as serving adults aged 55 and older in Markham. If you're not sure whether a program is right for you or someone you care for, call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a>."
+    },
+    {
+      "q": "How do I register?",
+      "a": "Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we'll talk you through it. You can also send us a message below and ask for a call back."
+    },
+    {
+      "q": "Where are programs held?",
+      "a": "In the Amenity Room at Hagerman Corners Community Homes, 4460 14th Avenue, Markham. Some events meet elsewhere (for example, Seniors Circle on November 18 is at Milliken Church, 3 Clayton Drive), and the calendar always shows the location. <a href=\"https://www.google.com/maps/dir/?api=1&amp;destination=4460+14th+Avenue%2C+Markham%2C+ON\" target=\"_blank\" rel=\"noopener\">Get directions<span class=\"visually-hidden\"> (opens Google Maps in a new tab)</span></a>."
+    },
+    {
+      "q": "What does it cost?",
+      "a": "Costs can vary by activity. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to ask about the activity you're interested in."
+    },
+    {
+      "q": "Can a caregiver attend?",
+      "a": "Our mission includes older adults and their caregivers in Markham. Call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> to talk about coming together, so we can plan the visit with you."
+    },
+    {
+      "q": "When are the programs?",
+      "a": "{{weekly}} Every date and time is in <a href=\"#calendar\">this month&rsquo;s calendar</a>. Questions? Call Charmaine at <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a>."
+    },
+    {
+      "q": "What accessibility or transportation arrangements are available?",
+      "a": "Please call <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> before your visit so we can talk through access, mobility needs and how you'll get there."
+    },
+    {
+      "q": "Who runs Island Breeze?",
+      "a": "Island Breeze was founded by Charmaine. It&rsquo;s a not-for-profit run by a volunteer board, with the help of volunteers and community facilitators. For program information, call Charmaine at <a class=\"tel-link\" href=\"tel:+14163197763\">416-319-7763</a> or email <a class=\"mail-link\" href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a>."
+    }
+  ],
+  "milestones": [
+    {
+      "date": "October 2018",
+      "title": "Incorporated as a not-for-profit",
+      "text": "Island Breeze Seniors Day Program was founded by Charmaine and incorporated as a not-for-profit under the Canada Not-for-profit Corporations Act."
+    },
+    {
+      "date": "February 2024",
+      "title": "Markham Museum visit",
+      "text": "Members visited the Markham Museum's older adults program."
+    },
+    {
+      "date": "2025",
+      "title": "Part of Carefirst's partner network",
+      "text": "Carefirst Seniors and Community Services Association listed Island Breeze among its social care and community support partners in presentations in January and July 2025."
+    },
+    {
+      "date": "2026",
+      "title": "Cultural Arts for Holistic Healing",
+      "text": "A workshop series for seniors in South Markham with drumming, poetry, dance, clay, wellness and a closing fashion show and celebration luncheon in July."
+    },
+    {
+      "date": "November 2026",
+      "title": "Weekly programs at Hagerman Corners",
+      "text": "Exercise Class on Mondays and Chair Yoga on Tuesdays in the Amenity Room, with a special event most Wednesdays: a pancake breakfast, a Price Is Right game, Seniors Circle and bingo."
+    }
+  ],
+  "collaborators": [
+    {
+      "name": "Carefirst Seniors and Community Services Association",
+      "text": "Includes Island Breeze in its partner network (since 2022) and hosted a tea party for our members in 2026.",
+      "source": null
+    },
+    {
+      "name": "ACSA Community Services",
+      "text": "Partner on the 2026 Cultural Arts for Holistic Healing program.",
+      "source": null
+    }
+  ],
+  "funding": [
+    {
+      "name": "United Way Greater Toronto",
+      "text": "Supported the 2026 Cultural Arts for Holistic Healing workshop series.",
+      "source": null
+    },
+    {
+      "name": "South Markham",
+      "text": "Sponsor of the 2026 Cultural Arts for Holistic Healing program.",
+      "source": null
+    }
+  ],
+  "outings": [
+    {
+      "name": "Markham Museum",
+      "text": "Older adults program visit (2024) and a seniors pottery workshop (2025)."
+    },
+    {
+      "name": "YMCA in Markham",
+      "text": "Carefirst Health Fair (2026)."
+    }
+  ],
+  "photos": {
+    "_note": "Consented photos of Island Breeze members, supplied by the owner (October 2026). Files: public/img/<base>-{800,1280}.{webp,jpg}, made with scripts/optimize-images.mjs. A photo appears only once its files exist. 'w'/'h' are the image's proportions; 'pos' is an optional CSS object-position for cropped slots. 'group-wide' is a 16:9 crop of the group photo, made at full resolution from photo-group-1280.",
+    "group": {
+      "base": "photo-group",
+      "w": 800,
+      "h": 1066,
+      "pos": "50% 60%",
+      "alt": "About thirty Island Breeze members and volunteers, many in matching white T-shirts, posing together for a group photo in a bright community room.",
+      "caption": "Our Island Breeze family"
+    },
+    "group-wide": {
+      "base": "photo-group-wide",
+      "w": 1280,
+      "h": 720,
+      "alt": "About thirty Island Breeze members and volunteers, most in matching white Island Breeze T-shirts, gathered for a group photo in a bright community room. Some sit in the front row, two people in black T-shirts kneel at the front, and one member sits in a power wheelchair.",
+      "caption": "Our Island Breeze family"
+    },
+    "celebration": {
+      "base": "photo-celebration",
+      "w": 800,
+      "h": 800,
+      "alt": "A large group of members in colourful clothing standing together in front of a decorated wall with an “Honoring” banner.",
+      "caption": "Celebrating culture together"
+    },
+    "friends": {
+      "base": "photo-friends",
+      "w": 800,
+      "h": 500,
+      "alt": "Two smiling friends with their arms around each other at a community lunch.",
+      "caption": "Friends at lunch"
+    },
+    "friends-three": {
+      "base": "photo-friends-three",
+      "w": 1280,
+      "h": 557,
+      "alt": "Three smiling women sitting side by side at a table.",
+      "caption": "Good company"
+    },
+    "wave": {
+      "base": "photo-wave",
+      "w": 800,
+      "h": 591,
+      "pos": "62% 40%",
+      "alt": "A smiling gentleman in a plaid shirt and black cap waving at the camera.",
+      "caption": "A friendly wave"
+    },
+    "tea-party": {
+      "base": "photo-tea-party",
+      "w": 800,
+      "h": 1067,
+      "pos": "50% 40%",
+      "alt": "Members in elegant hats seated along a long table set with teacups, tiered stands of treats and pink runners at a tea party.",
+      "caption": "Tea party"
+    },
+    "bingo": {
+      "base": "photo-bingo",
+      "w": 800,
+      "h": 1066,
+      "pos": "50% 35%",
+      "alt": "Members playing bingo with bright green cards at a long table.",
+      "caption": "Bingo"
+    },
+    "lunch": {
+      "base": "photo-lunch",
+      "w": 800,
+      "h": 800,
+      "pos": "50% 45%",
+      "alt": "Members chatting around tables with sunflower tablecloths at a community lunch.",
+      "caption": "Community lunch"
+    },
+    "buffet": {
+      "base": "photo-buffet",
+      "w": 800,
+      "h": 800,
+      "alt": "Members serving themselves from a buffet of homemade dishes.",
+      "caption": "Lunch is served"
+    }
+  },
+  "gallery": [
+    "group",
+    "celebration",
+    "friends",
+    "wave",
+    "tea-party",
+    "bingo",
+    "friends-three",
+    "lunch",
+    "buffet"
+  ],
+  "photoSlots": {
+    "_note": "Where photos appear outside the carousel. Activity keys match activityGroups ids.",
+    "hero": "group",
+    "creative": null,
+    "social": "bingo",
+    "wellness": "celebration",
+    "outings": "tea-party",
+    "join": "friends",
+    "about": "group-wide",
+    "story": "lunch",
+    "callband": "wave"
+  },
+  "owner": {
+    "name": "Charmaine",
+    "role": "Founder",
+    "phone": "416-319-7763",
+    "_source": "Owner/site builder, Nov 2026 (name and role). The November 2026 calendar says: Contact Charmaine for information, 416-319-7763."
+  },
+  "calendar": {
+    "_note": "From the program calendar flyer supplied by Island Breeze (November 2026: public/calendar/november-2026.pdf). Times are 24-hour. Days not listed have no program. Toronto time (EST, UTC-5, in November).",
+    "timezone": "-05:00",
+    "defaultVenue": "hagerman",
+    "venues": {
+      "hagerman": {
+        "name": "Hagerman Corners Community Homes",
+        "room": "Amenity Room",
+        "street": "4460 14th Avenue",
+        "city": "Markham",
+        "region": "ON",
+        "postal": "L3R 1H1",
+        "map": "https://www.google.com/maps/dir/?api=1&destination=4460+14th+Avenue%2C+Markham%2C+ON"
+      },
+      "milliken": {
+        "name": "Milliken Church",
+        "room": "",
+        "street": "3 Clayton Drive",
+        "city": "Markham",
+        "region": "ON",
+        "postal": "",
+        "map": "https://www.google.com/maps/dir/?api=1&destination=3+Clayton+Drive%2C+Markham%2C+ON"
+      }
+    },
+    "kinds": {
+      "exercise": {
+        "name": "Exercise Class",
+        "icon": "a-exercise",
+        "accent": "palm",
+        "desc": "A group exercise class to keep moving together."
+      },
+      "chair-yoga": {
+        "name": "Chair Yoga",
+        "icon": "a-chair-yoga",
+        "accent": "ocean",
+        "desc": "Yoga done seated or with the support of a chair."
+      },
+      "pancake": {
+        "name": "Pancake Breakfast",
+        "icon": "a-pancake",
+        "accent": "sunset",
+        "desc": "A pancake breakfast together."
+      },
+      "price-is-right": {
+        "name": "Price Is Right Game",
+        "icon": "a-tag",
+        "accent": "pink",
+        "desc": "A price-guessing game in the style of the TV show."
+      },
+      "seniors-circle": {
+        "name": "Seniors Circle",
+        "icon": "a-circle",
+        "accent": "pink",
+        "desc": "A Seniors Circle gathering. Note the different location: Milliken Church."
+      },
+      "bingo": {
+        "name": "Bingo",
+        "icon": "a-bingo",
+        "accent": "sunset",
+        "desc": "Bingo with friends."
+      }
+    },
+    "months": [
+      {
+        "id": "2026-11",
+        "title": "November 2026",
+        "pdf": "calendar/november-2026.pdf",
+        "events": [
+          {
+            "date": "2026-11-02",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-03",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-04",
+            "kind": "pancake",
+            "start": "10:00",
+            "end": "12:00"
+          },
+          {
+            "date": "2026-11-09",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-10",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-11",
+            "kind": "price-is-right",
+            "start": "11:00",
+            "end": "13:00"
+          },
+          {
+            "date": "2026-11-16",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-17",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-18",
+            "kind": "seniors-circle",
+            "start": "13:00",
+            "end": "15:00",
+            "venue": "milliken"
+          },
+          {
+            "date": "2026-11-23",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          },
+          {
+            "date": "2026-11-24",
+            "kind": "chair-yoga",
+            "start": "13:00",
+            "end": "14:00"
+          },
+          {
+            "date": "2026-11-25",
+            "kind": "bingo",
+            "start": "11:00",
+            "end": "12:45"
+          },
+          {
+            "date": "2026-11-30",
+            "kind": "exercise",
+            "start": "14:00",
+            "end": "15:00"
+          }
+        ],
+        "observances": [
+          {
+            "date": "2026-11-11",
+            "name": "Remembrance Day",
+            "icon": "a-poppy"
+          }
+        ]
+      }
+    ]
+  }
+}
