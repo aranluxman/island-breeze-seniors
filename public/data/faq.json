@@ -836,7 +836,7 @@
     "incorporated",
     "government"
    ],
-   "answer": "Island Breeze Seniors Day Program Ltd. is a <strong>federal not-for-profit corporation</strong>. For questions about donations or receipts, please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll be happy to help."
+   "answer": "Island Breeze Seniors Day Program Ltd. is a <strong>federal not-for-profit corporation</strong>. It is <strong>not a registered charity</strong> with the Canada Revenue Agency, so we gladly accept voluntary contributions but can&rsquo;t issue official charitable donation receipts for income tax purposes. <a href=\"donate\">See how to donate</a>."
   },
   {
    "id": "area",
@@ -1601,9 +1601,19 @@
     "fundraise",
     "fundraising",
     "sponsor us",
-    "gift"
+    "gift",
+    "e-transfer",
+    "etransfer",
+    "interac",
+    "cheque",
+    "check",
+    "cash",
+    "send money",
+    "how to donate",
+    "where to donate",
+    "make a donation"
    ],
-   "answer": "Thank you for thinking of us. To talk about supporting Island Breeze, please call Charmaine at <a href=\"tel:+14163197763\">416-319-7763</a> or email <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a> and we&rsquo;ll be happy to help."
+   "answer": "Thank you for thinking of us! You can donate by <strong>e-Transfer</strong> to <a href=\"mailto:islandbreezeseniors@gmail.com\">islandbreezeseniors@<wbr>gmail.com</a>, by <strong>cheque</strong> payable to <strong>Island Breeze Seniors Day Program Ltd.</strong>, or with <strong>cash</strong> (contact us to arrange it). Island Breeze is not a registered charity, so we can&rsquo;t issue tax receipts. <a href=\"donate\">See how to donate</a>."
   },
   {
    "id": "jobs",
