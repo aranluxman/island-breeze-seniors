@@ -9,9 +9,9 @@ docs/content-checklist.md   sources + open questions (not published)
 public/
   index.html        the whole site (single page)
   styles.css        design tokens, layout, components, motion (reduced-motion safe)
-  main.js           menu, scroll reveal, scroll-spy, lazy map, contact form, Join Now panel, calendar (today, next program, print, add to calendar), Help assistant
-  data/faq.json     knowledge for the scripted Help assistant (site facts only; no AI)
-  data/calendar.json generated from the content file: the calendar data the page and Help assistant read
+  main.js           menu, scroll reveal, scroll-spy, lazy map, contact form, Join Now panel, calendar (today, next program, print, add to calendar), (retired) scripted Help assistant
+  data/faq.json     knowledge for the retired scripted Help assistant (unused)
+  data/calendar.json generated from the content file: the calendar data the page and the chat assistant read
   calendar/         the original monthly calendar flyers (PDF), offered as downloads
   thanks.html       no-JS form landing page
   404.html          real 404 (stops Pages serving the home page for missing URLs)
@@ -42,7 +42,7 @@ CLI alternative: `npx wrangler pages deploy public --project-name island-breeze-
 3. New kind of event? Add it under `calendar.kinds` with a name, an icon id (`a-...` in the sprite in `index.html`), an accent (`palm`, `ocean`, `sunset`, `pink`) and a one-line description.
 4. Run `node scripts/render-content.mjs`.
 
-That rebuilds the month grid and phone list, the "Every Monday…" cards, the hero's "Times", the "When are the programs?" FAQ answer, the Event structured data for Google, and `public/data/calendar.json`, which the Help assistant uses to answer questions like "what's on Tuesday?". The page shows the first month that hasn't ended yet. On the live page, `main.js` marks today and past days (Toronto time), shows the next program with **Add to my calendar** (.ics) and **Directions**, folds away past weeks on phones, and prints just the calendar on one landscape page.
+That rebuilds the month grid and phone list, the "Every Monday…" cards, the hero's "Times", the "When are the programs?" FAQ answer, the Event structured data for Google, and `public/data/calendar.json`, which the chat assistant reads live to answer questions like "what's on Tuesday?". The page shows the first month that hasn't ended yet. On the live page, `main.js` marks today and past days (Toronto time), shows the next program with **Add to my calendar** (.ics) and **Directions**, folds away past weeks on phones, and prints just the calendar on one landscape page.
 
 ## Updating content (milestones, FAQ, partners)
 
@@ -67,10 +67,18 @@ The form posts to `https://formsubmit.co/aran.luxman@gmail.com` (**temporary** r
 - After activating, replace the email in the form `action` with the random alias FormSubmit provides, so the address isn't visible in the page source.
 - Before handover, switch to the organization's inbox (it needs its own activation) and keep the privacy note accurate.
 
-## Join Now panel and Help assistant
+## Join Now panel and chat assistant
 
 - **Join Now** (header) opens a panel: Call, Email, or Send a message. Without JavaScript it's a link to the contact form.
-- **Help** (bottom-right) is a *scripted* assistant, not an AI, so it never invents facts. It knows about 70 topics (owner, location and room, directions, joining, cost, caregivers, every calendar event, past activities, partners and more) from `public/data/faq.json`, and answers schedule questions live from `data/calendar.json` ("what's on Wednesday?", "when is bingo?", "this week", "November 18", "today").
+- **Ask a question** (bottom-right) is `public/chat-widget.js`, an AI chat assistant (Nov 2026). It replaced the scripted Help assistant described below. The widget calls the `ib-chat` Supabase Edge Function (project "Physio & TheLuxs", tables prefixed `ib_`), which answers only from the Island Breeze knowledge file plus the live `data/calendar.json`, so a new month's calendar reaches the bot as soon as it's published. Knowledge changes go through the Teach page (`train.html`, kept outside this repo with the backend source in `../island-breeze-chatbot/`), not this repo.
+- Call-back requests the bot collects are saved in Supabase (`ib_leads`) and also emailed through the contact form's FormSubmit address (read from `#contact-form`, so on pages without that form only the Supabase copy exists).
+- The widget tells visitors their messages go to an AI service and are saved. Keep that notice accurate.
+
+### Old scripted Help assistant (retired)
+
+Its markup was removed from `index.html`; its code in `main.js` and `data/faq.json` remain but do nothing without the markup. To bring it back, restore the `help-launcher` button and `help-panel` dialog from git history.
+
+- **Help** (bottom-right) was a *scripted* assistant, not an AI, so it never invents facts. It knows about 70 topics (owner, location and room, directions, joining, cost, caregivers, every calendar event, past activities, partners and more) from `public/data/faq.json`, and answers schedule questions live from `data/calendar.json` ("what's on Wednesday?", "when is bingo?", "this week", "November 18", "today").
 - Typos are fine: about 300 common misspellings are fixed first ("loction", "excercise", "wensday", "Charmain"), and any remaining word within one or two letters of a keyword (including swapped letters) still matches. Words it already knows are never treated as typos of other words.
 - When it isn't sure, it says so and offers Call / Email / Send a message, plus "You might also ask" suggestions. No tracking, cookies or third-party scripts; nothing is stored.
 - To add an answer, add an entry to `faq.json` (`q`, `keywords`, `answer`). Only add facts that are on the site or confirmed by the owner.

@@ -606,6 +606,7 @@
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js')</script>
   <script src="main.js" defer></script>
+  <script src="chat-widget.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
@@ -1458,28 +1459,8 @@
     </div>
   </dialog>
 
-  <!-- Help assistant (D): scripted answers from data/faq.json only. No AI, no tracking, no cookies. -->
-  <button class="help-launcher" type="button" data-opens="help-panel" hidden><svg class="ico" aria-hidden="true"><use href="#a-help"/></svg>Help</button>
-  <dialog class="sheet help-panel" id="help-panel" aria-labelledby="help-title">
-    <div class="sheet-grab" aria-hidden="true"><span></span></div>
-    <div class="sheet-head">
-      <div>
-        <h2 id="help-title">Questions? Ask here</h2>
-        <p class="sheet-sub">Ask about times, the calendar, the location, joining and more. Spelling doesn&rsquo;t need to be perfect.</p>
-      </div>
-      <button class="icon-btn" type="button" data-close><svg class="ico" aria-hidden="true"><use href="#a-close"/></svg><span class="visually-hidden">Close</span></button>
-    </div>
-    <div class="help-log" role="log" aria-live="polite" aria-label="Conversation" tabindex="0">
-      <div class="msg msg-bot"><p>Hello! I can answer questions about Island Breeze, like what&rsquo;s on this week or where we meet. Tap a question, or type your own.</p><div class="help-chips" role="group" aria-label="Suggested questions"></div></div>
-    </div>
-    <form class="help-ask">
-      <label for="help-q">Or type your question</label>
-      <div class="help-ask-row">
-        <input id="help-q" type="text" autocomplete="off" enterkeyhint="send">
-        <button class="btn btn-primary" type="submit">Ask</button>
-      </div>
-    </form>
-  </dialog>
+  <!-- Chat assistant: chat-widget.js (AI answers from Island Breeze facts and the live calendar, via a Supabase Edge Function).
+       It replaced the scripted Help assistant (Nov 2026); that code in main.js now does nothing because its markup is gone. -->
 
   <!-- Mobile call bar: hidden near the top, over the form, and while typing -->
   <div class="call-bar glass" aria-hidden="true">
